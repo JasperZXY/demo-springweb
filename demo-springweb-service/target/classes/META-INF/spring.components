@@ -1,7 +1,0 @@
-#
-#Tue Mar 20 14:35:04 CST 2018
-org.ruanwei.demo.user.service.impl.UserDubboServiceImpl=org.springframework.stereotype.Component
-org.ruanwei.demo.user.service.impl.UserHttpInvokerServiceImpl=org.springframework.stereotype.Component
-org.ruanwei.demo.user.service.impl.UserHessianServiceImpl=org.springframework.stereotype.Component
-org.ruanwei.demo.user.service.impl.UserRmiServiceImpl=org.springframework.stereotype.Component
-org.ruanwei.demo.user.service.impl.UserJmsServiceImpl=org.springframework.stereotype.Component

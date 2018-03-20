@@ -1,7 +1,0 @@
-/Users/ruanwei/Applications/workspace/demo-springweb3/demo-springweb-remoting/src/main/java/org/ruanwei/demo/remoting/user/service/UserDubboService.java
-/Users/ruanwei/Applications/workspace/demo-springweb3/demo-springweb-remoting/src/main/java/org/ruanwei/demo/remoting/user/service/UserHessianService.java
-/Users/ruanwei/Applications/workspace/demo-springweb3/demo-springweb-remoting/src/main/java/org/ruanwei/demo/remoting/user/service/UserRmiService.java
-/Users/ruanwei/Applications/workspace/demo-springweb3/demo-springweb-remoting/src/main/java/org/ruanwei/demo/remoting/user/entity/User.java
-/Users/ruanwei/Applications/workspace/demo-springweb3/demo-springweb-remoting/src/main/java/org/ruanwei/demo/remoting/user/service/UserBurlapService.java
-/Users/ruanwei/Applications/workspace/demo-springweb3/demo-springweb-remoting/src/main/java/org/ruanwei/demo/remoting/user/service/UserJmsService.java
-/Users/ruanwei/Applications/workspace/demo-springweb3/demo-springweb-remoting/src/main/java/org/ruanwei/demo/remoting/user/service/UserHttpInvokerService.java
