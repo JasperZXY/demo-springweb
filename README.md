@@ -1,6 +1,6 @@
 # demo-springweb
 Spring Web Demo
-
+<pre>
 1.包名更换
 2.增加Reactive的Flux的Mono
 3.补充基于Java的初始化和配置
@@ -122,3 +122,4 @@ java.util.Map / org.springframework.ui.Model / org.springframework.ui.ModelMap
 错误码： <%=request.getAttribute("javax.servlet.error.status_code")%> <br>
  信息： <%=request.getAttribute("javax.servlet.error.message")%> <br>
  异常： <%=request.getAttribute("javax.servlet.error.exception_type")%> <br>
+</pre>
