@@ -1,0 +1,7 @@
+org/ruanwei/demo/remoting/user/service/UserBurlapService.class
+org/ruanwei/demo/remoting/user/service/UserHessianService.class
+org/ruanwei/demo/remoting/user/service/UserHttpInvokerService.class
+org/ruanwei/demo/remoting/user/entity/User.class
+org/ruanwei/demo/remoting/user/service/UserJmsService.class
+org/ruanwei/demo/remoting/user/service/UserRmiService.class
+org/ruanwei/demo/remoting/user/service/UserDubboService.class
