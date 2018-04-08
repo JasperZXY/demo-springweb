@@ -21,7 +21,7 @@ ResourceUrlEncodingFilter
 9.PDF报错
 10.自动扫描的inclued和exclude
 11.@ConvertGroup、@GroupSequence、@ScriptAssert、@SupportedValidationTarget、EL表达式${validatedValue}
-12.
+12.验证错误消息和国际化消息
 
 
 A.HandlerMapping：Map a request to a handler along with a list of HandlerInterceptor for pre- and post-processing.
