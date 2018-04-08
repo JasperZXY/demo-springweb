@@ -20,6 +20,8 @@ ResourceUrlEncodingFilter
 8.参考MethodValidationPostProcessor/BeanValidationPostProcessor使用AOP来实现非Web层的校验
 9.PDF报错
 10.自动扫描的inclued和exclude
+11.@ConvertGroup、@GroupSequence、@ScriptAssert、@SupportedValidationTarget、EL表达式${validatedValue}
+12.
 
 
 A.HandlerMapping：Map a request to a handler along with a list of HandlerInterceptor for pre- and post-processing.
