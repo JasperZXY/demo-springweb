@@ -25,10 +25,10 @@ ResourceUrlEncodingFilter
 
 ============================================
 A.HandlerMapping：Map a request to a handler along with a list of HandlerInterceptor for pre- and post-processing.
-    1.BeanNameUrlHandlerMapping(Default Implementation)
-    2.RequestMappingHandlerMapping(Default Implementation)：use @RequestMapping in @Controller(HandlerMethod).
+    1.RequestMappingHandlerMapping(Default Implementation)：use @RequestMapping in @Controller(HandlerMethod).
+    2.BeanNameUrlHandlerMapping(Default Implementation)
     3.SimpleUrlHandlerMapping：use Controller接口,并遵循其工作流
-    4.ControllerClassNameHandlerMapping：貌似去掉了   
+    4.ControllerClassNameHandlerMapping：貌似废弃了   
 HandlerInterceptor/WebRequestInterceptor
   1/7.preHandle  [mainThread]
      after handler determined by HandlerMapping, before invoked by HandlerAdapter.
@@ -50,17 +50,21 @@ CallableProcessingInterceptor/DeferredResultProcessingInterceptor
   4.2.handleError  [mainThread]
   6.afterCompletion  [mainThread]
 AsyncWebRequestInterceptor
+PathMatcher(AntPathMatcher)/PathHelper
 
 B.HandlerAdapter：Help the DispatcherServlet to invoke a handler mapped to a request regardless of how the handler is actually invoked.the main purpose is to shield the DispatcherServlet from such details. 
-    1.HttpRequestHandlerAdapter(Default Implementation)：use HttpRequestHandler接口(DefaultServletHttpRequestHandler)
-    2.SimpleControllerHandlerAdapter(Default Implementation)：对应SimpleUrlHandlerMapping.
-    3.RequestMappingHandlerAdapter(Default Implementation)：对应RequestMappingHandlerMapping.
-    AbstractHandlerMethodAdapter use HandlerMethod
-    SimpleServletHandlerAdapter use Servlet接口
+    1.RequestMappingHandlerAdapter(AbstractHandlerMethodAdapter)(Default Implementation)：handler of HandlerMethod，对应RequestMappingHandlerMapping.
+    2.HttpRequestHandlerAdapter(Default Implementation)：handler of HttpRequestHandler(DefaultServletHttpRequestHandler)   
+    3.SimpleControllerHandlerAdapter(Default Implementation)：handler of Controller，对应SimpleUrlHandlerMapping.
+    4.SimpleServletHandlerAdapter: handler of Servlet.
 org.springframework.web.HttpRequestHandler:
     DefaultServletHttpRequestHandler  <mvc:default-servlet-handler>
     ResourceHttpRequestHandler  <mvc:resources>
     WebSocketHttpRequestHandler  <websocket:handlers>
+    HttpInvokerServiceExporter
+    HessianServiceExporter
+HandlerMathodArgumentResolver
+HandlerMethodReturnValueHandler/AsyncHandlerMethodReturnValueHandler
 
 C.HandlerExceptionResolver：Strategy to resolve exceptions possibly mapping them to handlers, or to HTML error views, or other.
     1.ExceptionHandlerExceptionResolver(Default Implementation)：@ExceptionHandler
@@ -72,15 +76,15 @@ MessageCodesResolver
 
 D.ViewResolver：Resolve logical String-based view names returned from a handler to an actual View to render to the response with. 
     1.BeanNameViewResolver
-    2.XmlViewResolver
-    3.ResourceBundleViewResolver
-    4.UrlBasedViewResolver:
-    5.InternalResourceViewResolver(Default Implementation)
-    6.GroovyMarkupViewResolver
-    7.FreeMarkerViewResolver
-    8.ScriptTemplateViewResolver
-    9.TilesViewResolver
-    10.XsltViewResolver
+    2.XmlViewResolver(AbstractCachingViewResolver)
+    3.ResourceBundleViewResolver(AbstractCachingViewResolver)
+    4.UrlBasedViewResolver(AbstractCachingViewResolver)
+    5.InternalResourceViewResolver(UrlBasedViewResolver)(Default Implementation)
+    6.GroovyMarkupViewResolver(UrlBasedViewResolver/AbstractTemplateViewResolver)
+    7.FreeMarkerViewResolver(UrlBasedViewResolver/AbstractTemplateViewResolver)
+    8.ScriptTemplateViewResolver(UrlBasedViewResolver)
+    9.TilesViewResolver(UrlBasedViewResolver)
+    10.XsltViewResolver(UrlBasedViewResolver)
     11.ContentNegotiatingViewResolver
 RequestToViewNameTranslator
     DefaultRequestToViewNameTranslator(Default Implementation)
