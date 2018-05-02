@@ -28,7 +28,7 @@ A.HandlerMapping：Map a request to a handler along with a list of HandlerInterc
     1.BeanNameUrlHandlerMapping(Default Implementation)
     2.RequestMappingHandlerMapping(Default Implementation)：use @RequestMapping in @Controller(HandlerMethod).
     3.SimpleUrlHandlerMapping：use Controller接口,并遵循其工作流
-    4.ControllerClassNameHandlerMapping：貌似去掉了   
+    4.ControllerClassNameHandlerMapping：貌似废弃了   
 HandlerInterceptor/WebRequestInterceptor
   1/7.preHandle  [mainThread]
      after handler determined by HandlerMapping, before invoked by HandlerAdapter.
@@ -52,15 +52,16 @@ CallableProcessingInterceptor/DeferredResultProcessingInterceptor
 AsyncWebRequestInterceptor
 
 B.HandlerAdapter：Help the DispatcherServlet to invoke a handler mapped to a request regardless of how the handler is actually invoked.the main purpose is to shield the DispatcherServlet from such details. 
-    1.HttpRequestHandlerAdapter(Default Implementation)：use HttpRequestHandler接口(DefaultServletHttpRequestHandler)
-    2.SimpleControllerHandlerAdapter(Default Implementation)：对应SimpleUrlHandlerMapping.
-    3.RequestMappingHandlerAdapter(Default Implementation)：对应RequestMappingHandlerMapping.
-    AbstractHandlerMethodAdapter use HandlerMethod
-    SimpleServletHandlerAdapter use Servlet接口
+    1.HttpRequestHandlerAdapter(Default Implementation)：handler of HttpRequestHandler(DefaultServletHttpRequestHandler)
+    2.RequestMappingHandlerAdapter(AbstractHandlerMethodAdapter)(Default Implementation)：handler of HandlerMethod，对应RequestMappingHandlerMapping.
+    3.SimpleControllerHandlerAdapter(Default Implementation)：handler of Controller，对应SimpleUrlHandlerMapping.
+    4.SimpleServletHandlerAdapter: handler of Servlet.
 org.springframework.web.HttpRequestHandler:
     DefaultServletHttpRequestHandler  <mvc:default-servlet-handler>
     ResourceHttpRequestHandler  <mvc:resources>
     WebSocketHttpRequestHandler  <websocket:handlers>
+    HttpInvokerServiceExporter
+    HessianServiceExporter
 
 C.HandlerExceptionResolver：Strategy to resolve exceptions possibly mapping them to handlers, or to HTML error views, or other.
     1.ExceptionHandlerExceptionResolver(Default Implementation)：@ExceptionHandler
