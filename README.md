@@ -83,7 +83,7 @@ D.ViewResolver：Resolve logical String-based view names returned from a handler
     10.XsltViewResolver
     11.ContentNegotiatingViewResolver
 RequestToViewNameTranslator
-    DefaultRequestToViewNameTranslator
+    DefaultRequestToViewNameTranslator(Default Implementation)
 
 E.LocaleResolver：Resolve the Locale a client is using and possibly their time zone, in order to be able to offer internationalized views. 
     1.AcceptHeaderLocaleResolver(Default Implementation)
