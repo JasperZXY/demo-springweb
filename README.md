@@ -1,6 +1,7 @@
 # demo-springweb
 Spring Web Demo
 <pre>
+
 1.包名更换
 2.增加Reactive的Flux的Mono
 3.补充基于Java的初始化和配置
@@ -23,109 +24,6 @@ ResourceUrlEncodingFilter
 11.@ConvertGroup、@GroupSequence、@ScriptAssert、@SupportedValidationTarget、EL表达式${validatedValue}
 12.验证错误消息和国际化消息
 
-============================================
-A.HandlerMapping：Map a request to a handler along with a list of HandlerInterceptor for pre- and post-processing.
-    1.RequestMappingHandlerMapping(Default Implementation)：use @RequestMapping in @Controller(HandlerMethod).
-    2.BeanNameUrlHandlerMapping(Default Implementation)
-    3.SimpleUrlHandlerMapping：use Controller接口,并遵循其工作流
-    4.ControllerClassNameHandlerMapping：貌似废弃了   
-HandlerInterceptor/WebRequestInterceptor
-  1/7.preHandle  [mainThread]
-     after handler determined by HandlerMapping, before invoked by HandlerAdapter.
-  8.postHandle  [mainThread]
-     after handler invoked by HandlerAdapter，before view rendered by DispatcherServlet.
-  9.afterCompletion  [mainThread]
-     after view rendered by DispatcherServlet,this is the completion of request processing.
-AsyncHandlerInterceptor
-  3.afterConcurrentHandlingStarted  [mainThread]        
-     after handler started asynchronous request handling.
-CallableProcessingInterceptor/DeferredResultProcessingInterceptor
-  2.beforeConcurrentHandling  [mainThread]
-     before the start of concurrent handling.
-  4.preProcess  [asyncThread]
-     after the start of concurrent handling，before the actual invocation of the Callable.
-  5.postProcess  [asyncThread]
-     after the Callable has produced a result.
-  4.1.handleTimeout  [mainThread]
-  4.2.handleError  [mainThread]
-  6.afterCompletion  [mainThread]
-AsyncWebRequestInterceptor
-PathMatcher(AntPathMatcher)/PathHelper
-
-B.HandlerAdapter：Help the DispatcherServlet to invoke a handler mapped to a request regardless of how the handler is actually invoked.the main purpose is to shield the DispatcherServlet from such details. 
-    1.RequestMappingHandlerAdapter(AbstractHandlerMethodAdapter)(Default Implementation)：handler of HandlerMethod，对应RequestMappingHandlerMapping.
-    2.HttpRequestHandlerAdapter(Default Implementation)：handler of HttpRequestHandler(DefaultServletHttpRequestHandler)   
-    3.SimpleControllerHandlerAdapter(Default Implementation)：handler of Controller，对应SimpleUrlHandlerMapping.
-    4.SimpleServletHandlerAdapter: handler of Servlet.
-org.springframework.web.HttpRequestHandler:
-    DefaultServletHttpRequestHandler  <mvc:default-servlet-handler>
-    ResourceHttpRequestHandler  <mvc:resources>
-    WebSocketHttpRequestHandler  <websocket:handlers>
-    HttpInvokerServiceExporter
-    HessianServiceExporter
-HandlerMathodArgumentResolver
-HandlerMethodReturnValueHandler/AsyncHandlerMethodReturnValueHandler
-
-C.HandlerExceptionResolver：Strategy to resolve exceptions possibly mapping them to handlers, or to HTML error views, or other.
-    1.ExceptionHandlerExceptionResolver(Default Implementation)：@ExceptionHandler
-    2.ResponseStatusExceptionResolver(Default Implementation)：@ResponseStatus
-    3.DefaultHandlerExceptionResolver(Default Implementation)：
-    4.SimpleMappingExceptionResolver
-MessageCodesResolver
-    DefaultMessageCodesResolver
-
-D.ViewResolver：Resolve logical String-based view names returned from a handler to an actual View to render to the response with. 
-    1.BeanNameViewResolver
-    2.XmlViewResolver(AbstractCachingViewResolver)
-    3.ResourceBundleViewResolver(AbstractCachingViewResolver)
-    4.UrlBasedViewResolver(AbstractCachingViewResolver)
-    5.InternalResourceViewResolver(UrlBasedViewResolver)(Default Implementation)
-    6.GroovyMarkupViewResolver(UrlBasedViewResolver/AbstractTemplateViewResolver)
-    7.FreeMarkerViewResolver(UrlBasedViewResolver/AbstractTemplateViewResolver)
-    8.ScriptTemplateViewResolver(UrlBasedViewResolver)
-    9.TilesViewResolver(UrlBasedViewResolver)
-    10.XsltViewResolver(UrlBasedViewResolver)
-    11.ContentNegotiatingViewResolver
-RequestToViewNameTranslator
-    DefaultRequestToViewNameTranslator(Default Implementation)
-
-E.LocaleResolver：Resolve the Locale a client is using and possibly their time zone, in order to be able to offer internationalized views. 
-    1.AcceptHeaderLocaleResolver(Default Implementation)
-    2.FixedLocaleResolver
-    3.SessionLocaleResolver
-    4.CookieLocaleResolver
-
-F.ThemeResolver：Resolve themes your web application can use, for example, to offer personalized layouts. 
-    1.FixedThemeResolver(Default Implementation)
-    2.SessionThemeResolver
-    3.CookieThemeResolver
-
-G.MultipartResolver：Abstraction for parsing a multi-part request (e.g. browser form file upload) with the help of some multipart parsing library.
-    1.CommonsMultipartResolver：based on Commons FileUpload
-    2.StandardServletMultipartResolver：based on Servlet 3.0
-
-H.FlashMapManager：Store and retrieve the "input" and the "output" FlashMap that can be used to pass attributes from one request to another, usually across a redirect. 
-    SessionFlashMapManager(Default Implementation)
-=============================================
-
-application/x-www-form-urlencoded
-multipart/form-data
-
-Last-Modified/If-Modified-Since/If-Unmodified-Since 304
-Etag/If-None-Match 304
-Expires 时间点
-Cache-Control 时间段
-
-@Validated @Valid
-getForDay(@PathVariable @DateTimeFormat(iso=ISO.DATE) Date day, @NumberFormat double num)
-NamespaceHandler
-
 https://my.oschina.net/FengJ/blog/223727
 
-@ResponseStatus
-java.util.Map / org.springframework.ui.Model / org.springframework.ui.ModelMap
-
-错误码： <%=request.getAttribute("javax.servlet.error.status_code")%> <br>
- 信息： <%=request.getAttribute("javax.servlet.error.message")%> <br>
- 异常： <%=request.getAttribute("javax.servlet.error.exception_type")%> <br>
 </pre>
