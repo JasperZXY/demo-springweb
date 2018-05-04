@@ -429,6 +429,12 @@
 				<env>prod</env>
 			</properties>
 		</profile>
+		<profile>
+			<id>zxy</id>
+			<properties>
+				<env>zxy</env>
+			</properties>
+		</profile>
 	</profiles>
 
 </project>
