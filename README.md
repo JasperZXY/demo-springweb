@@ -1,9 +1,10 @@
 # Quick Start
 - demo-springweb-web中的doc有一份db.sql，执行这份SQL
-- 这一步可选，在flters中添加自己的配置文件，然后pom.xml中也进行添加
 - 默认的配置环境是dev，需要确认dev.properties中的配置信息是否正确，特别是数据库的配置
-- `mvn clean install && cd demo-springweb-web && mvn jetty:run -P zxy`，可以在这里指定要运行的环境，三个命令可以分开执行
-- 首页 http://127.0.0.1:8080/springweb-web/html/index.html
+- 执行下面三个命令
+- `mvn clean compile`
+- `cd demo-springweb-web`
+- `mvn jetty:run`
 - 用户管理页面 http://127.0.0.1:8080/springweb-web/user/list.html
 
 
