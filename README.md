@@ -30,6 +30,59 @@
 ```
 
 
+# 数据格式化返回
+基本的数据格式  
+success：是否调用成功；code：错误返回码；message：错误信息；data：返回的数据
+```json
+{
+    success: true,
+    code: 0,
+    message: null,
+    data: {
+    }
+
+}
+```
+
+单个数据的返回
+```json
+{
+    success: true,
+    code: 0,
+    message: null,
+    data: {
+        id: 1,
+        name: "ruanwei",
+        gender: 0,
+        age: 28
+    }
+}
+```
+
+分页结果返回
+```json
+{
+    success: true,
+    code: 0,
+    message: null,
+    curPage: 2,
+    pageSize: 1,
+    count: 3,
+    list:[
+      {
+        id: 2,
+        name: "zxy",
+        gender: 0,
+        age: 0
+      }
+    ]
+}
+```
+
+样例api
+- http://127.0.0.1:8080/springweb-web/user2/1
+- http://127.0.0.1:8080/springweb-web/user2/list?curPage=2&pageSize=1
+
 
 # demo-springweb
 Spring Web Demo
