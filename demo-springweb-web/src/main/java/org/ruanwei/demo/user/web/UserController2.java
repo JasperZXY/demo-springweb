@@ -1,5 +1,8 @@
 package org.ruanwei.demo.user.web;
 
+import org.ruanwei.core.InvalidArgumentException;
+import org.ruanwei.core.InvalidLogicException;
+import org.ruanwei.core.ServiceException;
 import org.ruanwei.core.web.Page;
 import org.ruanwei.core.web.PaginatorResult;
 import org.ruanwei.core.web.PlainResult;
@@ -61,6 +64,23 @@ public class UserController2 {
             plainResult.setData(user);
         }
         return plainResult;
+    }
+
+    @GetMapping(path = "/error/{type}")
+    @ResponseBody
+    public PlainResult<User> error(@PathVariable Integer type) throws Exception {
+        if (type == null) {
+            throw new NullPointerException();
+        }
+        switch (type) {
+            case 1:
+                throw new InvalidArgumentException("不支持的参数类型");
+            case 2:
+                throw new InvalidLogicException("登录态失效");
+            case 3:
+                throw new ServiceException("获取用户数据失败", 100001);
+        }
+        return new PlainResult<>(new User("test", type));
     }
 
 }
