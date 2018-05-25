@@ -109,14 +109,14 @@ UserController2.error()，MyControllerAdvice.handleSpringException()
 public Object handleSpringException(Throwable e, HttpServletRequest request, HttpServletResponse response) throws Exception {
     logger.error("handleSpringException===================" + request.getRequestURL(), e);
     BaseResult result = new BaseResult();
-    if (e instanceof InvalidArgumentException) {
+    if (e instanceof InvalidArgumentException) {    // 参数异常
         result.setError(1001, "参数异常：" + e.getMessage());
-    } else if (e instanceof InvalidLogicException) {
+    } else if (e instanceof InvalidLogicException) {    // 登录异常
         result.setError(1002, "登录异常：" + e.getMessage());
-    } else if (e instanceof ServiceException) {
+    } else if (e instanceof ServiceException) {     // 业务异常
         ServiceException re = (ServiceException)e;
         result.setError(re.getCode(), re.getMessage());
-    } else {
+    } else {                                        // 系统异常
         result.setError(1003, "服务器繁忙，请稍后重试！");
     }
     return result;
