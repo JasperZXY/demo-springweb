@@ -118,8 +118,8 @@ public class MyControllerAdvice extends AbstractJsonpResponseBodyAdvice { // ext
 			result.setError(1001, "参数异常：" + e.getMessage());
 		}else if (e instanceof InvalidLogicException) {
 			result.setError(1002, "登录异常：" + e.getMessage());
-		}else if (e instanceof RemoteAccessException) {
-			RemoteAccessException re = (RemoteAccessException)e;
+		}else if (e instanceof ServiceException) {
+			ServiceException re = (ServiceException)e;
 			result.setError(re.getCode(), re.getMessage());
 		}else {
 			result.setError(1003, "服务器繁忙，请稍后重试！");
