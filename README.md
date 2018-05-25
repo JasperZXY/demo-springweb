@@ -96,32 +96,14 @@ success：是否调用成功；code：错误返回码；message：错误信息�
 
 
 # 异常拦截
-目前对三种异常做了特定的拦截，其他异常都归了系统类异常，代码见
-UserController2.error()，MyControllerAdvice.handleSpringException()  
+目前对三种异常做了特定的拦截，其他异常都归了系统类异常，代码见UserController2.error()，MyControllerAdvice.handleSpringException()  
 接口如下
 - http://127.0.0.1:8080/springweb-web/user2/error/1
 - http://127.0.0.1:8080/springweb-web/user2/error/2
 - http://127.0.0.1:8080/springweb-web/user2/error/3
 - http://127.0.0.1:8080/springweb-web/user2/error/5
-```
-@ExceptionHandler(Exception.class) // handled by ExceptionHandlerExceptionResolver
-@ResponseBody
-public Object handleSpringException(Throwable e, HttpServletRequest request, HttpServletResponse response) throws Exception {
-    logger.error("handleSpringException===================" + request.getRequestURL(), e);
-    BaseResult result = new BaseResult();
-    if (e instanceof InvalidArgumentException) {    // 参数异常
-        result.setError(1001, "参数异常：" + e.getMessage());
-    } else if (e instanceof InvalidLogicException) {    // 登录异常
-        result.setError(1002, "登录异常：" + e.getMessage());
-    } else if (e instanceof ServiceException) {     // 业务异常
-        ServiceException re = (ServiceException)e;
-        result.setError(re.getCode(), re.getMessage());
-    } else {                                        // 系统异常
-        result.setError(1003, "服务器繁忙，请稍后重试！");
-    }
-    return result;
-}
-```
+
+定义的异常：参数异常、登录态失效异常、业务异常、其他系统异常
 
 最终返回的数据如下
 ```json
