@@ -11,7 +11,6 @@ public class PlainResult<T> extends BaseResult {
     public PlainResult(){}
 
     public PlainResult(T data) {
-        this.setSuccess(true);
         this.data = data;
     }
 

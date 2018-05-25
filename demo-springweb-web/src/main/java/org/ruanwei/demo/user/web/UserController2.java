@@ -54,7 +54,13 @@ public class UserController2 {
     @ResponseBody
     public PlainResult<User> get(@PathVariable("uid") @Min(0) int id) {
         User user = userService.getUser(id);
-        return new PlainResult<>(user);
+        PlainResult<User> plainResult = new PlainResult<>();
+        if (user == null) {
+            plainResult.setError(101, "该用户不存在");
+        }else {
+            plainResult.setData(user);
+        }
+        return plainResult;
     }
 
 }

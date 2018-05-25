@@ -79,9 +79,20 @@ success：是否调用成功；code：错误返回码；message：错误信息�
 }
 ```
 
+发生错误的情况
+```json
+{
+    success: false,
+    code: 101,
+    message: "该用户不存在",
+    data: null
+}
+```
+
 样例api
 - http://127.0.0.1:8080/springweb-web/user2/1
 - http://127.0.0.1:8080/springweb-web/user2/list?curPage=2&pageSize=1
+- http://127.0.0.1:8080/springweb-web/user2/999
 
 
 # demo-springweb

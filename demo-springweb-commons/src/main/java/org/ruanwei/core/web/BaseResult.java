@@ -13,7 +13,7 @@ public class BaseResult implements Serializable {
     /**
      * 标识本次调用是否返回
      */
-    private boolean success;
+    private boolean success = true;
 
     /**
      * 本次调用返回code
@@ -53,6 +53,13 @@ public class BaseResult implements Serializable {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public <R extends BaseResult> R setError(int code, String message) {
+        this.setSuccess(false);
+        this.setCode(code);
+        this.setMessage(message);
+        return (R)this;
     }
 
 
