@@ -1,8 +1,10 @@
 # Quick Start
-- demo-springweb-web中的doc有一份db.sql，执行这份SQL
+- `git clone git@github.com:ruanweiqq/demo-springweb.git`
+- `cd demo-springweb`
+- demo-springweb-web中的doc有一份db.sql，执行这份SQL，TODO或内存数据库
 - 默认的配置环境是dev，需要确认dev.properties中的配置信息是否正确，特别是数据库的配置
 - 执行下面三个命令
-- `mvn clean compile`
+- `mvn clean install`
 - `cd demo-springweb-web`
 - `mvn jetty:run`
 - 用户管理页面 http://127.0.0.1:8080/springweb-web/user/list.html
@@ -33,16 +35,6 @@
 # 数据格式化返回
 基本的数据格式  
 success：是否调用成功；code：错误返回码；message：错误信息；data：返回的数据
-```json
-{
-    success: true,
-    code: 0,
-    message: null,
-    data: {
-    }
-
-}
-```
 
 单个数据的返回
 ```json
@@ -103,7 +95,7 @@ success：是否调用成功；code：错误返回码；message：错误信息�
 - http://127.0.0.1:8080/springweb-web/user2/error/3
 - http://127.0.0.1:8080/springweb-web/user2/error/5
 
-定义的异常：参数异常、登录态失效异常、业务异常、其他系统异常
+定义的异常：参数异常、业务异常(包括登录态异常)、系统异常
 
 最终返回的数据如下
 ```json
@@ -117,8 +109,51 @@ success：是否调用成功；code：错误返回码；message：错误信息�
 
 # demo-springweb
 Spring Web Demo
-<pre>
 
+- [ ] 容器配置，Java的配置方式
+- [ ] MVC配置，Java方式的配置为主，xml配置为辅
+- [ ] maven配置
+    - [ ] 打包成tomcat的运行用的包，一次性打包两个项目
+    - [ ] demo的bom，模仿spring-bom
+    - [ ] 是否支持pluginManager
+    - [ ] 依赖的jar包分类注释
+- [ ] URL路径匹配，支持自定义的
+- [ ] 处理拦截
+    - [ ] servlet filter
+    - [ ] HandlerInterceptor
+    - [ ] WebRequestInterceptor
+- [ ] 异常，ExceptionHandler，error-page
+- [ ] 视图，内容协商，根据不同的扩展名返回不同的数据
+    - [ ] 生成json的两种方式，JsonView、Message Converter
+- [ ] 国际化支持，LocalResolver
+- [ ] ThemeResolver
+- [ ] 文件上传，两种方式
+- [ ] 视图控制器 
+    - [ ] json
+    - [ ] html
+    - [ ] pdf
+    - [ ] view-controller、UrlFilenameViewController
+    - [ ] 自定义视图
+- [ ] RequestMapping，这个不用，要强制get跟post，两个页面之间跳转传参
+- [ ] RequestBody,ResponseBody
+- [ ] 自定义参数解析和返回值
+    - [ ] HttpMessageConverter
+    - [ ] ResponseBodyAdvice，可以修改返回的数据，jsonp
+- [ ] PushBuilder，支持Http2
+- [ ] InitBinder
+- [ ] 参数校验，带消息，自定义校验器消息，错误消息国际化
+- [ ] 异常的处理支持内容协商
+- [ ] ControllerAdvice
+- [ ] 异步请求处理，支持两种异步方法
+- [ ] HTTP Streaming
+- [ ] WebSocket
+- [ ] HTTP 缓存
+    - [ ] ResourceHttpRequestHandler 静态资源
+    - [ ] Controller 缓存
+- [ ] RestTemplate
+
+
+<pre>
 1.包名更换
 2.增加Reactive的Flux的Mono
 3.补充基于Java的初始化和配置
@@ -140,9 +175,11 @@ ResourceUrlEncodingFilter
 10.自动扫描的inclued和exclude
 11.@ConvertGroup、@GroupSequence、@ScriptAssert、@SupportedValidationTarget、EL表达式${validatedValue}
 12.验证错误消息和国际化消息
+13.打包成tomcat的运行用的包，一次性打包两个项目
+14.demo的bom，模仿spring-bom
+15.是否支持pluginManager
+16.依赖的jar包分类注释
 
 https://my.oschina.net/FengJ/blog/223727
 
 </pre>
-
-阮威
