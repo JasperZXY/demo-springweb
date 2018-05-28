@@ -1,8 +1,10 @@
 # Quick Start
-- demo-springweb-web中的doc有一份db.sql，执行这份SQL
+- `git clone git@github.com:ruanweiqq/demo-springweb.git`
+- `cd demo-springweb`
+- demo-springweb-web中的doc有一份db.sql，执行这份SQL，TODO或内存数据库
 - 默认的配置环境是dev，需要确认dev.properties中的配置信息是否正确，特别是数据库的配置
 - 执行下面三个命令
-- `mvn clean compile`
+- `mvn clean install`
 - `cd demo-springweb-web`
 - `mvn jetty:run`
 - 用户管理页面 http://127.0.0.1:8080/springweb-web/user/list.html
