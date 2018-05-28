@@ -22,3 +22,21 @@
 hs_err_pid*
 /.project
 /.settings/
+
+# idea
+.idea
+*.iml
+/demo-springweb-commons/demo-springweb-commons.iml
+/demo-springweb-remoting/demo-springweb-remoting.iml
+/demo-springweb-service/demo-springweb-service.iml
+/demo-springweb-web/demo-springweb-web.iml
+/demo-springweb-commons/target
+/demo-springweb-remoting/target
+/demo-springweb-service/target
+/demo-springweb-web/target
+/demo-springweb-web/demo-springweb-web.log
+/demo-springweb-web/demo-springweb-service.log
+.DS_Store
+logs
+target
+pom.xml.versionsBackup

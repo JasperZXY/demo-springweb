@@ -1,3 +1,120 @@
+# Quick Start
+- demo-springweb-web中的doc有一份db.sql，执行这份SQL
+- 默认的配置环境是dev，需要确认dev.properties中的配置信息是否正确，特别是数据库的配置
+- 执行下面三个命令
+- `mvn clean compile`
+- `cd demo-springweb-web`
+- `mvn jetty:run`
+- 用户管理页面 http://127.0.0.1:8080/springweb-web/user/list.html
+
+
+# 关于日志
+- 本项目用的日志框架是log4j2
+- 官方文档：http://logging.apache.org/log4j/2.x/manual/configuration.html
+- 日志可以根据不同环境进行配置，默认打在`/data/logs/demo-springweb`目录下
+- 日志Rollover配置的是100M一次，日志名类似2018-05-22_1.log、2018-05-22_2.log
+- 日志输出格式如下
+
+```
+时间 线程名 日志级别(WARN=W, DEBUG=D, ERROR=E, TRACE=T, INFO=I) 类名[行号] - 日志信息
+
+17:08:53.552 [main] D BeanValidationBeanPostProcessor[86] - postProcessBeforeInitialization==================307org.ruanwei.demo.user.web.interceptor.MyDeferredResultProcessingInterceptor#0#1=org.ruanwei.demo.user.web.interceptor.MyDeferredResultProcessingInterceptor@1031c1a0
+17:08:53.552 [main] D BeanValidationBeanPostProcessor[136] - postProcessAfterInitialization==================308org.ruanwei.demo.user.web.interceptor.MyDeferredResultProcessingInterceptor#0#1=org.ruanwei.demo.user.web.interceptor.MyDeferredResultProcessingInterceptor@1031c1a0
+17:08:53.553 [main] D BeanValidationBeanPostProcessor[86] - postProcessBeforeInitialization==================309(inner bean)#6d5508a5=org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter@519b0f00
+17:08:53.553 [main] D BeanValidationBeanPostProcessor[89] - handlerAdapter==================org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter@519b0f00
+17:08:53.554 [main] I RequestMappingHandlerAdapter[568] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'springweb-web-servlet': startup date [Tue May 22 17:08:52 CST 2018]; parent: Root WebApplicationContext
+17:08:53.556 [main] I RequestMappingHandlerAdapter[585] - Detected @ModelAttribute methods in myControllerAdvice
+17:08:53.570 [main] I RequestMappingHandlerAdapter[592] - Detected @InitBinder methods in myControllerAdvice
+17:08:53.570 [main] I RequestMappingHandlerAdapter[604] - Detected ResponseBodyAdvice bean in myControllerAdvice
+17:08:53.573 [main] I RequestMappingHandlerAdapter[604] - Detected ResponseBodyAdvice bean in myResponseBodyAdvice
+```
+
+
+# 数据格式化返回
+基本的数据格式  
+success：是否调用成功；code：错误返回码；message：错误信息；data：返回的数据
+```json
+{
+    success: true,
+    code: 0,
+    message: null,
+    data: {
+    }
+
+}
+```
+
+单个数据的返回
+```json
+{
+    success: true,
+    code: 0,
+    message: null,
+    data: {
+        id: 1,
+        name: "ruanwei",
+        gender: 0,
+        age: 28
+    }
+}
+```
+
+分页结果返回
+```json
+{
+    success: true,
+    code: 0,
+    message: null,
+    curPage: 2,
+    pageSize: 1,
+    count: 3,
+    list:[
+      {
+        id: 2,
+        name: "zxy",
+        gender: 0,
+        age: 0
+      }
+    ]
+}
+```
+
+发生错误的情况
+```json
+{
+    success: false,
+    code: 101,
+    message: "该用户不存在",
+    data: null
+}
+```
+
+样例api
+- http://127.0.0.1:8080/springweb-web/user2/1
+- http://127.0.0.1:8080/springweb-web/user2/list?curPage=2&pageSize=1
+- http://127.0.0.1:8080/springweb-web/user2/999
+
+
+# 异常拦截
+目前对三种异常做了特定的拦截，其他异常都归了系统类异常，代码见UserController2.error()，MyControllerAdvice.handleSpringException()  
+接口如下
+- http://127.0.0.1:8080/springweb-web/user2/error/1
+- http://127.0.0.1:8080/springweb-web/user2/error/2
+- http://127.0.0.1:8080/springweb-web/user2/error/3
+- http://127.0.0.1:8080/springweb-web/user2/error/5
+
+定义的异常：参数异常、登录态失效异常、业务异常、其他系统异常
+
+最终返回的数据如下
+```json
+{
+    success: false,
+    code: 1002,
+    message: "xxx"
+}
+```
+
+
 # demo-springweb
 Spring Web Demo
 <pre>
