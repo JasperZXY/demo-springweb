@@ -25,6 +25,14 @@ public class BaseResult implements Serializable {
      */
     private String message;
 
+    public BaseResult() {}
+
+    public BaseResult(int code, String message) {
+        this.setSuccess(false);
+        this.code = code;
+        this.message = message;
+    }
+
 
     public boolean isSuccess() {
         return success;

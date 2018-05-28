@@ -5,12 +5,16 @@ package org.ruanwei.core.web;
  * Time 2018/5/24
  * Desc 文件描述
  */
-public class PlainResult<T> extends BaseResult {
+public class Result<T> extends BaseResult {
     private T data;
 
-    public PlainResult(){}
+    public Result(){}
 
-    public PlainResult(T data) {
+    public Result(int code, String message) {
+        super(code, message);
+    }
+
+    public Result(T data) {
         this.data = data;
     }
 
