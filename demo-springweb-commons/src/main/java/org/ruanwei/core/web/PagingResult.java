@@ -79,15 +79,11 @@ public class PagingResult<T> extends BaseResult {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("{");
-        sb.append("success=").append(isSuccess());
-        sb.append(", code=").append(getCode());
-        sb.append(", message='").append(getMessage());
+        final StringBuilder sb = new StringBuilder(super.toString());
         sb.append(", curPage=").append(curPage);
         sb.append(", pageSize=").append(pageSize);
         sb.append(", count=").append(count);
         sb.append(", data=").append(list);
-        sb.append('}');
         return sb.toString();
     }
 }

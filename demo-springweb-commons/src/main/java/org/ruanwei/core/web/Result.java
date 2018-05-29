@@ -31,12 +31,8 @@ public class Result<T> extends BaseResult {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("{");
-        sb.append("success=").append(isSuccess());
-        sb.append(", code=").append(getCode());
-        sb.append(", message='").append(getMessage());
-        sb.append(", data=").append(data);
-        sb.append('}');
+        final StringBuilder sb = new StringBuilder(super.toString());
+        sb.append(",data=").append(data);
         return sb.toString();
     }
 }

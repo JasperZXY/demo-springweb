@@ -73,11 +73,10 @@ public class BaseResult implements Serializable {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("{");
+        final StringBuilder sb = new StringBuilder();
         sb.append("success=").append(success);
         sb.append(", code=").append(code);
         sb.append(", message='").append(message).append('\'');
-        sb.append('}');
         return sb.toString();
     }
 }
