@@ -42,8 +42,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.annotation.JsonView;
 
 /**
- * 其它方法参数，简单类型默认为@RequestParam，其它默认为@ModelAttribute
- * 其它方法返回值，简单类型默认为@ModelAttribute，void默认为RequestToViewNameTranslator视图名
  * 
  * @author ruanwei
  */
