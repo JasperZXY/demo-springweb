@@ -35,16 +35,6 @@
 # 数据格式化返回
 基本的数据格式  
 success：是否调用成功；code：错误返回码；message：错误信息；data：返回的数据
-```json
-{
-    success: true,
-    code: 0,
-    message: null,
-    data: {
-    }
-
-}
-```
 
 单个数据的返回
 ```json
@@ -119,8 +109,51 @@ success：是否调用成功；code：错误返回码；message：错误信息�
 
 # demo-springweb
 Spring Web Demo
-<pre>
 
+- [ ] 容器配置，Java的配置方式
+- [ ] MVC配置，Java方式的配置为主，xml配置为辅
+- [ ] maven配置
+    - [ ] 打包成tomcat的运行用的包，一次性打包两个项目
+    - [ ] demo的bom，模仿spring-bom
+    - [ ] 是否支持pluginManager
+    - [ ] 依赖的jar包分类注释
+- [ ] URL路径匹配，支持自定义的
+- [ ] 处理拦截
+    - [ ] servlet filter
+    - [ ] HandlerInterceptor
+    - [ ] WebRequestInterceptor
+- [ ] 异常，ExceptionHandler，error-page
+- [ ] 视图，内容协商，根据不同的扩展名返回不同的数据
+    - [ ] 生成json的两种方式，JsonView、Message Converter
+- [ ] 国际化支持，LocalResolver
+- [ ] ThemeResolver
+- [ ] 文件上传，两种方式
+- [ ] 视图控制器 
+    - [ ] json
+    - [ ] html
+    - [ ] pdf
+    - [ ] view-controller、UrlFilenameViewController
+    - [ ] 自定义视图
+- [ ] RequestMapping，这个不用，要强制get跟post，两个页面之间跳转传参
+- [ ] RequestBody,ResponseBody
+- [ ] 自定义参数解析和返回值
+    - [ ] HttpMessageConverter
+    - [ ] ResponseBodyAdvice，可以修改返回的数据，jsonp
+- [ ] PushBuilder，支持Http2
+- [ ] InitBinder
+- [ ] 参数校验，带消息，自定义校验器消息，错误消息国际化
+- [ ] 异常的处理支持内容协商
+- [ ] ControllerAdvice
+- [ ] 异步请求处理，支持两种异步方法
+- [ ] HTTP Streaming
+- [ ] WebSocket
+- [ ] HTTP 缓存
+    - [ ] ResourceHttpRequestHandler 静态资源
+    - [ ] Controller 缓存
+- [ ] RestTemplate
+
+
+<pre>
 1.包名更换
 2.增加Reactive的Flux的Mono
 3.补充基于Java的初始化和配置
@@ -152,7 +185,5 @@ https://my.oschina.net/FengJ/blog/223727
 </pre>
 
 
-钟献耀
 
-阮威
 
