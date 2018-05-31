@@ -56,7 +56,7 @@ public class UserController {
 
 	@GetMapping(path = "/list")
 	public String list(@Valid @NotNull UserForm userForm, Page page, Model model) {
-		logger.debug("list=" + userForm);
+		logger.debug("list=" + userForm + page);
 
 		// add your code here.
 
@@ -66,8 +66,8 @@ public class UserController {
 
 		user.setStart(page.getPageSize() * (page.getCurPage() - 1));
 		user.setOffset(page.getPageSize());
-		
-		//user.setAge(-1);
+
+		// user.setAge(-1);
 		List<User> list = userService.list4Page(user);
 
 		model.addAttribute("list", list);
