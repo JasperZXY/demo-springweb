@@ -351,7 +351,7 @@
 
 	<dependencies>
 	</dependencies>
-
+	
 	<build>
 		<finalName>demo-springweb</finalName>
 		<pluginManagement>
@@ -383,6 +383,32 @@
 		<plugins>
 		</plugins>
 	</build>
+	
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<env>development</env>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+
+		<profile>
+			<id>prod</id>
+			<properties>
+				<env>production</env>
+			</properties>
+		</profile>
+		
+		<profile>
+			<id>zxy</id>
+			<properties>
+				<env>zxy</env>
+			</properties>
+		</profile>
+	</profiles>
 
 	<repositories>
 		<repository>
@@ -416,31 +442,5 @@
 			<url>https://repo.spring.io/libs-release</url>
 		</pluginRepository>
 	</pluginRepositories>
-
-	<profiles>
-		<profile>
-			<id>dev</id>
-			<properties>
-				<env>development</env>
-			</properties>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-		</profile>
-
-		<profile>
-			<id>prod</id>
-			<properties>
-				<env>production</env>
-			</properties>
-		</profile>
-		
-		<profile>
-			<id>zxy</id>
-			<properties>
-				<env>zxy</env>
-			</properties>
-		</profile>
-	</profiles>
 
 </project>
