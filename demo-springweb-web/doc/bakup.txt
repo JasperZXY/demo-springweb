@@ -28,3 +28,11 @@
 			</list>
 		</property>
 	</bean>
+	
+	<!-- TODO 以下内容准备干掉 -->
+	<bean id="xmlConverter"
+		class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+		<property name="marshaller" ref="castorMarshaller" />
+		<property name="unmarshaller" ref="castorMarshaller" />
+	</bean>
+	<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller" />

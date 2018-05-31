@@ -73,15 +73,6 @@
 		<property name="keepAliveSeconds" value="30" /><!--线程池中空闲线程的存活时间单位秒  -->
 	</bean>
 
-	<!-- TODO 以下内容准备干掉 -->
-	<bean id="xmlConverter"
-		class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
-		<property name="marshaller" ref="castorMarshaller" />
-		<property name="unmarshaller" ref="castorMarshaller" />
-	</bean>
-	<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller" />
-
 	<import resource="integration-dataAccess.xml" />
-
 	<!-- <import resource="integration-remoting.xml" /> -->
 </beans>
