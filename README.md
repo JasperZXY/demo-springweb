@@ -1,8 +1,10 @@
 # Quick Start
-- demo-springweb-web中的doc有一份db.sql，执行这份SQL
+- `git clone git@github.com:ruanweiqq/demo-springweb.git`
+- `cd demo-springweb`
+- demo-springweb-web中的doc有一份db.sql，执行这份SQL，TODO或内存数据库
 - 默认的配置环境是dev，需要确认dev.properties中的配置信息是否正确，特别是数据库的配置
 - 执行下面三个命令
-- `mvn clean compile`
+- `mvn clean install`
 - `cd demo-springweb-web`
 - `mvn jetty:run`
 - 用户管理页面 http://127.0.0.1:8080/springweb-web/user/list.html
@@ -103,7 +105,7 @@ success：是否调用成功；code：错误返回码；message：错误信息�
 - http://127.0.0.1:8080/springweb-web/user2/error/3
 - http://127.0.0.1:8080/springweb-web/user2/error/5
 
-定义的异常：参数异常、登录态失效异常、业务异常、其他系统异常
+定义的异常：参数异常、业务异常(包括登录态异常)、系统异常
 
 最终返回的数据如下
 ```json
@@ -140,6 +142,10 @@ ResourceUrlEncodingFilter
 10.自动扫描的inclued和exclude
 11.@ConvertGroup、@GroupSequence、@ScriptAssert、@SupportedValidationTarget、EL表达式${validatedValue}
 12.验证错误消息和国际化消息
+13.打包成tomcat的运行用的包，一次性打包两个项目
+14.demo的bom，模仿spring-bom
+15.是否支持pluginManager
+16.依赖的jar包分类注释
 
 https://my.oschina.net/FengJ/blog/223727
 
