@@ -193,15 +193,15 @@
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jstl</artifactId>
+				<version>1.2</version>
+			</dependency>
+			<dependency>
 				<groupId>javax.el</groupId>
 				<artifactId>javax.el-api</artifactId>
 				<version>3.0.0</version>
 				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>jstl</artifactId>
-				<version>1.2</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.taglibs</groupId>
@@ -354,28 +354,33 @@
 
 	<build>
 		<finalName>demo-springweb</finalName>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.7.0</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+						<encoding>utf8</encoding>
+						<!-- <compilerArgument>-XDignore.symbol.file</compilerArgument> -->
+						<compilerArgument>-parameters</compilerArgument>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.20.1</version>
+					<configuration>
+						<testFailureIgnore>true</testFailureIgnore>
+						<skip>true</skip>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.7.0</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<encoding>utf8</encoding>
-					<!-- <compilerArgument>-XDignore.symbol.file</compilerArgument> -->
-					<compilerArgument>-parameters</compilerArgument>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.20.1</version>
-				<configuration>
-					<testFailureIgnore>true</testFailureIgnore>
-					<skip>true</skip>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 
@@ -416,7 +421,7 @@
 		<profile>
 			<id>dev</id>
 			<properties>
-				<env>dev</env>
+				<env>development</env>
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
@@ -426,9 +431,10 @@
 		<profile>
 			<id>prod</id>
 			<properties>
-				<env>prod</env>
+				<env>production</env>
 			</properties>
 		</profile>
+		
 		<profile>
 			<id>zxy</id>
 			<properties>

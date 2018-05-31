@@ -4,8 +4,8 @@ import org.ruanwei.core.InvalidArgumentException;
 import org.ruanwei.core.InvalidLogicException;
 import org.ruanwei.core.ServiceException;
 import org.ruanwei.core.web.Page;
-import org.ruanwei.core.web.PaginatorResult;
-import org.ruanwei.core.web.PlainResult;
+import org.ruanwei.core.web.PagingResult;
+import org.ruanwei.core.web.Result;
 import org.ruanwei.demo.user.entity.User;
 import org.ruanwei.demo.user.service.UserService;
 import org.ruanwei.demo.user.web.databind.UserForm;
@@ -38,7 +38,7 @@ public class UserController2 {
 
     @GetMapping(path = "/list")
     @ResponseBody
-    public PaginatorResult<User> list(@Valid @NotNull UserForm userForm, Page page) {
+    public PagingResult<User> list(@Valid @NotNull UserForm userForm, Page page) {
 
         User user = BeanUtils.copy(userForm, User.class);
         long totalRecord = userService.count(user);
@@ -49,26 +49,26 @@ public class UserController2 {
 
         List<User> list = userService.list4Page(user);
 
-        return new PaginatorResult<>(page, totalRecord, list);
+        return new PagingResult<>(page, totalRecord, list);
     }
 
 
     @GetMapping(path = "{uid}")
     @ResponseBody
-    public PlainResult<User> get(@PathVariable("uid") @Min(0) int id) {
+    public Result<User> get(@PathVariable("uid") @Min(0) int id) {
         User user = userService.getUser(id);
-        PlainResult<User> plainResult = new PlainResult<>();
+        Result<User> result = new Result<>();
         if (user == null) {
-            plainResult.setError(101, "该用户不存在");
+            result.setError(101, "该用户不存在");
         }else {
-            plainResult.setData(user);
+            result.setData(user);
         }
-        return plainResult;
+        return result;
     }
 
     @GetMapping(path = "/error/{type}")
     @ResponseBody
-    public PlainResult<User> error(@PathVariable Integer type) throws Exception {
+    public Result<User> error(@PathVariable Integer type) throws Exception {
         if (type == null) {
             throw new NullPointerException();
         }
@@ -80,7 +80,7 @@ public class UserController2 {
             case 3:
                 throw new ServiceException("获取用户数据失败", 100001);
         }
-        return new PlainResult<>(new User("test", type));
+        return new Result<>(new User("test", type));
     }
 
 }

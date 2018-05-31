@@ -1,39 +1,28 @@
 package org.ruanwei.demo.user.web.interceptor;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.ConstraintViolationException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.ruanwei.core.DataAccessException;
 import org.ruanwei.core.InvalidArgumentException;
 import org.ruanwei.core.InvalidLogicException;
-import org.ruanwei.core.InvalidStateException;
-import org.ruanwei.core.RemoteAccessException;
 import org.ruanwei.core.ServiceException;
-import org.ruanwei.core.WebException;
 import org.ruanwei.core.web.BaseResult;
-import org.ruanwei.core.web.PlainResult;
 import org.ruanwei.util.Counter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindException;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.AbstractJsonpResponseBodyAdvice;
 
