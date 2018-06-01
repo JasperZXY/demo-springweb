@@ -10,17 +10,22 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import javax.validation.groups.Default;
 
 import com.fasterxml.jackson.annotation.JsonView;
+
+import org.ruanwei.demo.user.validation.Create;
+import org.ruanwei.demo.user.validation.Update;
+
 
 @SuppressWarnings("serial")
 public class User implements Serializable {
 	@JsonView(WithoutPageingView.class)
-	@Min(0)
+	@Min(value=0, groups = {Update.class}, message = "id必须大于0")
 	private int id;
 	
 	@JsonView(WithoutPageingView.class)
-	@Size(min = 0, max = 30)
+	@Size(min = 0, max = 30, groups = {Create.class, Update.class}, message = "名字最多30个字")
 	private String name = "";
 	
 	@JsonView(WithoutPageingView.class)

@@ -107,6 +107,13 @@ success：是否调用成功；code：错误返回码；message：错误信息�
 ```
 
 
+# 参数校验
+- 可使用`javax.validation.Valid`注解或`org.springframework.validation.annotation.Validated`注解
+- Validated支持分组校验，Valid不支持分组校验，不指定分组的话，默认是`javax.validation.groups.Default`
+- 由于指定分组校验后，分组没有匹配上的是不会进行校验，所以建议指定分组后，加上默认分组`javax.validation.groups.Default`
+- 代码中新建了三个分组（`Create`、`Update`、`Query`），方便业务使用
+
+
 # demo-springweb
 Spring Web Demo
 

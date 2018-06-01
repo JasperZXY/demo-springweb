@@ -54,7 +54,7 @@ public class ExceptionController {
 
 	// 1.来自Servlet容器的异常：包含404和500(例如JSP异常)
 	// 2.来自Spring的异常：包含用户在框架中抛出的异常(例如@ExceptionHandler)
-	@GetMapping(path = "/error", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@RequestMapping(path = "/error", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@ResponseBody
 	public Map<String, Object> error(HttpServletRequest request) {
 		logger.error("error");

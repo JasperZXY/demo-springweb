@@ -8,6 +8,7 @@ import org.ruanwei.core.web.PagingResult;
 import org.ruanwei.core.web.Result;
 import org.ruanwei.demo.user.entity.User;
 import org.ruanwei.demo.user.service.UserService;
+import org.ruanwei.demo.user.validation.Create;
 import org.ruanwei.demo.user.web.databind.UserForm;
 import org.ruanwei.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.groups.Default;
 
 
 /**
@@ -35,6 +37,18 @@ public class UserController2 {
 
     @Autowired
     private UserService userService;
+
+
+    @RequestMapping(path = "doAdd")
+    public Result<UserForm> doAdd(@Validated({Create.class, Default.class}) @NotNull UserForm userForm) {
+        return Result.bulider().data(userForm).build();
+    }
+
+    @RequestMapping(path = "doAdd2")
+    public Result<UserForm> doAdd2(@Validated @NotNull UserForm userForm) {
+        return Result.bulider().data(userForm).build();
+    }
+
 
     @GetMapping(path = "/list")
     @ResponseBody
@@ -49,7 +63,7 @@ public class UserController2 {
 
         List<User> list = userService.list4Page(user);
 
-        return new PagingResult<>(page, totalRecord, list);
+        return PagingResult.bulider().page(page).count(totalRecord).list(list).build();
     }
 
 
@@ -65,6 +79,7 @@ public class UserController2 {
         }
         return result;
     }
+
 
     @GetMapping(path = "/error/{type}")
     @ResponseBody
