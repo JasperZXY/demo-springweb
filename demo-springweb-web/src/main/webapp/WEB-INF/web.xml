@@ -62,17 +62,6 @@
 		</init-param>
 	</filter>
 
-	<!-- Note that this strategy saves network bandwidth but not CPU, as the 
-		full response must be computed for each request. -->
-	<filter>
-		<filter-name>ShallowEtagHeader</filter-name>
-		<filter-class>org.springframework.web.filter.ShallowEtagHeaderFilter</filter-class>
-		<async-supported>true</async-supported>
-		<!-- Optional parameter that configures the filter to write weak ETags 
-			<init-param> <param-name>writeWeakETag</param-name> <param-value>true</param-value> 
-			</init-param> -->
-	</filter>
-
 	<filter>
 		<filter-name>CommonsRequestLogging</filter-name>
 		<filter-class>org.springframework.web.filter.CommonsRequestLoggingFilter</filter-class>
@@ -93,13 +82,6 @@
 
 	<filter-mapping>
 		<filter-name>CharacterEncoding</filter-name>
-		<url-pattern>*</url-pattern>
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>ASYNC</dispatcher>
-	</filter-mapping>
-
-	<filter-mapping>
-		<filter-name>ShallowEtagHeader</filter-name>
 		<url-pattern>*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>ASYNC</dispatcher>

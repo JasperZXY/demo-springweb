@@ -42,8 +42,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.annotation.JsonView;
 
 /**
- * 其它方法参数，简单类型默认为@RequestParam，其它默认为@ModelAttribute
- * 其它方法返回值，简单类型默认为@ModelAttribute，void默认为RequestToViewNameTranslator视图名
  * 
  * @author ruanwei
  */
@@ -58,7 +56,7 @@ public class UserController {
 
 	@GetMapping(path = "/list")
 	public String list(@Valid @NotNull UserForm userForm, Page page, Model model) {
-		logger.debug("list=" + userForm);
+		logger.debug("list=" + userForm + page);
 
 		// add your code here.
 
@@ -68,8 +66,8 @@ public class UserController {
 
 		user.setStart(page.getPageSize() * (page.getCurPage() - 1));
 		user.setOffset(page.getPageSize());
-		
-		//user.setAge(-1);
+
+		// user.setAge(-1);
 		List<User> list = userService.list4Page(user);
 
 		model.addAttribute("list", list);
@@ -171,16 +169,19 @@ public class UserController {
 
 	// Using a MultipartResolver with Commons FileUpload.
 	@PostMapping(path = "upload")
-	public String upload(@RequestParam("name") String name, @RequestParam("file") CommonsMultipartFile file,
-			@Valid @RequestPart("file") MultipartFile file2, BindingResult bindingResult,
-			MultipartHttpServletRequest request) {
+	public String upload(@RequestParam("name") String name, @Valid @RequestPart("file") MultipartFile multipartFile,
+			BindingResult bindingResult, MultipartHttpServletRequest request,
+			@RequestParam("file") CommonsMultipartFile commonsMultipartFile) {
 		logger.debug("upload=" + name);
-		if (!file.isEmpty()) {
+		if (!multipartFile.isEmpty()) {
 			File mFile = new File(new Date().getTime() + ".jpg");
 			try {
-				byte[] bytes = file.getBytes();
+				MultipartFile multipartFile2 = request.getFile("file");
+				byte[] bytes1 = multipartFile.getBytes();
+				byte[] bytes2 = multipartFile2.getBytes();
+				byte[] bytes3 = commonsMultipartFile.getBytes();
 				// store the bytes somewhere
-				file.getFileItem().write(mFile);
+				commonsMultipartFile.getFileItem().write(mFile);
 			} catch (Exception e) {
 				logger.error(e.getMessage() + e.getCause().getMessage(), e);
 				// throw new WebException(e.getMessage(),
@@ -194,14 +195,17 @@ public class UserController {
 
 	// Using a MultipartResolver with Servlet 3.0.
 	@PostMapping(path = "upload2")
-	public String upload2(@RequestParam("name") String name, @RequestParam("file") Part file,
-			MultipartHttpServletRequest request) {
+	public String upload2(@RequestParam("name") String name, @Valid @RequestPart("file") MultipartFile multipartFile,
+			BindingResult bindingResult, MultipartHttpServletRequest request, @RequestParam("file") Part servletFile) {
 		logger.debug("upload2=" + name);
 		File mFile = new File(new Date().getTime() + ".jpg");
 		try {
-			InputStream inputStream = file.getInputStream();
+			MultipartFile multipartFile2 = request.getFile("file");
+			byte[] bytes1 = multipartFile.getBytes();
+			byte[] bytes2 = multipartFile2.getBytes();
+			InputStream inputStream = servletFile.getInputStream();
 			// store bytes from uploaded file somewhere
-			file.write(mFile.getAbsolutePath());
+			servletFile.write(mFile.getAbsolutePath());
 		} catch (IOException e) {
 			logger.error(e.getMessage() + e.getCause().getMessage(), e);
 			// throw new WebException(e.getMessage(), HttpStatus.BAD_REQUEST);
