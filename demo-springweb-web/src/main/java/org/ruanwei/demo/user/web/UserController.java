@@ -169,16 +169,19 @@ public class UserController {
 
 	// Using a MultipartResolver with Commons FileUpload.
 	@PostMapping(path = "upload")
-	public String upload(@RequestParam("name") String name, @RequestParam("file") CommonsMultipartFile file,
-			@Valid @RequestPart("file") MultipartFile file2, BindingResult bindingResult,
-			MultipartHttpServletRequest request) {
+	public String upload(@RequestParam("name") String name, @Valid @RequestPart("file") MultipartFile multipartFile,
+			BindingResult bindingResult, MultipartHttpServletRequest request,
+			@RequestParam("file") CommonsMultipartFile commonsMultipartFile) {
 		logger.debug("upload=" + name);
-		if (!file.isEmpty()) {
+		if (!multipartFile.isEmpty()) {
 			File mFile = new File(new Date().getTime() + ".jpg");
 			try {
-				byte[] bytes = file.getBytes();
+				MultipartFile multipartFile2 = request.getFile("file");
+				byte[] bytes1 = multipartFile.getBytes();
+				byte[] bytes2 = multipartFile2.getBytes();
+				byte[] bytes3 = commonsMultipartFile.getBytes();
 				// store the bytes somewhere
-				file.getFileItem().write(mFile);
+				commonsMultipartFile.getFileItem().write(mFile);
 			} catch (Exception e) {
 				logger.error(e.getMessage() + e.getCause().getMessage(), e);
 				// throw new WebException(e.getMessage(),
@@ -192,14 +195,17 @@ public class UserController {
 
 	// Using a MultipartResolver with Servlet 3.0.
 	@PostMapping(path = "upload2")
-	public String upload2(@RequestParam("name") String name, @RequestParam("file") Part file,
-			MultipartHttpServletRequest request) {
+	public String upload2(@RequestParam("name") String name, @Valid @RequestPart("file") MultipartFile multipartFile,
+			BindingResult bindingResult, MultipartHttpServletRequest request, @RequestParam("file") Part servletFile) {
 		logger.debug("upload2=" + name);
 		File mFile = new File(new Date().getTime() + ".jpg");
 		try {
-			InputStream inputStream = file.getInputStream();
+			MultipartFile multipartFile2 = request.getFile("file");
+			byte[] bytes1 = multipartFile.getBytes();
+			byte[] bytes2 = multipartFile2.getBytes();
+			InputStream inputStream = servletFile.getInputStream();
 			// store bytes from uploaded file somewhere
-			file.write(mFile.getAbsolutePath());
+			servletFile.write(mFile.getAbsolutePath());
 		} catch (IOException e) {
 			logger.error(e.getMessage() + e.getCause().getMessage(), e);
 			// throw new WebException(e.getMessage(), HttpStatus.BAD_REQUEST);
