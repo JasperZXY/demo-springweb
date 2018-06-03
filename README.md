@@ -108,11 +108,17 @@ success：是否调用成功；code：错误返回码；message：错误信息�
 
 
 # 参数校验
+- 文档参考 https://docs.spring.io/spring/docs/4.3.x/spring-framework-reference/htmlsingle/#validation
 - 可使用`javax.validation.Valid`注解或`org.springframework.validation.annotation.Validated`注解
 - Validated支持分组校验，Valid不支持分组校验，不指定分组的话，默认是`javax.validation.groups.Default`
 - 由于指定分组校验后，分组没有匹配上的是不会进行校验，所以建议指定分组后，加上默认分组`javax.validation.groups.Default`
 - 代码中新建了三个分组（`Create`、`Update`、`Query`），方便业务使用
+- 检验不通过，抛出的异常为`org.springframework.validation.BindException`
 
+参数校验国际化支持
+- 关键类`org.springframework.validation.beanvalidation.LocalValidatorFactoryBean`、`org.springframework.context.support.ReloadableResourceBundleMessageSource`
+- 特别注意的点：properties文件，如果内容是中文，要用Unicode编码；xml中的配置要加上“classpath:”
+- message的指定格式用“{xxx}”
 
 # demo-springweb
 Spring Web Demo
