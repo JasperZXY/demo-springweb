@@ -120,6 +120,18 @@ success：是否调用成功；code：错误返回码；message：错误信息�
 - 特别注意的点：properties文件，如果内容是中文，要用Unicode编码；xml中的配置要加上“classpath:”
 - message的指定格式用“{xxx}”
 
+
+# 内容协商
+- 三种实现方式
+    - 使用扩展名（.json）
+    - 使用参数(format=json)
+    - 使用http request header的Accept
+- https://docs.spring.io/spring/docs/4.3.x/spring-framework-reference/htmlsingle/#mvc-multiple-representations
+- org.springframework.web.accept.ContentNegotiationManagerFactoryBean
+- ContentNegotiatingViewResolver
+- contentNegotiationManager
+
+
 # demo-springweb
 Spring Web Demo
 

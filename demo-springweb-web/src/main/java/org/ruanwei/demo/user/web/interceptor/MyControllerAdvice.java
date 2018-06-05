@@ -17,15 +17,11 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.AbstractJsonpResponseBodyAdvice;
 
 import java.net.URLDecoder;
-import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -85,24 +81,22 @@ public class MyControllerAdvice extends AbstractJsonpResponseBodyAdvice { // ext
     }
 
 
-    @ModelAttribute("cities")
-    public List<String> modelAttribute(Model model) {
-        logger.debug("modelAttribute==================");
-        List<String> cityList = new ArrayList<String>();
-        cityList.add("a");
-        cityList.add("b");
-        cityList.add("c");
-        model.addAttribute("cities2", cityList);
-        return cityList;
-    }
+//    @ModelAttribute("cities")
+//    public List<String> modelAttribute(Model model) {
+//        logger.debug("modelAttribute==================");
+//        List<String> cityList = new ArrayList<String>();
+//        cityList.add("a");
+//        cityList.add("b");
+//        cityList.add("c");
+//        model.addAttribute("cities2", cityList);
+//        return cityList;
+//    }
 
     // SimpleMappingExceptionResolver
 
 
     @ExceptionHandler(Exception.class) // handled by ExceptionHandlerExceptionResolver
-    //	@ResponseStatus // handled by ResponseStatusExceptionResolver
-    @ResponseBody
-    public Object handleSpringException(Throwable e, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object handleSpringException(Throwable e, HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
         //logger.error("handleSpringException===================" + request.getRequestURL(), e);
         StringBuilder urlBuilder = new StringBuilder();
         urlBuilder.append(request.getRequestURI());
@@ -154,43 +148,45 @@ public class MyControllerAdvice extends AbstractJsonpResponseBodyAdvice { // ext
             logger.error("handleSpringException " + url, e);
             result.setError(1003, "服务器繁忙，请稍后重试！");
         }
-        return result;
+        model.addAttribute("code", result.getCode());
+        model.addAttribute("message", result.getMessage());
+        return "generic_error";
 
-		/*
-    // 1.From BeanValidationBeanPostProcessor/MethodValidationPostProcessor.
-		if (e instanceof ConstraintViolationException) { // ValidationException
-			throw new InvalidArgumentException("ConstraintViolationException", e);
-		} // 2.From @Valid @RequestBody
-		else if (e instanceof MethodArgumentNotValidException) {
-			throw new InvalidArgumentException("MethodArgumentNotValidException", e);
-		} // 3.BindException by default(if no BindingResult argument).
-		else if (e instanceof BindException) {
-			throw new InvalidArgumentException("BindException", e);
-		} // 4. From Web Layer.
-		else if (e instanceof WebException) {
-			throw new InvalidLogicException("WebException", e);
-		} // 5. From Service Layer.
-		else if (e instanceof ServiceException) {
-			throw new InvalidLogicException("ServiceException", e);
-		} // 6. From Integration Layer(DataAccess).
-		else if (e instanceof DataAccessException) {
-			throw new InvalidStateException("DataAccessException", e);
-		} // 7. From Integration Layer(Remoting).
-		else if (e instanceof RemoteAccessException) {
-			throw new InvalidStateException("RemoteAccessException", e);
-		} // 8.From Unknown.
-		else if (e instanceof NullPointerException) {
-			throw new IllegalStateException("NullPointerException", e);
-		} // 9.From Unknown except NPE.
-		else if (e instanceof RuntimeException) {
-			throw new IllegalStateException("RuntimeException", e);
-		} // ServletException-ServletRequestBindingException:
-			// MissingPathVariableException/MissingServletRequestParameterException/UnsatisfiedServletRequestParameterException
-		else if (e instanceof ServletException) { // JasperException
-			throw new IllegalStateException("ServletException", e);
-		} else {
-			throw new IllegalStateException("IllegalStateException", e);
-		}
-		*/
+		    /*
+        // 1.From BeanValidationBeanPostProcessor/MethodValidationPostProcessor.
+        if (e instanceof ConstraintViolationException) { // ValidationException
+          throw new InvalidArgumentException("ConstraintViolationException", e);
+        } // 2.From @Valid @RequestBody
+        else if (e instanceof MethodArgumentNotValidException) {
+          throw new InvalidArgumentException("MethodArgumentNotValidException", e);
+        } // 3.BindException by default(if no BindingResult argument).
+        else if (e instanceof BindException) {
+          throw new InvalidArgumentException("BindException", e);
+        } // 4. From Web Layer.
+        else if (e instanceof WebException) {
+          throw new InvalidLogicException("WebException", e);
+        } // 5. From Service Layer.
+        else if (e instanceof ServiceException) {
+          throw new InvalidLogicException("ServiceException", e);
+        } // 6. From Integration Layer(DataAccess).
+        else if (e instanceof DataAccessException) {
+          throw new InvalidStateException("DataAccessException", e);
+        } // 7. From Integration Layer(Remoting).
+        else if (e instanceof RemoteAccessException) {
+          throw new InvalidStateException("RemoteAccessException", e);
+        } // 8.From Unknown.
+        else if (e instanceof NullPointerException) {
+          throw new IllegalStateException("NullPointerException", e);
+        } // 9.From Unknown except NPE.
+        else if (e instanceof RuntimeException) {
+          throw new IllegalStateException("RuntimeException", e);
+        } // ServletException-ServletRequestBindingException:
+          // MissingPathVariableException/MissingServletRequestParameterException/UnsatisfiedServletRequestParameterException
+        else if (e instanceof ServletException) { // JasperException
+          throw new IllegalStateException("ServletException", e);
+        } else {
+          throw new IllegalStateException("IllegalStateException", e);
+        }
+		    */
     }
 }
