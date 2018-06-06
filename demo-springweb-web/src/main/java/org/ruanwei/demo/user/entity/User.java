@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @SuppressWarnings("serial")
 public class User implements Serializable {
 	@JsonView(WithoutPageingView.class)
-	@Min(value=0, groups = {Update.class}, message = "id必须大于0")
+	@Min(value=0, groups = {Update.class}, message = "ID必须大于0")
 	private int id;
 	
 	@JsonView(WithoutPageingView.class)
