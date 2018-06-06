@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 @Controller
 public class ExceptionController {
@@ -54,8 +56,8 @@ public class ExceptionController {
 
 	// 1.来自Servlet容器的异常：包含404和500(例如JSP异常)
 	// 2.来自Spring的异常：包含用户在框架中抛出的异常(例如@ExceptionHandler)
-	@GetMapping(path = "/error", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE })
-	@ResponseBody
+	//@RequestMapping(path = "/error", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE })
+	//@ResponseBody
 	public Map<String, Object> error(HttpServletRequest request) {
 		logger.error("error");
 
@@ -78,16 +80,18 @@ public class ExceptionController {
 		return map;
 	}
 
-	@GetMapping(path = "/error")
+	@RequestMapping(path = "/error")
 	public String error2(HttpServletRequest request, Model model) {
-		logger.error("error2");
-
 		Object statusCode = request.getAttribute("javax.servlet.error.status_code");
-		Object message = request.getAttribute("javax.servlet.error.message");
-		model.addAttribute("code", statusCode);
-		model.addAttribute("reason", message);
-		logger.error("statusCode=" + statusCode + " message=" + message);
+		Object reason = request.getAttribute("javax.servlet.error.message");
+		Object code = request.getAttribute("code");
+		Object message = request.getAttribute("message");
 
-		return "" + statusCode;
+		model.addAttribute("statusCode", statusCode);
+		model.addAttribute("code", code);
+		model.addAttribute("reason", reason);
+		model.addAttribute("message", message);
+
+		return "generic_error";
 	}
 }

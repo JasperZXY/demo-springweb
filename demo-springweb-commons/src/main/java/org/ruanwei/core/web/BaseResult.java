@@ -71,6 +71,10 @@ public class BaseResult implements Serializable {
     }
 
 
+    public static BaseResultBuilder bulider() {
+        return new BaseResultBuilder();
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
@@ -79,4 +83,28 @@ public class BaseResult implements Serializable {
         sb.append(", message='").append(message).append('\'');
         return sb.toString();
     }
+
+    public static class BaseResultBuilder {
+        protected BaseResult result;
+        public BaseResultBuilder() {
+            result = new BaseResult();
+        }
+
+        public BaseResultBuilder code(int code) {
+            result.setCode(code);
+            return this;
+        }
+        public BaseResultBuilder message(String msg) {
+            result.setMessage(msg);
+            return this;
+        }
+        public BaseResultBuilder success(boolean success) {
+            result.setSuccess(success);
+            return this;
+        }
+        public BaseResult build() {
+            return result;
+        }
+    }
+
 }

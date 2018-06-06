@@ -210,6 +210,7 @@
 			</value>
 		</property>
 		<!-- org.springframework.web.accept.FixedContentNegotiationStrategy -->
-		<property name="defaultContentType" value="text/html" />
+		<!--<property name="defaultContentType" value="text/html" />-->
+		<!--<property name="defaultContentType" value="application/json" />-->
 	</bean>
 </beans>

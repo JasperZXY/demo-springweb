@@ -57,7 +57,8 @@
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basenames">
 			<list>
-				<value>exception</value>
+				<value>classpath:exception</value>
+				<value>classpath:param</value>
 			</list>
 		</property>
 		<property name="cacheSeconds" value="10" />

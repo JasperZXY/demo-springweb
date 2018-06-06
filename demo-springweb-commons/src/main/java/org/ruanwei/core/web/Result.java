@@ -35,4 +35,22 @@ public class Result<T> extends BaseResult {
         sb.append(",data=").append(data);
         return sb.toString();
     }
+
+    public static ResultBuilder bulider() {
+        return new ResultBuilder();
+    }
+
+    public static class ResultBuilder<T> extends BaseResultBuilder {
+        protected Result<T> result;
+        public ResultBuilder() {
+            result = new Result<>();
+        }
+        public ResultBuilder data(T data) {
+            result.setData(data);
+            return this;
+        }
+        public Result<T> build() {
+            return result;
+        }
+    }
 }

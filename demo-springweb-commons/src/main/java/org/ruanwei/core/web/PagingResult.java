@@ -86,4 +86,39 @@ public class PagingResult<T> extends BaseResult {
         sb.append(", data=").append(list);
         return sb.toString();
     }
+
+    public static PagingResultBuilder bulider() {
+        return new PagingResultBuilder();
+    }
+
+    public static class PagingResultBuilder<T> extends BaseResultBuilder {
+        protected PagingResult<T> result;
+        public PagingResultBuilder() {
+            result = new PagingResult<>();
+        }
+        public PagingResultBuilder list(List<T> data) {
+            result.setList(data);
+            return this;
+        }
+        public PagingResultBuilder count(long count) {
+            result.setCount(count);
+            return this;
+        }
+        public PagingResultBuilder page(Page page) {
+            result.setCurPage(page.getCurPage());
+            result.setPageSize(page.getPageSize());
+            return this;
+        }
+        public PagingResultBuilder curPage(int curPage) {
+            result.setCurPage(curPage);
+            return this;
+        }
+        public PagingResultBuilder pageSize(int pageSize) {
+            result.setPageSize(pageSize);
+            return this;
+        }
+        public PagingResult<T> build() {
+            return result;
+        }
+    }
 }

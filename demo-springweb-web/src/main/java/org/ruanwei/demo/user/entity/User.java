@@ -1,26 +1,23 @@
 package org.ruanwei.demo.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import org.ruanwei.demo.user.validation.Create;
+import org.ruanwei.demo.user.validation.Update;
+
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonView;
 
 @SuppressWarnings("serial")
 public class User implements Serializable {
 	@JsonView(WithoutPageingView.class)
-	@Min(0)
+	@Min(value=0, groups = {Update.class}, message = "id必须大于0")
 	private int id;
 	
 	@JsonView(WithoutPageingView.class)
-	@Size(min = 0, max = 30)
+	@Size(min = 0, max = 30, groups = {Create.class, Update.class}, message = "{user.name.limit}")
 	private String name = "";
 	
 	@JsonView(WithoutPageingView.class)
@@ -28,8 +25,8 @@ public class User implements Serializable {
 	
 	@JsonView(WithoutPageingView.class)
 	@NotNull
-	@Min(0)
-	@Max(100)
+	@Min(value=0, message = "{user.age.min}")
+	@Max(value = 100, message = "{user.age.max}")
 	private int age;
 	
 	@JsonView(WithoutPageingView.class)
