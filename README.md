@@ -82,18 +82,16 @@ success：是否调用成功；code：错误返回码；message：错误信息�
 ```
 
 样例api
-- http://127.0.0.1:8080/springweb-web/user2/1
-- http://127.0.0.1:8080/springweb-web/user2/list?curPage=2&pageSize=1
-- http://127.0.0.1:8080/springweb-web/user2/999
+- http://127.0.0.1:8080/springweb-web/user/1.json
+- http://127.0.0.1:8080/springweb-web/user/list.json?curPage=2&pageSize=1
+- http://127.0.0.1:8080/springweb-web/user/-1.json
 
 
 # 异常拦截
 目前对三种异常做了特定的拦截，其他异常都归了系统类异常，代码见UserController2.error()，MyControllerAdvice.handleSpringException()  
 接口如下
-- http://127.0.0.1:8080/springweb-web/user2/error/1
-- http://127.0.0.1:8080/springweb-web/user2/error/2
-- http://127.0.0.1:8080/springweb-web/user2/error/3
-- http://127.0.0.1:8080/springweb-web/user2/error/5
+- http://127.0.0.1:8080/springweb-web/testException/1
+- http://127.0.0.1:8080/springweb-web/testException/9
 
 定义的异常：参数异常、业务异常(包括登录态异常)、系统异常
 
@@ -109,15 +107,15 @@ success：是否调用成功；code：错误返回码；message：错误信息�
 
 # 参数校验
 - 文档参考 https://docs.spring.io/spring/docs/4.3.x/spring-framework-reference/htmlsingle/#validation
+- 引用的jar包`hibernate-validator`
 - 可使用`javax.validation.Valid`注解或`org.springframework.validation.annotation.Validated`注解
 - Validated支持分组校验，Valid不支持分组校验，不指定分组的话，默认是`javax.validation.groups.Default`
 - 由于指定分组校验后，分组没有匹配上的是不会进行校验，所以建议指定分组后，加上默认分组`javax.validation.groups.Default`
-- 代码中新建了三个分组（`Create`、`Update`、`Query`），方便业务使用
-- 检验不通过，抛出的异常为`org.springframework.validation.BindException`
+- 检验不通过，抛出的异常为`org.springframework.validation.BindException`、`ConstraintViolationException`
 
 参数校验国际化支持
 - 关键类`org.springframework.validation.beanvalidation.LocalValidatorFactoryBean`、`org.springframework.context.support.ReloadableResourceBundleMessageSource`
-- 特别注意的点：properties文件，如果内容是中文，要用Unicode编码；xml中的配置要加上“classpath:”
+- 特别注意的点：xml中的配置要加上“classpath:”
 - message的指定格式用“{xxx}”
 
 

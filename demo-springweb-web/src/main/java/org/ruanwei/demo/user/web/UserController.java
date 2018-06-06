@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.groups.Default;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -85,7 +86,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "doAdd")
-	public String doAdd(@Valid @NotNull UserForm userForm, RedirectAttributes attr) {
+	public String doAdd(@Validated({User.Create.class, Default.class}) @NotNull UserForm userForm, RedirectAttributes attr) {
 		logger.debug("doAdd=" + userForm);
 
 		// add your code here.
@@ -123,7 +124,7 @@ public class UserController {
 			MediaType.APPLICATION_RSS_XML_VALUE })
 	@ResponseBody
 	@JsonView(User.WithPageingView.class)
-	public User edit2(@PathVariable("uid") @Min(0) int id) {
+	public User edit2(@PathVariable("uid") @Validated @Min(value = 0, message = "ID必须大于0") int id) {
 		logger.debug("edit2=" + id);
 
 		// add your code here.
@@ -133,7 +134,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "doEdit")
-	public String doEdit(@Valid @NotNull UserForm userForm) {
+	public String doEdit(@Validated({User.Create.class, Default.class}) @NotNull UserForm userForm) {
 		logger.debug("doEdit=" + userForm);
 
 		// add your code here.

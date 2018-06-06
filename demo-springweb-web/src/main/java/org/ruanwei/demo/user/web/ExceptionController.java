@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ruanwei.core.DataAccessException;
+import org.ruanwei.core.InvalidArgumentException;
+import org.ruanwei.core.InvalidLogicException;
 import org.ruanwei.core.RemoteAccessException;
 import org.ruanwei.core.ServiceException;
 import org.ruanwei.core.WebException;
@@ -49,9 +51,12 @@ public class ExceptionController {
 			throw new Exception("(Checked) Exception, type=" + type);
 		} else if (type == 9) {
 			throw new Error("Error, type=" + type);
-		} else {
-			throw new Throwable("Throwable, type=" + type);
+		} else if (type == 10) {
+			throw new InvalidArgumentException("不支持的参数类型");
+		} else if (type == 11) {
+			throw new InvalidLogicException("登录态失效");
 		}
+		throw new Throwable("Throwable, type=" + type);
 	}
 
 	// 1.来自Servlet容器的异常：包含404和500(例如JSP异常)

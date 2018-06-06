@@ -1,5 +1,6 @@
 package org.ruanwei.demo.user.web.interceptor;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ruanwei.core.InvalidArgumentException;
@@ -25,6 +26,7 @@ import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolationException;
 
 
 /**
@@ -101,7 +103,10 @@ public class MyControllerAdvice extends AbstractJsonpResponseBodyAdvice { // ext
         StringBuilder urlBuilder = new StringBuilder();
         urlBuilder.append(request.getRequestURI());
         if (request.getMethod().equalsIgnoreCase("GET")) {
-            urlBuilder.append("?").append(request.getQueryString());
+            String queryStr = request.getQueryString();
+            if (StringUtils.isNotBlank(queryStr)) {
+                urlBuilder.append("?").append(queryStr);
+            }
         }else if (request.getParameterNames() != null) {
             urlBuilder.append(" param:{");
             Enumeration<String> enumeration = request.getParameterNames();
@@ -139,12 +144,19 @@ public class MyControllerAdvice extends AbstractJsonpResponseBodyAdvice { // ext
                 if (oe instanceof FieldError) {
                     FieldError fe = (FieldError) oe;
                     //errorBuilder.append("\n[").append(fe.getField()).append("]").append(fe.getDefaultMessage());
-                    errorBuilder.append("\n").append(oe.getDefaultMessage());
+                    errorBuilder.append(oe.getDefaultMessage()).append("；");
                 }else {
-                    errorBuilder.append("\n").append(oe.getDefaultMessage());
+                    errorBuilder.append(oe.getDefaultMessage()).append("；");
                 }
             }
+            errorBuilder.deleteCharAt(errorBuilder.length() - 1);
             logger.warn("handleSpringException BindException url:{}, msg:{}", url, e.getMessage());
+            result.setError(1001, errorBuilder.toString());
+        }else if (e instanceof ConstraintViolationException) {
+            ConstraintViolationException ce = (ConstraintViolationException)e;
+            StringBuilder errorBuilder = new StringBuilder("参数异常：");
+            ce.getConstraintViolations().forEach(ev -> errorBuilder.append(ev.getMessage()).append("；"));
+            errorBuilder.deleteCharAt(errorBuilder.length() - 1);
             result.setError(1001, errorBuilder.toString());
         }else {
             logger.error("handleSpringException " + url, e);
