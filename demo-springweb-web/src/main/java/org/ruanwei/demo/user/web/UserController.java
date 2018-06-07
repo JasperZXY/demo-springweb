@@ -62,10 +62,10 @@ public class UserController {
 	http://127.0.0.1:8080/springweb-web/user/list.json
 	http://127.0.0.1:8080/springweb-web/user/list.pdf
 	http://127.0.0.1:8080/springweb-web/user/list.xlsx
+	http://127.0.0.1:8080/springweb-web/user/list.xml
 	 */
-	@GetMapping(path = "/list", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_PDF_VALUE,
-			MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_RSS_XML_VALUE, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"})
-	public ModelAndView list(@Valid @NotNull UserForm userForm, Page page, Model model) {
+    @GetMapping(path = "/list")
+    public ModelAndView list(@Valid @NotNull UserForm userForm, Page page, Model model) {
 		logger.debug("list=" + userForm + page);
 
 		// add your code here.
@@ -83,28 +83,11 @@ public class UserController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("user/user_list");
 		modelAndView.addObject("list", list);
+		// 为了支持xml、pdf、xlsx
 		model.addAttribute("data", list);
 
 		return modelAndView;
 	}
-
-	/*
-	http://127.0.0.1:8080/springweb-web/user/list.xml
-	 */
-	@GetMapping(path = "/list", produces = {MediaType.APPLICATION_XML_VALUE})
-	@ResponseBody
-	public PagingResult<User> listV2(@Valid @NotNull UserForm userForm, Page page) {
-		User user = BeanUtils.copy(userForm, User.class);
-		long totalRecord = userService.count(user);
-		page.setTotalRecord(totalRecord);
-
-		user.setStart(page.getPageSize() * (page.getCurPage() - 1));
-		user.setOffset(page.getPageSize());
-
-		List<User> list = userService.list4Page(user);
-		return PagingResult.bulider().page(page).count(totalRecord).list(list).build();
-	}
-
 
 
 	@GetMapping(path = "add")

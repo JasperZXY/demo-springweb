@@ -113,7 +113,9 @@
 						<arg-type>org.springframework.web.servlet.view.xml.MappingJackson2XmlView</arg-type>
 					</replaced-method>
 				</bean>-->
-				<bean class="org.springframework.web.servlet.view.xml.MappingJackson2XmlView" />
+				<bean class="org.springframework.web.servlet.view.xml.MappingJackson2XmlView" >
+					<property name="modelKey" value="data"></property>
+				</bean>
 				<bean class="org.ruanwei.demo.user.web.viewresolver.MyPdfView" />
 				<bean class="org.ruanwei.demo.user.web.viewresolver.MyXlsxView" />
 			</mvc:default-views>
