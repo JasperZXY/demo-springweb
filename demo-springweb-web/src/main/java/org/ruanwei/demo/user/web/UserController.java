@@ -17,6 +17,7 @@ import javax.validation.groups.Default;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ruanwei.core.web.Page;
+import org.ruanwei.core.web.PagingResult;
 import org.ruanwei.demo.user.entity.User;
 import org.ruanwei.demo.user.service.UserService;
 import org.ruanwei.demo.user.web.databind.UserForm;
@@ -38,6 +39,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -55,8 +57,15 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping(path = "/list")
-	public String list(@Valid @NotNull UserForm userForm, Page page, Model model) {
+	/*
+	http://127.0.0.1:8080/springweb-web/user/list.html
+	http://127.0.0.1:8080/springweb-web/user/list.json
+	http://127.0.0.1:8080/springweb-web/user/list.pdf
+	http://127.0.0.1:8080/springweb-web/user/list.xlsx
+	 */
+	@GetMapping(path = "/list", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_PDF_VALUE,
+			MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_RSS_XML_VALUE, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"})
+	public ModelAndView list(@Valid @NotNull UserForm userForm, Page page, Model model) {
 		logger.debug("list=" + userForm + page);
 
 		// add your code here.
@@ -71,10 +80,32 @@ public class UserController {
 		// user.setAge(-1);
 		List<User> list = userService.list4Page(user);
 
-		model.addAttribute("list", list);
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("user/user_list");
+		modelAndView.addObject("list", list);
+		model.addAttribute("data", list);
 
-		return "user/user_list";
+		return modelAndView;
 	}
+
+	/*
+	http://127.0.0.1:8080/springweb-web/user/list.xml
+	 */
+	@GetMapping(path = "/list", produces = {MediaType.APPLICATION_XML_VALUE})
+	@ResponseBody
+	public PagingResult<User> listV2(@Valid @NotNull UserForm userForm, Page page) {
+		User user = BeanUtils.copy(userForm, User.class);
+		long totalRecord = userService.count(user);
+		page.setTotalRecord(totalRecord);
+
+		user.setStart(page.getPageSize() * (page.getCurPage() - 1));
+		user.setOffset(page.getPageSize());
+
+		List<User> list = userService.list4Page(user);
+		return PagingResult.bulider().page(page).count(totalRecord).list(list).build();
+	}
+
+
 
 	@GetMapping(path = "add")
 	public String add() {
@@ -119,7 +150,7 @@ public class UserController {
 
 	// content negotiation using
 	// HttpMessageConverter(mediaTypes和defaultContentType)
-	@GetMapping(path = "{uid}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE,
+	@PostMapping(path = "{uid}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE,
 			MediaType.APPLICATION_PDF_VALUE, MediaType.APPLICATION_ATOM_XML_VALUE,
 			MediaType.APPLICATION_RSS_XML_VALUE })
 	@ResponseBody

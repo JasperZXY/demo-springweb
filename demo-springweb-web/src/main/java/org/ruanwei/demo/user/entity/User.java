@@ -47,7 +47,7 @@ public class User implements Serializable {
     private int hobby;
 
     @JsonView(WithoutPageingView.class)
-    @Size(min = 1, max = 50, message = "{user.intro}")
+    @Size(min = 1, max = 50, message = "{}")
     private String intro;
 
     @JsonView(WithoutPageingView.class)
