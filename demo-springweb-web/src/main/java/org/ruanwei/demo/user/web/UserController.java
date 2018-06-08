@@ -62,6 +62,7 @@ public class UserController {
 	http://127.0.0.1:8080/springweb-web/user/list.json
 	http://127.0.0.1:8080/springweb-web/user/list.pdf
 	http://127.0.0.1:8080/springweb-web/user/list.xlsx
+	http://127.0.0.1:8080/springweb-web/user/list.xls
 	http://127.0.0.1:8080/springweb-web/user/list.xml
 	 */
     @GetMapping(path = "/list")
@@ -126,6 +127,7 @@ public class UserController {
 
 		User user = getUser0(id);
 		model.addAttribute("user", user);
+		model.addAttribute("data", user);
 		// model.addAttribute(JsonView.class.getName(),User.WithoutPageingView.class);
 
 		return "user/user_edit";

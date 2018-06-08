@@ -118,6 +118,7 @@
 				</bean>
 				<bean class="org.ruanwei.demo.user.web.viewresolver.MyPdfView" />
 				<bean class="org.ruanwei.demo.user.web.viewresolver.MyXlsxView" />
+				<bean class="org.ruanwei.demo.user.web.viewresolver.MyXlsView" />
 			</mvc:default-views>
 		</mvc:content-negotiation>
 
