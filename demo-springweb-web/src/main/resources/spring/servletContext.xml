@@ -108,13 +108,24 @@
 			<mvc:default-views>
 				<bean
 					class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+				<!--<bean class="org.springframework.web.servlet.ViewResolver">
+					<replaced-method name="resolveViewName" replacer="xmlViewResolver">
+						<arg-type>org.springframework.web.servlet.view.xml.MappingJackson2XmlView</arg-type>
+					</replaced-method>
+				</bean>-->
+				<bean class="org.springframework.web.servlet.view.xml.MappingJackson2XmlView" >
+					<property name="modelKey" value="data"></property>
+				</bean>
+				<bean class="org.ruanwei.demo.user.web.viewresolver.MyPdfView" />
+				<bean class="org.ruanwei.demo.user.web.viewresolver.MyXlsxView" />
+				<bean class="org.ruanwei.demo.user.web.viewresolver.MyXlsView" />
 			</mvc:default-views>
 		</mvc:content-negotiation>
 
-		<bean class="org.ruanwei.demo.user.web.viewresolver.MyJsonViewResolver" />
+		<!--<bean class="org.ruanwei.demo.user.web.viewresolver.MyJsonViewResolver" />
 		<bean class="org.ruanwei.demo.user.web.viewresolver.MyXmlViewResolver" />
 		<bean class="org.ruanwei.demo.user.web.viewresolver.MyXlsxViewResolver" />
-		<bean class="org.ruanwei.demo.user.web.viewresolver.MyPdfViewResolver" />
+		<bean class="org.ruanwei.demo.user.web.viewresolver.MyPdfViewResolver" />-->
 
 		<!-- org.springframework.web.servlet.view.InternalResourceViewResolver -->
 		<mvc:jsp prefix="/WEB-INF/jsp/" suffix=".jsp"
@@ -210,7 +221,6 @@
 			</value>
 		</property>
 		<!-- org.springframework.web.accept.FixedContentNegotiationStrategy -->
-		<!--<property name="defaultContentType" value="text/html" />-->
-		<!--<property name="defaultContentType" value="application/json" />-->
+		<property name="defaultContentType" value="text/html" />
 	</bean>
 </beans>

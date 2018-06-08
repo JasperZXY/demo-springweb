@@ -1,5 +1,6 @@
 package org.ruanwei.demo.user.web.interceptor;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ruanwei.core.InvalidArgumentException;
@@ -18,13 +19,16 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.AbstractJsonpResponseBodyAdvice;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.net.URLDecoder;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolationException;
 
 
 /**
@@ -96,12 +100,15 @@ public class MyControllerAdvice extends AbstractJsonpResponseBodyAdvice { // ext
 
 
     @ExceptionHandler(Exception.class) // handled by ExceptionHandlerExceptionResolver
-    public Object handleSpringException(Throwable e, HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+    public Object handleSpringException(Throwable e, HttpServletRequest request, HttpServletResponse response, RedirectAttributes attr) throws Exception {
         //logger.error("handleSpringException===================" + request.getRequestURL(), e);
         StringBuilder urlBuilder = new StringBuilder();
         urlBuilder.append(request.getRequestURI());
         if (request.getMethod().equalsIgnoreCase("GET")) {
-            urlBuilder.append("?").append(request.getQueryString());
+            String queryStr = request.getQueryString();
+            if (StringUtils.isNotBlank(queryStr)) {
+                urlBuilder.append("?").append(queryStr);
+            }
         }else if (request.getParameterNames() != null) {
             urlBuilder.append(" param:{");
             Enumeration<String> enumeration = request.getParameterNames();
@@ -114,6 +121,7 @@ public class MyControllerAdvice extends AbstractJsonpResponseBodyAdvice { // ext
         }
 
         String url = urlBuilder.toString();
+
         try {
             url = URLDecoder.decode(url, "UTF-8");
         } catch (Exception ex) {
@@ -137,20 +145,34 @@ public class MyControllerAdvice extends AbstractJsonpResponseBodyAdvice { // ext
             for (ObjectError oe : be.getAllErrors()) {
                 if (oe instanceof FieldError) {
                     FieldError fe = (FieldError) oe;
-                    errorBuilder.append("\n[").append(fe.getField()).append("]").append(fe.getDefaultMessage());
+                    //errorBuilder.append("\n[").append(fe.getField()).append("]").append(fe.getDefaultMessage());
+                    errorBuilder.append(oe.getDefaultMessage()).append("；");
                 }else {
-                    errorBuilder.append("\n").append(oe.getDefaultMessage());
+                    errorBuilder.append(oe.getDefaultMessage()).append("；");
                 }
             }
+            errorBuilder.deleteCharAt(errorBuilder.length() - 1);
             logger.warn("handleSpringException BindException url:{}, msg:{}", url, e.getMessage());
+            result.setError(1001, errorBuilder.toString());
+        }else if (e instanceof ConstraintViolationException) {
+            ConstraintViolationException ce = (ConstraintViolationException)e;
+            StringBuilder errorBuilder = new StringBuilder("参数异常：");
+            ce.getConstraintViolations().forEach(ev -> errorBuilder.append(ev.getMessage()).append("；"));
+            errorBuilder.deleteCharAt(errorBuilder.length() - 1);
             result.setError(1001, errorBuilder.toString());
         }else {
             logger.error("handleSpringException " + url, e);
             result.setError(1003, "服务器繁忙，请稍后重试！");
         }
-        model.addAttribute("code", result.getCode());
-        model.addAttribute("message", result.getMessage());
-        return "generic_error";
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("generic_error");
+        modelAndView.addObject("success", result.isSuccess());
+        modelAndView.addObject("code", result.getCode());
+        modelAndView.addObject("message", result.getMessage());
+        return modelAndView;
+//        attr.addAttribute("result", result);
+//        return "redirect:/generic_error";
 
 		    /*
         // 1.From BeanValidationBeanPostProcessor/MethodValidationPostProcessor.
