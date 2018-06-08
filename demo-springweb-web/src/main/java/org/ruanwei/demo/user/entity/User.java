@@ -2,6 +2,8 @@ package org.ruanwei.demo.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
@@ -31,6 +33,7 @@ public class User implements Serializable {
 
     @JsonView(WithoutPageingView.class)
     @Past
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date birthday;
 
     @JsonView(WithoutPageingView.class)
@@ -47,7 +50,7 @@ public class User implements Serializable {
     private int hobby;
 
     @JsonView(WithoutPageingView.class)
-    @Size(min = 1, max = 50, message = "{}")
+    @Size(min = 1, max = 50, message = "{user.intro}")
     private String intro;
 
     @JsonView(WithoutPageingView.class)

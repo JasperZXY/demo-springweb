@@ -10,9 +10,10 @@
 <h2 style="color: red">
     糟糕，系统开了个小差！
 </h2>
-状态码： <%=request.getAttribute("javax.servlet.error.status_code")%> <br>
+<%--状态码： <%=request.getAttribute("javax.servlet.error.status_code")%> <br>
 异常信息： <%=request.getAttribute("javax.servlet.error.message")%> <br>
-异常： <%=request.getAttribute("javax.servlet.error.exception_type")%> <br>
+异常： <%=request.getAttribute("javax.servlet.error.exception_type")%> <br>--%>
+成功： <%=request.getAttribute("success")%> <br>
 返回码： <%=request.getAttribute("code")%> <br>
 返回信息： <%=request.getAttribute("message")%> <br>
 </body>

@@ -9,6 +9,7 @@ import org.ruanwei.core.ServiceException;
 import org.ruanwei.core.web.BaseResult;
 import org.ruanwei.util.Counter;
 import org.springframework.context.annotation.Bean;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.AbstractJsonpResponseBodyAdvice;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.net.URLDecoder;
 import java.util.Enumeration;
@@ -98,7 +100,7 @@ public class MyControllerAdvice extends AbstractJsonpResponseBodyAdvice { // ext
 
 
     @ExceptionHandler(Exception.class) // handled by ExceptionHandlerExceptionResolver
-    public ModelAndView handleSpringException(Throwable e, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object handleSpringException(Throwable e, HttpServletRequest request, HttpServletResponse response, RedirectAttributes attr) throws Exception {
         //logger.error("handleSpringException===================" + request.getRequestURL(), e);
         StringBuilder urlBuilder = new StringBuilder();
         urlBuilder.append(request.getRequestURI());
@@ -165,9 +167,12 @@ public class MyControllerAdvice extends AbstractJsonpResponseBodyAdvice { // ext
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("generic_error");
+        modelAndView.addObject("success", result.isSuccess());
         modelAndView.addObject("code", result.getCode());
         modelAndView.addObject("message", result.getMessage());
         return modelAndView;
+//        attr.addAttribute("result", result);
+//        return "redirect:/generic_error";
 
 		    /*
         // 1.From BeanValidationBeanPostProcessor/MethodValidationPostProcessor.

@@ -14,6 +14,7 @@ import org.ruanwei.core.InvalidLogicException;
 import org.ruanwei.core.RemoteAccessException;
 import org.ruanwei.core.ServiceException;
 import org.ruanwei.core.WebException;
+import org.ruanwei.core.web.BaseResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -92,10 +93,18 @@ public class ExceptionController {
 		Object code = request.getAttribute("code");
 		Object message = request.getAttribute("message");
 
+		model.addAttribute("success", false);
 		model.addAttribute("statusCode", statusCode);
 		model.addAttribute("code", code);
 		model.addAttribute("reason", reason);
 		model.addAttribute("message", message);
+
+		Object result = request.getAttribute("result");
+		if (result != null && result instanceof BaseResult) {
+			BaseResult baseResult = (BaseResult)result;
+			model.addAttribute("code", baseResult.getCode());
+			model.addAttribute("message", baseResult.getMessage());
+		}
 
 		return "generic_error";
 	}
