@@ -12,12 +12,16 @@ import org.apache.logging.log4j.Logger;
 import org.ruanwei.util.Counter;
 import org.ruanwei.util.StringUtils;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.support.WebBindingInitializer;
 
+@ControllerAdvice
 public class MyWebBindingInitializer implements WebBindingInitializer {
 	private static final Logger logger = LogManager.getLogger();
 
 	@Override
+	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		logger.debug("initBinder==================" + Counter.getCount());
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

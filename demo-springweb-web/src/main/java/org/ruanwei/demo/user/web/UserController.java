@@ -12,10 +12,12 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.groups.Default;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ruanwei.core.web.Page;
+import org.ruanwei.core.web.PagingResult;
 import org.ruanwei.demo.user.entity.User;
 import org.ruanwei.demo.user.service.UserService;
 import org.ruanwei.demo.user.web.databind.UserForm;
@@ -37,6 +39,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -54,8 +57,16 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping(path = "/list")
-	public String list(@Valid @NotNull UserForm userForm, Page page, Model model) {
+	/*
+	http://127.0.0.1:8080/springweb-web/user/list.html
+	http://127.0.0.1:8080/springweb-web/user/list.json
+	http://127.0.0.1:8080/springweb-web/user/list.pdf
+	http://127.0.0.1:8080/springweb-web/user/list.xlsx
+	http://127.0.0.1:8080/springweb-web/user/list.xls
+	http://127.0.0.1:8080/springweb-web/user/list.xml
+	 */
+    @GetMapping(path = "/list")
+    public ModelAndView list(@Valid @NotNull UserForm userForm, Page page, Model model) {
 		logger.debug("list=" + userForm + page);
 
 		// add your code here.
@@ -70,10 +81,15 @@ public class UserController {
 		// user.setAge(-1);
 		List<User> list = userService.list4Page(user);
 
-		model.addAttribute("list", list);
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("user/user_list");
+		modelAndView.addObject("list", list);
+		// 为了支持xml、pdf、xlsx
+		model.addAttribute("data", list);
 
-		return "user/user_list";
+		return modelAndView;
 	}
+
 
 	@GetMapping(path = "add")
 	public String add() {
@@ -85,7 +101,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "doAdd")
-	public String doAdd(@Valid @NotNull UserForm userForm, RedirectAttributes attr) {
+	public String doAdd(@Validated({User.Create.class, Default.class}) @NotNull UserForm userForm, RedirectAttributes attr) {
 		logger.debug("doAdd=" + userForm);
 
 		// add your code here.
@@ -111,6 +127,7 @@ public class UserController {
 
 		User user = getUser0(id);
 		model.addAttribute("user", user);
+		model.addAttribute("data", user);
 		// model.addAttribute(JsonView.class.getName(),User.WithoutPageingView.class);
 
 		return "user/user_edit";
@@ -118,12 +135,12 @@ public class UserController {
 
 	// content negotiation using
 	// HttpMessageConverter(mediaTypes和defaultContentType)
-	@GetMapping(path = "{uid}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE,
+	@PostMapping(path = "{uid}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE,
 			MediaType.APPLICATION_PDF_VALUE, MediaType.APPLICATION_ATOM_XML_VALUE,
 			MediaType.APPLICATION_RSS_XML_VALUE })
 	@ResponseBody
 	@JsonView(User.WithPageingView.class)
-	public User edit2(@PathVariable("uid") @Min(0) int id) {
+	public User edit2(@PathVariable("uid") @Validated @Min(value = 0, message = "ID必须大于0") int id) {
 		logger.debug("edit2=" + id);
 
 		// add your code here.
@@ -133,7 +150,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "doEdit")
-	public String doEdit(@Valid @NotNull UserForm userForm) {
+	public String doEdit(@Validated({User.Create.class, Default.class}) @NotNull UserForm userForm) {
 		logger.debug("doEdit=" + userForm);
 
 		// add your code here.
