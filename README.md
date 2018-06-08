@@ -174,6 +174,7 @@ Spring Web Demo
     - [ ] ResourceHttpRequestHandler 静态资源
     - [ ] Controller 缓存
 - [ ] RestTemplate
+- [ ] 类型转换
 
 
 <pre>
