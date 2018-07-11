@@ -11,7 +11,7 @@
       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd       
       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd"
-	default-autowire="byName">
+	default-autowire="default">
 	<!-- 拷贝以下内容到applicationContext.xml -->
 	<!-- <import resource="integration-dataAccess.xml" /> -->
 

@@ -15,6 +15,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.core.Ordered;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
@@ -38,7 +39,8 @@ import org.springframework.web.servlet.ViewResolver;
  *
  */
 @Component
-public class BeanValidationBeanPostProcessor implements BeanPostProcessor, Ordered, InitializingBean {
+public class BeanValidationBeanPostProcessor implements BeanPostProcessor,
+		Ordered, InitializingBean {
 	private static final Logger logger = LogManager.getLogger();
 
 	@Nullable
@@ -50,14 +52,6 @@ public class BeanValidationBeanPostProcessor implements BeanPostProcessor, Order
 		this.validator = validator;
 	}
 
-	/**
-	 * Set the JSR-303 ValidatorFactory to delegate to for validating beans,
-	 * using its default Validator.
-	 * <p>
-	 * Default is the default ValidatorFactory's default Validator.
-	 * 
-	 * @see javax.validation.ValidatorFactory#getValidator()
-	 */
 	public void setValidatorFactory(ValidatorFactory validatorFactory) {
 		this.validator = validatorFactory.getValidator();
 	}
@@ -77,13 +71,16 @@ public class BeanValidationBeanPostProcessor implements BeanPostProcessor, Order
 	@Override
 	public void afterPropertiesSet() {
 		if (this.validator == null) {
-			this.validator = Validation.buildDefaultValidatorFactory().getValidator();
+			this.validator = Validation.buildDefaultValidatorFactory()
+					.getValidator();
 		}
 	}
 
 	@Override
-	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-		logger.debug("postProcessBeforeInitialization==================" + Counter.getCount() + beanName + "=" + bean);
+	public Object postProcessBeforeInitialization(Object bean, String beanName)
+			throws BeansException {
+		logger.debug("postProcessBeforeInitialization=================="
+				+ Counter.getCount() + beanName + "=" + bean);
 		if (bean instanceof HandlerAdapter) {
 			HandlerAdapter handlerAdapter = (HandlerAdapter) bean;
 			logger.debug("handlerAdapter==================" + handlerAdapter);
@@ -94,7 +91,8 @@ public class BeanValidationBeanPostProcessor implements BeanPostProcessor, Order
 			// 在这里定制RequestMappingHandlerMapping，如interceptors等
 		} else if (bean instanceof HandlerExceptionResolver) {
 			HandlerExceptionResolver handlerExceptionResolver = (HandlerExceptionResolver) bean;
-			logger.debug("handlerExceptionResolver==================" + handlerExceptionResolver);
+			logger.debug("handlerExceptionResolver=================="
+					+ handlerExceptionResolver);
 		} else if (bean instanceof ViewResolver) {
 			ViewResolver viewResolver = (ViewResolver) bean;
 			logger.debug("viewResolver==================" + viewResolver);
@@ -106,22 +104,31 @@ public class BeanValidationBeanPostProcessor implements BeanPostProcessor, Order
 			logger.debug("themeResolver==================" + themeResolver);
 		} else if (bean instanceof MultipartResolver) {
 			MultipartResolver multipartResolver = (MultipartResolver) bean;
-			logger.debug("multipartResolver==================" + multipartResolver);
+			logger.debug("multipartResolver=================="
+					+ multipartResolver);
 		} else if (bean instanceof FlashMapManager) {
 			FlashMapManager flashMapManager = (FlashMapManager) bean;
 			logger.debug("flashMapManager==================" + flashMapManager);
 		} else if (bean instanceof FormattingConversionServiceFactoryBean) {
 			FormattingConversionServiceFactoryBean conversionService = (FormattingConversionServiceFactoryBean) bean;
-			logger.debug("conversionService==================" + conversionService);
+			logger.debug("conversionService=================="
+					+ conversionService);
+		} else if (bean instanceof ConversionService) {
+			ConversionService conversionService = (ConversionService) bean;
+			logger.debug("conversionService=================="
+					+ conversionService);
 		} else if (bean instanceof HandlerInterceptor) {
 			HandlerInterceptor handlerInterceptor = (HandlerInterceptor) bean;
-			logger.debug("handlerInterceptor==================" + handlerInterceptor);
+			logger.debug("handlerInterceptor=================="
+					+ handlerInterceptor);
 		} else if (bean instanceof WebRequestInterceptor) {
 			WebRequestInterceptor webRequestInterceptor = (WebRequestInterceptor) bean;
-			logger.debug("webRequestInterceptor==================" + webRequestInterceptor);
+			logger.debug("webRequestInterceptor=================="
+					+ webRequestInterceptor);
 		} else if (bean instanceof CallableProcessingInterceptor) {
 			CallableProcessingInterceptor callableProcessingInterceptor = (CallableProcessingInterceptor) bean;
-			logger.debug("callableProcessingInterceptor==================" + callableProcessingInterceptor);
+			logger.debug("callableProcessingInterceptor=================="
+					+ callableProcessingInterceptor);
 		}
 
 		if (!this.afterInitialization) {
@@ -132,8 +139,10 @@ public class BeanValidationBeanPostProcessor implements BeanPostProcessor, Order
 	}
 
 	@Override
-	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-		logger.debug("postProcessAfterInitialization==================" + Counter.getCount() + beanName + "=" + bean);
+	public Object postProcessAfterInitialization(Object bean, String beanName)
+			throws BeansException {
+		logger.debug("postProcessAfterInitialization=================="
+				+ Counter.getCount() + beanName + "=" + bean);
 
 		if (this.afterInitialization) {
 			doValidate(bean);

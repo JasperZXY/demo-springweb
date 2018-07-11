@@ -151,7 +151,7 @@ Spring Web Demo
 - [ ] 国际化支持，LocalResolver
 - [ ] ThemeResolver
 - [ ] 文件上传，两种方式
-- [ ] 视图控制器 
+- [ ] 视图控制器
     - [ ] json
     - [ ] html
     - [ ] pdf
@@ -176,38 +176,36 @@ Spring Web Demo
 - [ ] RestTemplate
 - [ ] 类型转换
 
-
-<pre>
-1.包名更换
-2.增加Reactive的Flux的Mono
-3.补充基于Java的初始化和配置
-4.补充ListenableFuture<V>, java.util.concurrent.CompletionStage<V>, java.util.concurrent.CompletableFuture<V>
+# TODO
+- 数据绑定：转换（）、校验（分组）
+- 异常统一处理，异常信息国际化
+- 内容协商（异常）
+- 统一输入输出
+- 正确有效的拦截器
+- 清理maven配置和依赖
+- 增加spring基于Java的配置
+- 清理日志
+- 增加servlet基于Java的配置
+- 增加WebFlux项目
+- 报名统一到org.ruanwei.demo.springweb.user
+- 补充ListenableFuture<V>, java.util.concurrent.CompletionStage<V>, java.util.concurrent.CompletableFuture<V>
 Alternative to DeferredResult as a convenience for example when an underlying service returns one of those.
-5.补充Reactive types — Reactor, RxJava, or others via ReactiveAdapterRegistry
+- 补充Reactive types
 Alternative to `DeferredResult with multi-value streams (e.g. Flux, Observable) collected to a List.
 For streaming scenarios — .e.g. text/event-stream, application/json+stream, SseEmitter and ResponseBodyEmitter are used instead, where ServletOutputStream blocking I/O is performed on a Spring MVC managed thread and back pressure applied against the completion of each write.
-6.补充javax.servlet.http.PushBuilder
+- 补充javax.servlet.http.PushBuilder
 Servlet 4.0 push builder API for programmatic HTTP/2 resource pushes. Note that per Servlet spec, the injected PushBuilder instance can be null if the client does not support that HTTP/2 feature.
-7.几个主要的Filter
+- 几个主要的Filter
 AbstractRequestLoggingFilter
 ForwardedHeaderFilter
 HiddenHttpMethodFilter
 HttpPutFormContentFilter
 ResourceUrlEncodingFilter
-8.参考MethodValidationPostProcessor/BeanValidationPostProcessor使用AOP来实现非Web层的校验
-9.PDF报错
-10.自动扫描的inclued和exclude
-11.@ConvertGroup、@GroupSequence、@ScriptAssert、@SupportedValidationTarget、EL表达式${validatedValue}
-12.验证错误消息和国际化消息
-13.打包成tomcat的运行用的包，一次性打包两个项目
-14.demo的bom，模仿spring-bom
-15.是否支持pluginManager
-16.依赖的jar包分类注释
-
-https://my.oschina.net/FengJ/blog/223727
-
-</pre>
-
-
-
-
+- 参考MethodValidationPostProcessor/BeanValidationPostProcessor使用AOP来实现非Web层的校验https://my.oschina.net/FengJ/blog/223727
+- PDF报错
+- 自动扫描的inclued和exclude
+- @ConvertGroup、@GroupSequence、@ScriptAssert、@SupportedValidationTarget、EL表达式${validatedValue}
+- 验证错误消息和国际化消息
+- 打包成tomcat的运行用的包，一次性打包两个项目
+- demo的bom，模仿spring-bom
+- 是否支持pluginManager

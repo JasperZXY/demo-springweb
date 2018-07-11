@@ -11,7 +11,7 @@
       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd       
       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd"
-	default-autowire="byName">
+	default-autowire="default">
 
 	<context:component-scan base-package="org.ruanwei.demo">
 		<context:include-filter type="annotation"
@@ -35,7 +35,6 @@
 	<!-- <bean
 		class="org.springframework.validation.beanvalidation.BeanValidationPostProcessor"
 		p:validator-ref="validator" /> -->
-
 	<bean
 		class="org.ruanwei.demo.user.web.interceptor.BeanValidationBeanPostProcessor"
 		p:validator-ref="validator" />

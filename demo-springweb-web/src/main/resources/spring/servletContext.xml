@@ -13,7 +13,7 @@
       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd  
       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
-	default-autowire="byName">
+	default-autowire="default">
 
 	<!-- 扫描并识别具有@Controller和@RequestMapping注解的类 -->
 	<context:component-scan base-package="org.ruanwei.demo.user.web">
@@ -131,7 +131,6 @@
 		<mvc:jsp prefix="/WEB-INF/jsp/" suffix=".jsp"
 			view-class="org.springframework.web.servlet.view.JstlView"
 			cache-views="true" />
-
 		<!-- org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver -->
 		<!-- org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer -->
 		<!-- <mvc:freemarker/> -->
