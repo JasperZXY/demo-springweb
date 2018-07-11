@@ -58,16 +58,17 @@ public class UserController {
 	private UserService userService;
 
 	/*
-	http://127.0.0.1:8080/springweb-web/user/list.html
-	http://127.0.0.1:8080/springweb-web/user/list.json
-	http://127.0.0.1:8080/springweb-web/user/list.pdf
-	http://127.0.0.1:8080/springweb-web/user/list.xlsx
-	http://127.0.0.1:8080/springweb-web/user/list.xls
-	http://127.0.0.1:8080/springweb-web/user/list.xml
+	 * http://127.0.0.1:8080/springweb-web/user/list.html
+	 * http://127.0.0.1:8080/springweb-web/user/list.json
+	 * http://127.0.0.1:8080/springweb-web/user/list.pdf
+	 * http://127.0.0.1:8080/springweb-web/user/list.xlsx
+	 * http://127.0.0.1:8080/springweb-web/user/list.xls
+	 * http://127.0.0.1:8080/springweb-web/user/list.xml
 	 */
-    @GetMapping(path = "/list")
-    public ModelAndView list(@Valid @NotNull UserForm userForm, Page page, Model model) {
-		logger.debug("list=" + userForm + page);
+	@GetMapping(path = "/list")
+	public String list(@Valid @NotNull UserForm userForm, Page page,
+			Model model) {
+		logger.debug("list=" + userForm + page + model);
 
 		// add your code here.
 
@@ -78,18 +79,14 @@ public class UserController {
 		user.setStart(page.getPageSize() * (page.getCurPage() - 1));
 		user.setOffset(page.getPageSize());
 
-		// user.setAge(-1);
 		List<User> list = userService.list4Page(user);
 
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("user/user_list");
-		modelAndView.addObject("list", list);
+		model.addAttribute("list", list);
 		// 为了支持xml、pdf、xlsx
 		model.addAttribute("data", list);
-
-		return modelAndView;
+		
+		return "user/user_list";
 	}
-
 
 	@GetMapping(path = "add")
 	public String add() {
@@ -101,7 +98,9 @@ public class UserController {
 	}
 
 	@PostMapping(path = "doAdd")
-	public String doAdd(@Validated({User.Create.class, Default.class}) @NotNull UserForm userForm, RedirectAttributes attr) {
+	public String doAdd(
+			@Validated({ User.Create.class, Default.class }) @NotNull UserForm userForm,
+			RedirectAttributes attr) {
 		logger.debug("doAdd=" + userForm);
 
 		// add your code here.
@@ -133,24 +132,9 @@ public class UserController {
 		return "user/user_edit";
 	}
 
-	// content negotiation using
-	// HttpMessageConverter(mediaTypes和defaultContentType)
-	@PostMapping(path = "{uid}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE,
-			MediaType.APPLICATION_PDF_VALUE, MediaType.APPLICATION_ATOM_XML_VALUE,
-			MediaType.APPLICATION_RSS_XML_VALUE })
-	@ResponseBody
-	@JsonView(User.WithPageingView.class)
-	public User edit2(@PathVariable("uid") @Validated @Min(value = 0, message = "ID必须大于0") int id) {
-		logger.debug("edit2=" + id);
-
-		// add your code here.
-
-		User user = userService.getUser(id);
-		return user;
-	}
-
 	@PostMapping(path = "doEdit")
-	public String doEdit(@Validated({User.Create.class, Default.class}) @NotNull UserForm userForm) {
+	public String doEdit(
+			@Validated({ User.Create.class, Default.class }) @NotNull UserForm userForm) {
 		logger.debug("doEdit=" + userForm);
 
 		// add your code here.
@@ -186,7 +170,8 @@ public class UserController {
 
 	// Using a MultipartResolver with Commons FileUpload.
 	@PostMapping(path = "upload")
-	public String upload(@RequestParam("name") String name, @Valid @RequestPart("file") MultipartFile multipartFile,
+	public String upload(@RequestParam("name") String name,
+			@Valid @RequestPart("file") MultipartFile multipartFile,
 			BindingResult bindingResult, MultipartHttpServletRequest request,
 			@RequestParam("file") CommonsMultipartFile commonsMultipartFile) {
 		logger.debug("upload=" + name);
@@ -212,8 +197,10 @@ public class UserController {
 
 	// Using a MultipartResolver with Servlet 3.0.
 	@PostMapping(path = "upload2")
-	public String upload2(@RequestParam("name") String name, @Valid @RequestPart("file") MultipartFile multipartFile,
-			BindingResult bindingResult, MultipartHttpServletRequest request, @RequestParam("file") Part servletFile) {
+	public String upload2(@RequestParam("name") String name,
+			@Valid @RequestPart("file") MultipartFile multipartFile,
+			BindingResult bindingResult, MultipartHttpServletRequest request,
+			@RequestParam("file") Part servletFile) {
 		logger.debug("upload2=" + name);
 		File mFile = new File(new Date().getTime() + ".jpg");
 		try {
@@ -232,15 +219,18 @@ public class UserController {
 	}
 
 	@GetMapping(path = "/list2")
-	public String list2(@Valid UserForm userForm, BindingResult bindingResult, Page page, Model model) {
+	public String list2(@Valid UserForm userForm, BindingResult bindingResult,
+			Page page, Model model) {
 		logger.debug("list2=" + userForm);
 
 		if (bindingResult.hasErrors()) {
 			FieldError fieldError = bindingResult.getFieldError();
 			if (fieldError != null) {
-				logger.error(fieldError.getRejectedValue() + " is invalid for " + fieldError.getField());
+				logger.error(fieldError.getRejectedValue() + " is invalid for "
+						+ fieldError.getField());
 				model.addAttribute("errorMessage",
-						fieldError.getRejectedValue() + " is invalid for " + fieldError.getField());
+						fieldError.getRejectedValue() + " is invalid for "
+								+ fieldError.getField());
 				// throw new
 				// WebException(fieldError.getDefaultMessage(),HttpStatus.BAD_REQUEST);
 			}
