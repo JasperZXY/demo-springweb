@@ -187,7 +187,10 @@ Spring Web Demo
 - 清理日志
 - 增加servlet基于Java的配置
 - 增加WebFlux项目
+<<<<<<< HEAD
 - 报名统一到org.ruanwei.demo.springweb.user
+=======
+>>>>>>> branch 'master' of https://github.com/ruanweiqq/demo-springweb.git
 - 补充ListenableFuture<V>, java.util.concurrent.CompletionStage<V>, java.util.concurrent.CompletableFuture<V>
 Alternative to DeferredResult as a convenience for example when an underlying service returns one of those.
 - 补充Reactive types
