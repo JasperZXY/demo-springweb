@@ -54,7 +54,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping(path = "/list")
+	@GetMapping(path = "list")
 	public String list(@Valid @NotNull UserForm userForm, Page page, Model model) {
 		logger.debug("list=" + userForm + page + model);
 
