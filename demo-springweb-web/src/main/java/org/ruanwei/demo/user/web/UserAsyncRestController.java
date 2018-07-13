@@ -23,16 +23,14 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 /**
- * <li>@RestController is a stereotype annotation that combines @ResponseBody
- * and @Controller.
- * <li>@GetMapping(path = "/list")等价于@RequestMapping(path ="/list", method =
- * RequestMethod.GET), path默认就是方法名.
+ * 本文件演示： 
+ * <li>基于HttpMessageConverter(@ResponseBody)进行渲染的Controller. 
+ * <li>支持异步.
  * 
  * @author ruanwei
- *
  */
 @RestController
-@RequestMapping(path = "/rest/user/")
+@RequestMapping(path = "/rest/async/user/")
 public class UserAsyncRestController {
 	private static final Logger logger = LogManager.getLogger();
 
@@ -40,10 +38,11 @@ public class UserAsyncRestController {
 	private UserService userService;
 
 	// produce the return value from a Spring MVC managed thread
-	@GetMapping(path = "/async1/{id}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE,
+	@GetMapping(path = "json1/{id}", produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public Callable<User> asyncjson1(@PathVariable Integer id) {
-		logger.debug("asyncjson1=" + id);
+	public Callable<User> json1(@PathVariable Integer id) {
+		logger.debug("json1=" + id);
 
 		Callable<User> call = () -> {
 			logger.debug("Callable.call()=");
@@ -66,27 +65,30 @@ public class UserAsyncRestController {
 	}
 
 	// produce the return value from a Spring MVC managed thread
-	@GetMapping(path = "/async2/{id}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE,
+	@GetMapping(path = "json2/{id}", produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public WebAsyncTask<User> asyncjson2(@PathVariable Integer id) {
-		logger.debug("asyncjson2=" + id);
+	public WebAsyncTask<User> json2(@PathVariable Integer id) {
+		logger.debug("json2=" + id);
 
-		WebAsyncTask<User> asyncTask = new WebAsyncTask<User>(5000L, "myThreadPool", () -> {
-			logger.debug("Callable.call()=");
-			User user = null;
-			try {
-				logger.debug("sleep(2000)=");
-				Thread.sleep(2000);
-				logger.debug("sleep(2000)=");
-				user = userService.getUser(id);
-			} catch (Exception e) {
-				logger.error(e.getMessage(), e);
-				// add your code here.
-				// throw new
-				// WebException(e.getMessage(),HttpStatus.BAD_REQUEST);
+		WebAsyncTask<User> asyncTask = new WebAsyncTask<User>(5000L,
+				"myThreadPool", () -> {
+					logger.debug("Callable.call()=");
+					User user = null;
+					try {
+						logger.debug("sleep(2000)=");
+						Thread.sleep(2000);
+						logger.debug("sleep(2000)=");
+						user = userService.getUser(id);
+					} catch (Exception e) {
+						logger.error(e.getMessage(), e);
+						// add your code here.
+						// throw new
+						// WebException(e.getMessage(),HttpStatus.BAD_REQUEST);
 			}
 			return user;
 		});
+		
 		asyncTask.onCompletion(() -> logger.debug("onCompletion="));
 		asyncTask.onTimeout(() -> {
 			logger.error("onTimeout=");
@@ -102,15 +104,18 @@ public class UserAsyncRestController {
 
 	// produce the return value from any thread such as a JMS message, a
 	// scheduled task, etc.
-	@GetMapping(path = "async3/{id}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE,
+	@GetMapping(path = "json3/{id}", produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public DeferredResult<User> asyncjson3(@PathVariable Integer id) throws Exception {
-		logger.debug("asyncjson3=" + id);
+	public DeferredResult<User> json3(@PathVariable Integer id)
+			throws Exception {
+		logger.debug("json3=" + id);
 
 		DeferredResult<User> deferredResult = new DeferredResult<User>();
 		deferredResult.onCompletion(() -> logger.debug("onCompletion="));
 		deferredResult.onTimeout(() -> logger.error("onTimeout="));
-		deferredResult.onError(throwable -> logger.error("onError=", throwable));
+		deferredResult
+				.onError(throwable -> logger.error("onError=", throwable));
 
 		// In some other thread...
 		new Thread(() -> {
@@ -132,14 +137,18 @@ public class UserAsyncRestController {
 	}
 
 	// ListenableFuture<V>/CompletableFuture<V>/CompletionStage<V>/WebSocket/HTTP2
-	@GetMapping(path = "async4/{id}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE,
+	@GetMapping(path = "json4/{id}", produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public ListenableFuture<User> asyncjson4(@PathVariable Integer id) throws Exception {
-		logger.debug("asyncjson4=" + id);
+	public ListenableFuture<User> json4(@PathVariable Integer id)
+			throws Exception {
+		logger.debug("json4=" + id);
 
 		ListenableFuture<User> listenableFuture = userService.getUser0(id);
-		listenableFuture.addCallback((user -> logger.debug("SuccessCallback.onSuccess=" + user)),
-				throwable -> logger.error("FailureCallback.onFailure=", throwable));
+		listenableFuture.addCallback((user -> logger
+				.debug("SuccessCallback.onSuccess=" + user)),
+				throwable -> logger.error("FailureCallback.onFailure=",
+						throwable));
 
 		return listenableFuture;
 	}

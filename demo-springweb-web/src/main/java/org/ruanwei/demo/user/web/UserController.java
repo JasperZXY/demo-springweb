@@ -40,8 +40,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * 本文件演示
- * 1.基于Model和View(ViewResolver)进行渲染的Controller
- * 2.内容协商
+ * <li>基于Model和View(ViewResolver)进行渲染的Controller.
+ * <li>支持内容协商.
  * 
  * @author ruanwei
  */
