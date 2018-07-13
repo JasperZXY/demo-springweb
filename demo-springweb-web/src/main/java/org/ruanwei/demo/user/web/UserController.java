@@ -45,6 +45,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.annotation.JsonView;
 
 /**
+ * 本文件演示基于Model和View(ViewResolver)进行渲染的Controller，以及内容协商
  * 
  * @author ruanwei
  */
@@ -57,17 +58,8 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	/*
-	 * http://127.0.0.1:8080/springweb-web/user/list.html
-	 * http://127.0.0.1:8080/springweb-web/user/list.json
-	 * http://127.0.0.1:8080/springweb-web/user/list.pdf
-	 * http://127.0.0.1:8080/springweb-web/user/list.xlsx
-	 * http://127.0.0.1:8080/springweb-web/user/list.xls
-	 * http://127.0.0.1:8080/springweb-web/user/list.xml
-	 */
 	@GetMapping(path = "/list")
-	public String list(@Valid @NotNull UserForm userForm, Page page,
-			Model model) {
+	public String list(@Valid @NotNull UserForm userForm, Page page, Model model) {
 		logger.debug("list=" + userForm + page + model);
 
 		// add your code here.
@@ -84,8 +76,23 @@ public class UserController {
 		model.addAttribute("list", list);
 		// 为了支持xml、pdf、xlsx
 		model.addAttribute("data", list);
-		
+
 		return "user/user_list";
+	}
+
+	@GetMapping(path = "{uid}")
+	public String get(@PathVariable("uid") @Min(0) int id, Model model) {
+		logger.debug("get=" + id);
+
+		// add your code here.
+
+		User user = getUser0(id);
+		model.addAttribute("user", user);
+		model.addAttribute("data", user);
+		// @JsonView
+		// model.addAttribute(JsonView.class.getName(),User.WithoutPageingView.class);
+
+		return "user/user_edit";
 	}
 
 	@GetMapping(path = "add")
@@ -99,8 +106,7 @@ public class UserController {
 
 	@PostMapping(path = "doAdd")
 	public String doAdd(
-			@Validated({ User.Create.class, Default.class }) @NotNull UserForm userForm,
-			RedirectAttributes attr) {
+			@Validated({ User.Create.class, Default.class }) @NotNull UserForm userForm) {
 		logger.debug("doAdd=" + userForm);
 
 		// add your code here.
@@ -109,16 +115,10 @@ public class UserController {
 
 		userService.add(user);
 
-		// RedirectAttribute and FlashAttribute
-		attr.addAttribute("key1", "value1");// /user/list.html?key1=value1
-		attr.addFlashAttribute("key2", "value2");// 放到session中然后删除
-
-		// return "forward:/user/list.html"
-		return "redirect:/user/list.html";
+		return "redirect:/user/list"; // "forward:/user/list"
 	}
 
-	// content negotiation using ContentNegotiatingViewResolver.
-	@GetMapping(path = "{uid}")
+	@GetMapping(path = "edit/{uid}")
 	public String edit(@PathVariable("uid") @Min(0) int id, Model model) {
 		logger.debug("edit=" + id);
 
@@ -127,14 +127,14 @@ public class UserController {
 		User user = getUser0(id);
 		model.addAttribute("user", user);
 		model.addAttribute("data", user);
-		// model.addAttribute(JsonView.class.getName(),User.WithoutPageingView.class);
 
 		return "user/user_edit";
 	}
 
 	@PostMapping(path = "doEdit")
 	public String doEdit(
-			@Validated({ User.Create.class, Default.class }) @NotNull UserForm userForm) {
+			@Validated({ User.Create.class, Default.class }) @NotNull UserForm userForm,
+			RedirectAttributes attr) {
 		logger.debug("doEdit=" + userForm);
 
 		// add your code here.
@@ -142,7 +142,11 @@ public class UserController {
 		User user = BeanUtils.copy(userForm, User.class);
 		userService.edit(user);
 
-		return "redirect:/user/list.html";
+		// RedirectAttribute and FlashAttribute
+		attr.addAttribute("key1", "value1");// /user/list?key1=value1
+		attr.addFlashAttribute("userForm", userForm);// 放到session中然后删除
+
+		return "redirect:/user/list";
 	}
 
 	// URL模板路径支持通配符和占位符，其中变量支持正则表达式，变量名默认与方法参数名一致
@@ -154,7 +158,7 @@ public class UserController {
 
 		userService.deleteUser(id);
 
-		return "redirect:/user/list.html";
+		return "redirect:/user/list";
 	}
 
 	@PostMapping(path = "batchDelete")
@@ -165,7 +169,7 @@ public class UserController {
 
 		userService.batchDeleteUser(ids);
 
-		return "redirect:/user/list.html";
+		return "redirect:/user/list";
 	}
 
 	// Using a MultipartResolver with Commons FileUpload.
@@ -218,39 +222,6 @@ public class UserController {
 		return "redirect:uploadSuccess";
 	}
 
-	@GetMapping(path = "/list2")
-	public String list2(@Valid UserForm userForm, BindingResult bindingResult,
-			Page page, Model model) {
-		logger.debug("list2=" + userForm);
-
-		if (bindingResult.hasErrors()) {
-			FieldError fieldError = bindingResult.getFieldError();
-			if (fieldError != null) {
-				logger.error(fieldError.getRejectedValue() + " is invalid for "
-						+ fieldError.getField());
-				model.addAttribute("errorMessage",
-						fieldError.getRejectedValue() + " is invalid for "
-								+ fieldError.getField());
-				// throw new
-				// WebException(fieldError.getDefaultMessage(),HttpStatus.BAD_REQUEST);
-			}
-		}
-
-		// add your code here.
-
-		User user = BeanUtils.copy(userForm, User.class);
-		long totalRecord = userService.count(user);
-		page.setTotalRecord(totalRecord);
-
-		user.setStart(page.getPageSize() * (page.getCurPage() - 1));
-		user.setOffset(page.getPageSize());
-		List<User> list = userService.list4Page(user);
-
-		model.addAttribute("list", list);
-
-		return "user/user_list";
-	}
-
 	private User getUser0(Integer id) {
 		logger.debug("getUser0=" + id);
 
@@ -269,4 +240,24 @@ public class UserController {
 		return user;
 	}
 
+	@GetMapping(path = "/test")
+	public String test(@Valid UserForm userForm, BindingResult bindingResult,
+			Page page, Model model) {
+		logger.debug("list2=" + userForm);
+
+		if (bindingResult.hasErrors()) {
+			FieldError fieldError = bindingResult.getFieldError();
+			if (fieldError != null) {
+				logger.error(fieldError.getRejectedValue() + " is invalid for "
+						+ fieldError.getField());
+				model.addAttribute("errorMessage",
+						fieldError.getRejectedValue() + " is invalid for "
+								+ fieldError.getField());
+				// throw new
+				// WebException(fieldError.getDefaultMessage(),HttpStatus.BAD_REQUEST);
+			}
+		}
+
+		return "user/user_list";
+	}
 }
