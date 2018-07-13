@@ -31,7 +31,7 @@ import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBo
  */
 @RestController
 @RequestMapping(path = "/rest/async/user/")
-public class UserAsyncRestController {
+public class UserRestController {
 	private static final Logger logger = LogManager.getLogger();
 
 	@Autowired
