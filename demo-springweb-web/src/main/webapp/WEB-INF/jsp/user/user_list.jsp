@@ -164,7 +164,7 @@
 								<td><c:out value="${u.cellphone}"></c:out></td>
 								<td><c:out value="${u.email}"></c:out></td>
 								<td><c:out value="${u.intro}"></c:out></td>
-								<td><a href="<%=ctx%>/user/${u.id}.html">编辑</a>&nbsp;<a href="<%=ctx%>/user/delete/${u.id}.html">删除</a>&nbsp;|&nbsp;<a href="<%=ctx%>/user/${u.id}.json">JSON</a>
+								<td><a href="<%=ctx%>/user/edit/${u.id}.html">编辑</a>&nbsp;<a href="<%=ctx%>/user/delete/${u.id}.html">删除</a>&nbsp;|&nbsp;<a href="<%=ctx%>/user/${u.id}.json">JSON</a>
 									&nbsp;<a	href="<%=ctx%>/user/${u.id}.xml">XML</a>&nbsp;<a href="<%=ctx%>/user/${u.id}.xlsx">XLSX</a>&nbsp;<a href="<%=ctx%>/user/${u.id}.pdf">PDF</a>&nbsp;<a href="<%=ctx%>/rest/user/sse/${u.id}">SSE</a></td>
 							</tr>
 						</c:forEach>
