@@ -23,9 +23,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 /**
- * 本文件演示： 
- * <li>基于HttpMessageConverter(@ResponseBody)进行渲染的Controller. 
- * <li>支持异步.
+ * 本文件演示： <li>基于HttpMessageConverter(@ResponseBody)进行渲染的Controller. <li>支持异步.
  * 
  * @author ruanwei
  */
@@ -36,7 +34,17 @@ public class UserRestController {
 
 	@Autowired
 	private UserService userService;
-	
+
+	@GetMapping(path = "object/{id}", produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public User object(@PathVariable Integer id) {
+		logger.debug("object=" + id);
+
+		User user = userService.getUser(id);
+		return user;
+	}
+
 	// TODO:按照统一的返回类型，返回rest格式，列表，对象，映射
 
 	// produce the return value from a Spring MVC managed thread
@@ -90,7 +98,7 @@ public class UserRestController {
 			}
 			return user;
 		});
-		
+
 		asyncTask.onCompletion(() -> logger.debug("onCompletion="));
 		asyncTask.onTimeout(() -> {
 			logger.error("onTimeout=");
