@@ -40,17 +40,6 @@ public class UserAsyncController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping(path = "flux/{uid}")
-	public Mono<User> get2(@PathVariable("uid") @Min(0) int id) {
-		logger.debug("get2=" + id);
-
-		// add your code here.
-
-		User user = getUser0(id);
-
-		return Mono.just(user);
-	}
-
 	// produce the return value from a Spring MVC managed thread
 	@GetMapping(path = "async1/{id}", produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE,
@@ -165,6 +154,41 @@ public class UserAsyncController {
 						throwable));
 
 		return listenableFuture;
+	}
+	
+	@GetMapping(path = "flux1/{uid}")
+	public Mono<User> flux1(@PathVariable("uid") @Min(0) int id) {
+		logger.debug("flux1=" + id);
+
+		// add your code here.
+
+		User user = getUser0(id);
+
+		return Mono.just(user);
+	}
+	
+	@GetMapping(path = "flux2/{id}")
+	public Mono<User> flux2(@PathVariable Integer id) {
+		logger.debug("flux2=" + id);
+
+		Callable<User> call = () -> {
+			logger.debug("Callable.call()=");
+			User user = null;
+			try {
+				logger.debug("sleep(2000)=");
+				Thread.sleep(2000);
+				logger.debug("sleep(2000)=");
+				user = userService.getUser(id);
+			} catch (Exception e) {
+				logger.error(e.getMessage(), e);
+				// add your code here.
+				// throw new
+				// WebException(e.getMessage(),HttpStatus.BAD_REQUEST);
+			}
+			return user;
+		};
+
+		return Mono.fromCallable(call);
 	}
 
 	// produce the return value from any thread such as a JMS message, a
