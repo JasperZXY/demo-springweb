@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.AbstractJsonpResponseBodyAdvice;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -103,7 +102,7 @@ public class MyControllerAdvice extends AbstractJsonpResponseBodyAdvice { // ext
 
 
     @ExceptionHandler(Exception.class) // handled by ExceptionHandlerExceptionResolver
-    public Object handleSpringException(Throwable e, HttpServletRequest request, HttpServletResponse response, RedirectAttributes attr) throws Exception {
+    public String handleSpringException(Throwable e, HttpServletRequest request, HttpServletResponse response, Model model,RedirectAttributes attr) throws Exception {
         //logger.error("handleSpringException===================" + request.getRequestURL(), e);
         StringBuilder urlBuilder = new StringBuilder();
         urlBuilder.append(request.getRequestURI());
@@ -168,12 +167,10 @@ public class MyControllerAdvice extends AbstractJsonpResponseBodyAdvice { // ext
             result.setError(1003, "服务器繁忙，请稍后重试！");
         }
 
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("generic_error");
-        modelAndView.addObject("success", result.isSuccess());
-        modelAndView.addObject("code", result.getCode());
-        modelAndView.addObject("message", result.getMessage());
-        return modelAndView;
+        model.addAttribute("success", result.isSuccess());
+        model.addAttribute("code", result.getCode());
+        model.addAttribute("message", result.getMessage());
+        return "generic_error";
 //        attr.addAttribute("result", result);
 //        return "redirect:/generic_error";
 
