@@ -163,8 +163,6 @@ public class MyControllerAdvice extends AbstractJsonpResponseBodyAdvice { // ext
             ce.getConstraintViolations().forEach(ev -> errorBuilder.append(ev.getMessage()).append("；"));
             errorBuilder.deleteCharAt(errorBuilder.length() - 1);
             result.setError(1001, errorBuilder.toString());
-        }else if (e instanceof HttpMediaTypeNotAcceptableException) {
-            result.setError(1003, "不支持的返回类型");
         }else {
             logger.error("handleSpringException " + url, e);
             result.setError(1003, "服务器繁忙，请稍后重试！");
@@ -173,7 +171,7 @@ public class MyControllerAdvice extends AbstractJsonpResponseBodyAdvice { // ext
         model.addAttribute("success", result.isSuccess());
         model.addAttribute("code", result.getCode());
         model.addAttribute("message", result.getMessage());
-        model.addAttribute("data", result);
+        //model.addAttribute("data", result);
         return "generic_error";
 //        attr.addAttribute("result", result);
 //        return "redirect:/generic_error";

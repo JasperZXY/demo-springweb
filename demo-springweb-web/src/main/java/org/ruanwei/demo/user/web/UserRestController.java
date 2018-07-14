@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ruanwei.core.web.Page;
+import org.ruanwei.core.web.PagingResult;
+import org.ruanwei.core.web.Result;
 import org.ruanwei.demo.user.entity.User;
 import org.ruanwei.demo.user.service.UserService;
 import org.ruanwei.demo.user.web.databind.JsonParam;
@@ -40,7 +42,7 @@ public class UserRestController {
 	@GetMapping(path = "list", produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public List<User> list(@Valid @NotNull @JsonParam UserForm userForm, Page page) {
+	public PagingResult<User> list(@Valid @NotNull @JsonParam UserForm userForm, Page page) {
 		logger.debug("list=" + userForm + page);
 
 		// add your code here.
@@ -54,18 +56,18 @@ public class UserRestController {
 
 		List<User> list = userService.list4Page(user);
 
-		return list;
+		return PagingResult.bulider().list(list).count(totalRecord).build();
 	}
 	
 	@GetMapping(path = "{uid}")
-	public User get(@PathVariable("uid") @Min(0) int id) {
+	public Result<User> get(@PathVariable("uid") @Min(0) int id) {
 		logger.debug("get=" + id);
 
 		// add your code here.
 
 		User user = getUser0(id);
 
-		return user;
+		return Result.bulider().data(user).build();
 	}
 	
 	private User getUser0(Integer id) {
