@@ -219,7 +219,7 @@ HiddenHttpMethodFilter
 HttpPutFormContentFilter
 ResourceUrlEncodingFilter
 - 参考MethodValidationPostProcessor/BeanValidationPostProcessor使用AOP来实现非Web层的校验https://my.oschina.net/FengJ/blog/223727
-- PDF报错
+- PDF报错，在没有data数据的情况下，调用close会报no page，但是框架却没有拦截下来
 - 自动扫描的inclued和exclude
 - @ConvertGroup、@GroupSequence、@ScriptAssert、@SupportedValidationTarget、EL表达式${validatedValue}
 - 验证错误消息和国际化消息
