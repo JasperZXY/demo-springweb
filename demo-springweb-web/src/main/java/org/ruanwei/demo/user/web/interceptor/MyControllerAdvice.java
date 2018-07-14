@@ -1,5 +1,14 @@
 package org.ruanwei.demo.user.web.interceptor;
 
+import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolationException;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,17 +27,11 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.AbstractJsonpResponseBodyAdvice;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.net.URLDecoder;
-import java.util.Enumeration;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.ConstraintViolationException;
 
 
 /**
@@ -85,16 +88,16 @@ public class MyControllerAdvice extends AbstractJsonpResponseBodyAdvice { // ext
     }
 
 
-//    @ModelAttribute("cities")
-//    public List<String> modelAttribute(Model model) {
-//        logger.debug("modelAttribute==================");
-//        List<String> cityList = new ArrayList<String>();
-//        cityList.add("a");
-//        cityList.add("b");
-//        cityList.add("c");
-//        model.addAttribute("cities2", cityList);
-//        return cityList;
-//    }
+    @ModelAttribute("cities")
+    public List<String> modelAttribute(Model model) {
+        logger.debug("modelAttribute==================");
+        List<String> cityList = new ArrayList<String>();
+        cityList.add("a");
+        cityList.add("b");
+        cityList.add("c");
+        model.addAttribute("cities2", cityList);
+        return cityList;
+    }
 
     // SimpleMappingExceptionResolver
 
