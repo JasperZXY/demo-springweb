@@ -171,7 +171,7 @@ public class MyControllerAdvice extends AbstractJsonpResponseBodyAdvice { // ext
         model.addAttribute("success", result.isSuccess());
         model.addAttribute("code", result.getCode());
         model.addAttribute("message", result.getMessage());
-        model.addAttribute("data", result);
+        //model.addAttribute("data", result);
         return "generic_error";
 //        attr.addAttribute("result", result);
 //        return "redirect:/generic_error";
