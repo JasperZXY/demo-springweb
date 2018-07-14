@@ -14,12 +14,11 @@ import org.apache.logging.log4j.Logger;
 import org.ruanwei.core.web.Page;
 import org.ruanwei.demo.user.entity.User;
 import org.ruanwei.demo.user.service.UserService;
+import org.ruanwei.demo.user.web.databind.JsonParam;
 import org.ruanwei.demo.user.web.databind.UserForm;
 import org.ruanwei.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.scheduling.annotation.AsyncResult;
-import org.springframework.ui.Model;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,7 +47,7 @@ public class UserRestController {
 	@GetMapping(path = "list", produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public List<User> list(@Valid @NotNull UserForm userForm, Page page) {
+	public List<User> list(@Valid @NotNull @JsonParam UserForm userForm, Page page) {
 		logger.debug("list=" + userForm + page);
 
 		// add your code here.
