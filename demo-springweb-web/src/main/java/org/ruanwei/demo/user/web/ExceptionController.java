@@ -93,6 +93,21 @@ public class ExceptionController {
 		Object code = request.getAttribute("code");
 		Object message = request.getAttribute("message");
 
+		if (statusCode != null && "404".equals(statusCode.toString())) {
+			if (code == null) {
+				code = 10001;
+			}
+			if (message == null) {
+				message = "请确认URL是否正确";
+			}
+		}
+		if (code == null) {
+			code = 10003;
+		}
+		if (message == null) {
+			message = "服务器开小差";
+		}
+
 		model.addAttribute("success", false);
 		model.addAttribute("statusCode", statusCode);
 		model.addAttribute("code", code);

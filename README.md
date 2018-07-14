@@ -1,4 +1,4 @@
-	# Quick Start
+# Quick Start
 - `git clone git@github.com:ruanweiqq/demo-springweb.git`
 - `cd demo-springweb`
 - demo-springweb-web中的doc有一份db.sql，执行这份SQL，TODO或内存数据库
@@ -30,6 +30,22 @@
 17:08:53.570 [main] I RequestMappingHandlerAdapter[604] - Detected ResponseBodyAdvice bean in myControllerAdvice
 17:08:53.573 [main] I RequestMappingHandlerAdapter[604] - Detected ResponseBodyAdvice bean in myResponseBodyAdvice
 ```
+
+
+---
+# 参数
+## 参数校验
+- 文档参考 https://docs.spring.io/spring/docs/4.3.x/spring-framework-reference/htmlsingle/#validation
+- 引用的jar包`hibernate-validator`
+- 可使用`javax.validation.Valid`注解或`org.springframework.validation.annotation.Validated`注解
+- Validated支持分组校验，Valid不支持分组校验，不指定分组的话，默认是`javax.validation.groups.Default`
+- 由于指定分组校验后，分组没有匹配上的是不会进行校验，所以建议指定分组后，加上默认分组`javax.validation.groups.Default`
+- 检验不通过，抛出的异常为`org.springframework.validation.BindException`、`ConstraintViolationException`
+
+参数校验国际化支持
+- 关键类`org.springframework.validation.beanvalidation.LocalValidatorFactoryBean`、`org.springframework.context.support.ReloadableResourceBundleMessageSource`
+- 特别注意的点：xml中的配置要加上“classpath:”
+- message的指定格式用“{xxx}”
 
 
 # 数据格式化返回
@@ -112,6 +128,7 @@ success：是否调用成功；code：错误返回码；message：错误信息�
 - Validated支持分组校验，Valid不支持分组校验，不指定分组的话，默认是`javax.validation.groups.Default`
 - 由于指定分组校验后，分组没有匹配上的是不会进行校验，所以建议指定分组后，加上默认分组`javax.validation.groups.Default`
 - 检验不通过，抛出的异常为`org.springframework.validation.BindException`、`ConstraintViolationException`
+- `${validatedValue}`可以获取被校验的值，`{min}`等可获取注解如`@size`上配置的值
 
 参数校验国际化支持
 - 关键类`org.springframework.validation.beanvalidation.LocalValidatorFactoryBean`、`org.springframework.context.support.ReloadableResourceBundleMessageSource`
@@ -202,7 +219,7 @@ HiddenHttpMethodFilter
 HttpPutFormContentFilter
 ResourceUrlEncodingFilter
 - 参考MethodValidationPostProcessor/BeanValidationPostProcessor使用AOP来实现非Web层的校验https://my.oschina.net/FengJ/blog/223727
-- PDF报错
+- PDF报错，在没有data数据的情况下，调用close会报no page，但是框架却没有拦截下来
 - 自动扫描的inclued和exclude
 - @ConvertGroup、@GroupSequence、@ScriptAssert、@SupportedValidationTarget、EL表达式${validatedValue}
 - 验证错误消息和国际化消息
