@@ -21,8 +21,11 @@ public class WebAppConfig {
 
 	@Bean
 	public RouterFunction<ServerResponse> timerRouter() {
-		return RouterFunctions.route(RequestPredicates.GET("/time"),
-				req -> userHandler.getTime(req)).andRoute(
-				RequestPredicates.GET("/date"), userHandler::getDate);
+		return RouterFunctions
+				.route(RequestPredicates.GET("/time"),
+						req -> userHandler.getTime(req))
+				.andRoute(RequestPredicates.GET("/date"), userHandler::getDate)
+				.andRoute(RequestPredicates.GET("/times"),
+						userHandler::sendTimePerSec);
 	}
 }
