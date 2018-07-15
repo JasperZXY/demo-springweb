@@ -23,19 +23,15 @@ import org.ruanwei.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.data.redis.core.ListOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.validation.annotation.Validated;
 
 @Validated
 @Service("userService")
-@Transactional
+//@Transactional
 public class UserServiceImpl implements UserService {
 	private static final Logger logger = LogManager.getLogger();
 
@@ -58,18 +54,18 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDao;
 
-	private JdbcTemplate jdbcTemplate;
+	//private JdbcTemplate jdbcTemplate;
 
 	// @Autowired
-	private RedisTemplate<String, String> redisTemplate;
+	//private RedisTemplate<String, String> redisTemplate;
 
 	// @Resource(name = "redisTemplate")
-	private ListOperations<String, String> listOps;
+	//private ListOperations<String, String> listOps;
 
 	@Required
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
-		this.jdbcTemplate = new JdbcTemplate(dataSource);
+		//this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
 	@Override
