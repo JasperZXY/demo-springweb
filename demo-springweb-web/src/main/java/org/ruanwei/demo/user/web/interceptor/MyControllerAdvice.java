@@ -1,19 +1,11 @@
 package org.ruanwei.demo.user.web.interceptor;
 
-import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.ConstraintViolationException;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ruanwei.core.InvalidArgumentException;
 import org.ruanwei.core.InvalidLogicException;
+import org.ruanwei.core.ResponseCode;
 import org.ruanwei.core.ServiceException;
 import org.ruanwei.core.web.BaseResult;
 import org.ruanwei.util.Counter;
@@ -23,7 +15,6 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
-import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -32,6 +23,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.AbstractJsonpResponseBodyAdvice;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolationException;
 
 
 /**
@@ -134,10 +134,10 @@ public class MyControllerAdvice extends AbstractJsonpResponseBodyAdvice { // ext
         BaseResult result = new BaseResult();
         if (e instanceof InvalidArgumentException) {
             logger.warn("handleSpringException InvalidArgumentException url:{}, msg:{}", url, e.getMessage());
-            result.setError(1001, "参数异常：" + e.getMessage());
+            result.setError(ResponseCode.PARAM_ERROR.getCode(), "参数异常：" + e.getMessage());
         }else if (e instanceof InvalidLogicException) {
             logger.warn("handleSpringException InvalidLogicException url:{}, msg:{}", url, e.getMessage());
-            result.setError(1002, "登录异常：" + e.getMessage());
+            result.setError(ResponseCode.SESSION_INVALID.getCode(), "登录异常：" + e.getMessage());
         }else if (e instanceof ServiceException) {
             ServiceException re = (ServiceException) e;
             logger.warn("handleSpringException ServiceException url:{}, code:{} msg:{}", url, re.getCode(), e.getMessage());
@@ -156,16 +156,16 @@ public class MyControllerAdvice extends AbstractJsonpResponseBodyAdvice { // ext
             }
             errorBuilder.deleteCharAt(errorBuilder.length() - 1);
             logger.warn("handleSpringException BindException url:{}, msg:{}", url, e.getMessage());
-            result.setError(1001, errorBuilder.toString());
+            result.setError(ResponseCode.PARAM_ERROR.getCode(), errorBuilder.toString());
         }else if (e instanceof ConstraintViolationException) {
             ConstraintViolationException ce = (ConstraintViolationException)e;
             StringBuilder errorBuilder = new StringBuilder("参数异常：");
             ce.getConstraintViolations().forEach(ev -> errorBuilder.append(ev.getMessage()).append("；"));
             errorBuilder.deleteCharAt(errorBuilder.length() - 1);
-            result.setError(1001, errorBuilder.toString());
+            result.setError(ResponseCode.PARAM_ERROR.getCode(), errorBuilder.toString());
         }else {
             logger.error("handleSpringException " + url, e);
-            result.setError(1003, "服务器繁忙，请稍后重试！");
+            result.setError(ResponseCode.PARAM_ERROR);
         }
 
         model.addAttribute("success", result.isSuccess());

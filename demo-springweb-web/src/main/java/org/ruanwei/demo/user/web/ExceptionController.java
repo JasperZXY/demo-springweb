@@ -1,29 +1,25 @@
 package org.ruanwei.demo.user.web;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ruanwei.core.DataAccessException;
 import org.ruanwei.core.InvalidArgumentException;
 import org.ruanwei.core.InvalidLogicException;
 import org.ruanwei.core.RemoteAccessException;
+import org.ruanwei.core.ResponseCode;
 import org.ruanwei.core.ServiceException;
-import org.ruanwei.core.WebException;
 import org.ruanwei.core.web.BaseResult;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
@@ -94,18 +90,15 @@ public class ExceptionController {
 		Object message = request.getAttribute("message");
 
 		if (statusCode != null && "404".equals(statusCode.toString())) {
-			if (code == null) {
-				code = 10001;
-			}
-			if (message == null) {
-				message = "请确认URL是否正确";
-			}
+			code = ResponseCode.URL_NO_FOUND.getCode();
+			message = ResponseCode.URL_NO_FOUND.getMessage();
 		}
+
 		if (code == null) {
-			code = 10003;
+			code = ResponseCode.ERROR.getCode();
 		}
 		if (message == null) {
-			message = "服务器开小差";
+			message = ResponseCode.ERROR.getMessage();
 		}
 
 		model.addAttribute("success", false);

@@ -129,6 +129,7 @@ success：是否调用成功；code：错误返回码；message：错误信息�
 - 由于指定分组校验后，分组没有匹配上的是不会进行校验，所以建议指定分组后，加上默认分组`javax.validation.groups.Default`
 - 检验不通过，抛出的异常为`org.springframework.validation.BindException`、`ConstraintViolationException`
 - `${validatedValue}`可以获取被校验的值，`{min}`等可获取注解如`@size`上配置的值
+- 如果是对非bean进行参数校验，如String、int等入参进行参数校验，需要在Controller类上加注解`@Validated`
 
 参数校验国际化支持
 - 关键类`org.springframework.validation.beanvalidation.LocalValidatorFactoryBean`、`org.springframework.context.support.ReloadableResourceBundleMessageSource`
@@ -220,6 +221,7 @@ HttpPutFormContentFilter
 ResourceUrlEncodingFilter
 - 参考MethodValidationPostProcessor/BeanValidationPostProcessor使用AOP来实现非Web层的校验https://my.oschina.net/FengJ/blog/223727
 - PDF报错，在没有data数据的情况下，调用close会报no page，但是框架却没有拦截下来
+- PDF输出中文支持
 - 自动扫描的inclued和exclude
 - @ConvertGroup、@GroupSequence、@ScriptAssert、@SupportedValidationTarget、EL表达式${validatedValue}
 - 验证错误消息和国际化消息

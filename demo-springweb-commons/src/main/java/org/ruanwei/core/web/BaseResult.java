@@ -1,5 +1,7 @@
 package org.ruanwei.core.web;
 
+import org.ruanwei.core.ResponseCode;
+
 import java.io.Serializable;
 
 
@@ -67,6 +69,12 @@ public class BaseResult implements Serializable {
         this.setSuccess(false);
         this.setCode(code);
         this.setMessage(message);
+        return (R)this;
+    }
+    public <R extends BaseResult> R setError(ResponseCode responseCode) {
+        this.setSuccess(false);
+        this.setCode(responseCode.getCode());
+        this.setMessage(responseCode.getMessage());
         return (R)this;
     }
 
