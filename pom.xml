@@ -42,6 +42,7 @@
 		<module>demo-springweb-remoting</module>
 		<module>demo-springweb-service</module>
 		<module>demo-springweb-web</module>
+		<module>demo-springweb-webflux</module>
 	</modules>
 
 	<dependencyManagement>
