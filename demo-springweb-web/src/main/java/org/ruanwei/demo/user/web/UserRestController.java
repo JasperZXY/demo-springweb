@@ -44,7 +44,7 @@ public class UserRestController {
 	@GetMapping(path = "list", produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public PagingResult<User> list(@Valid @NotNull @JsonParam UserForm userForm, Page page) {
+	public PagingResult<User> list(@Valid @NotNull @JsonParam(required = false) UserForm userForm, Page page) {
 		logger.debug("list=" + userForm + page);
 
 		// add your code here.
