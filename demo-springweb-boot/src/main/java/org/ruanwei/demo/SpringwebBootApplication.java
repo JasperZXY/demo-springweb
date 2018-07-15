@@ -1,4 +1,4 @@
-package org.ruanwei.demo.springwebboot;
+package org.ruanwei.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
