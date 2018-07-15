@@ -5,8 +5,8 @@
 		<Console name="Console" target="SYSTEM_OUT">
 			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %level{WARN=W, DEBUG=D, ERROR=E, TRACE=T, INFO=I} %c{1}[%L] - %msg%n" />
 		</Console>
-		<RollingFile name="RollingFile" fileName="${log.path}/demo-springweb-webmvc.log"
-			filePattern="${log.path}/demo-springweb-webmvc-%d{yyyy-MM-dd}.log">
+		<RollingFile name="RollingFile" fileName="${log.path}/demo-springweb-webflux.log"
+			filePattern="${log.path}/demo-springweb-webflux-%d{yyyy-MM-dd}.log">
 			<!-- <SizeBasedTriggeringPolicy size="100M" /> -->
 			<TimeBasedTriggeringPolicy interval="12" modulate="true" />
 			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %level{WARN=W, DEBUG=D, ERROR=E, TRACE=T, INFO=I} %c{1}[%L] - %msg%n" />
