@@ -1,5 +1,7 @@
 package org.ruanwei.demo;
 
+import java.time.Duration;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.server.reactive.HttpHandler;
@@ -26,7 +28,8 @@ public class SpringWebApplication {
 	private static void runWithNetty(HttpHandler httpHandler) {
 		ReactorHttpHandlerAdapter adapter = new ReactorHttpHandlerAdapter(
 				httpHandler);
-		HttpServer.create("localhost", 8081).newHandler(adapter).block();
+		HttpServer.create("localhost", 8081).newHandler(adapter).block(Duration.ofMinutes(1));
+		
 	}
 
 	private static void runWithUndertow(HttpHandler httpHandler) {
