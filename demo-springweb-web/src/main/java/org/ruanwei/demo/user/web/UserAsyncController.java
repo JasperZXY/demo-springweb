@@ -27,8 +27,11 @@ import reactor.core.publisher.Mono;
 
 /**
  * 本文件演示：
- * <li>基于HttpMessageConverter(@ResponseBody)进行渲染的Controller. 
- * <li>支持内容协商.
+ * <li>基于DeferredResult的异步Controller. 
+ * <li>基于Callable和WebAsyncTask的异步Controller.
+ * <li>基于ListenableFuture/CompletableFuture的异步Controller.
+ * <li>基于Flux/Mono的异步Controller.
+ * <li>基于异步的Streaming Controller.
  * 
  * @author ruanwei
  */
