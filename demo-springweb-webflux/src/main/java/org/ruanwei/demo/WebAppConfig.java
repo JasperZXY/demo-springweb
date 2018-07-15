@@ -1,4 +1,4 @@
-package org.ruanwei.demo.user;
+package org.ruanwei.demo;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
