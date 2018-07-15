@@ -347,12 +347,17 @@
 				<artifactId>bcprov-jdk15</artifactId>
 				<version>1.46</version>
 			</dependency>
+			<dependency>
+				<groupId>io.projectreactor.ipc</groupId>
+				<artifactId>reactor-netty</artifactId>
+				<version>0.7.8.RELEASE</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
 	</dependencies>
-	
+
 	<build>
 		<finalName>demo-springweb</finalName>
 		<pluginManagement>
@@ -384,7 +389,7 @@
 		<plugins>
 		</plugins>
 	</build>
-	
+
 	<profiles>
 		<profile>
 			<id>dev</id>
@@ -402,7 +407,7 @@
 				<env>production</env>
 			</properties>
 		</profile>
-		
+
 		<profile>
 			<id>zxy</id>
 			<properties>
