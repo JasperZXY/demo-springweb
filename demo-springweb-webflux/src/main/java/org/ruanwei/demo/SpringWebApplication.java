@@ -1,5 +1,7 @@
 package org.ruanwei.demo;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.server.reactive.HttpHandler;
 import org.springframework.http.server.reactive.ReactorHttpHandlerAdapter;
 import org.springframework.web.reactive.DispatcherHandler;
@@ -9,8 +11,10 @@ import org.springframework.web.server.adapter.WebHttpHandlerBuilder;
 import reactor.ipc.netty.http.server.HttpServer;
 
 public class SpringWebApplication {
+	private static final Logger logger = LogManager.getLogger();
 
 	public static void main(String[] args) {
+		logger.debug("main");
 		WebHandler webHandler = new DispatcherHandler();
 		HttpHandler httpHandler = WebHttpHandlerBuilder.webHandler(webHandler)
 				.build();
