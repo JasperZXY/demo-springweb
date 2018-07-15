@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import reactor.core.publisher.Mono;
+
 /**
- * 本文件演示：
- * <li>基于HttpMessageConverter(@ResponseBody)进行渲染的Controller. 
- * <li>支持内容协商.
+ * 本文件演示： <li>基于HttpMessageConverter(@ResponseBody)进行渲染的Controller. <li>支持内容协商.
  * 
  * @author ruanwei
  */
@@ -38,11 +38,22 @@ public class UserRestController {
 	@Autowired
 	private UserService userService;
 
+	@GetMapping(path = "hello")
+	public Mono<String> hello() {
+		logger.debug("hello=");
+
+		// add your code here.
+
+		return Mono.just("Hello World");
+	}
+
 	// TODO:按照统一的返回类型，返回rest格式，列表，对象，映射
 	@GetMapping(path = "list", produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public PagingResult<User> list(@Valid @NotNull @JsonParam(required = false) UserForm userForm, Page page) {
+	public PagingResult<User> list(
+			@Valid @NotNull @JsonParam(required = false) UserForm userForm,
+			Page page) {
 		logger.debug("list=" + userForm + page);
 
 		// add your code here.
@@ -56,9 +67,10 @@ public class UserRestController {
 
 		List<User> list = userService.list4Page(user);
 
-		return PagingResult.bulider().page(page).list(list).count(totalRecord).build();
+		return PagingResult.bulider().page(page).list(list).count(totalRecord)
+				.build();
 	}
-	
+
 	@GetMapping(path = "{uid}")
 	public Result<User> get(@PathVariable("uid") @Min(0) int id) {
 		logger.debug("get=" + id);
@@ -69,7 +81,7 @@ public class UserRestController {
 
 		return Result.bulider().data(user).build();
 	}
-	
+
 	private User getUser0(Integer id) {
 		logger.debug("getUser0=" + id);
 
