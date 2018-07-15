@@ -1,21 +1,21 @@
 package org.ruanwei.demo.user.web.viewresolver;
 
+import com.alibaba.fastjson.JSONObject;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
+import org.apache.commons.collections4.CollectionUtils;
+
 import java.lang.reflect.Field;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.ruanwei.demo.user.entity.User;
-
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
 
 
 public class MyPdfView extends AbstractPdfView {
@@ -95,6 +95,12 @@ public class MyPdfView extends AbstractPdfView {
                 }
                 document.add(tableItem);
             }
+        }else {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("success", model.get("success"));
+            jsonObject.put("code", model.get("code"));
+            jsonObject.put("message", model.get("message"));
+            document.add(new Phrase(jsonObject.toJSONString()));
         }
 
     }

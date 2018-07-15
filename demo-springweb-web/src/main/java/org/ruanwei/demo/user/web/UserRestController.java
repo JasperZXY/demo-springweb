@@ -1,11 +1,5 @@
 package org.ruanwei.demo.user.web;
 
-import java.util.List;
-
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ruanwei.core.web.Page;
@@ -18,10 +12,17 @@ import org.ruanwei.demo.user.web.databind.UserForm;
 import org.ruanwei.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 /**
  * 本文件演示：
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 
  * @author ruanwei
  */
+@Validated
 @RestController
 @RequestMapping(path = "/user/rest/")
 public class UserRestController {
@@ -38,11 +40,11 @@ public class UserRestController {
 	@Autowired
 	private UserService userService;
 
-	// TODO:按照统一的返回类型，返回rest格式，列表，对象，映射
+	// http://127.0.0.1:8080/springweb-web/user/rest/list.json?curPage=1&pageSize=3&json={}
 	@GetMapping(path = "list", produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public PagingResult<User> list(@Valid @NotNull @JsonParam(required = false) UserForm userForm, Page page) {
+	public PagingResult<User> list(@Valid @NotNull @JsonParam UserForm userForm, Page page) {
 		logger.debug("list=" + userForm + page);
 
 		// add your code here.
