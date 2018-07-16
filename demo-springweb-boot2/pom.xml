@@ -48,6 +48,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<!-- For remote support -->
+					<!-- <excludeDevtools>false</excludeDevtools> -->
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

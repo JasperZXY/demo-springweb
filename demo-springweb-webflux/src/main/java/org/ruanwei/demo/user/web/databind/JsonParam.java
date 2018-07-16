@@ -19,7 +19,7 @@ public @interface JsonParam {
 	@AliasFor("value")
 	String name() default "json";
 
-	boolean required() default true;
+	boolean required() default false;
 	
 	String defaultValue() default "{}";
 }
