@@ -76,7 +76,7 @@ success：是否调用成功；code：错误返回码；message：错误信息�
     curPage: 2,
     pageSize: 1,
     count: 3,
-    list:[
+    data:[
       {
         id: 2,
         name: "zxy",

@@ -8,7 +8,7 @@ import org.ruanwei.core.InvalidLogicException;
 import org.ruanwei.core.RemoteAccessException;
 import org.ruanwei.core.ResponseCode;
 import org.ruanwei.core.ServiceException;
-import org.ruanwei.core.web.BaseResult;
+import org.ruanwei.core.web.Result;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -108,10 +108,10 @@ public class ExceptionController {
 		model.addAttribute("message", message);
 
 		Object result = request.getAttribute("result");
-		if (result != null && result instanceof BaseResult) {
-			BaseResult baseResult = (BaseResult)result;
-			model.addAttribute("code", baseResult.getCode());
-			model.addAttribute("message", baseResult.getMessage());
+		if (result != null && result instanceof Result) {
+			Result retResult = (Result)result;
+			model.addAttribute("code", retResult.getCode());
+			model.addAttribute("message", retResult.getMessage());
 		}
 
 		return "generic_error";
