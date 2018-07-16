@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.ruanwei.core.InvalidArgumentException;
 import org.springframework.core.MethodParameter;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ValueConstants;
@@ -37,12 +38,12 @@ public class JsonMethodArgumentResolver extends AbstractNamedValueMethodArgument
 	@Override
 	protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest request) throws Exception {
 		logger.debug("resolveName================== name=" + name + parameter);
+		Class<?> paramType = parameter.getParameterType();
 		String json = request.getParameter(name);
 		if (StringUtils.isEmpty(json)) {
-			return null;
+			return paramType.newInstance();
 		}
 
-		Class<?> paramType = parameter.getParameterType();
 		try {
 			Object arg = JSON.parseObject(json, paramType);
 			if (arg != null) {
@@ -50,9 +51,10 @@ public class JsonMethodArgumentResolver extends AbstractNamedValueMethodArgument
 			}
 		} catch (Exception e) {
 			logger.error("parse " + json + " to " + paramType + " failed.", e);
+			throw new InvalidArgumentException("参数解析失败");
 		}
 
-		return null;
+		return paramType.newInstance();
 	}
 
 	private static class JsonParamNamedValueInfo extends NamedValueInfo {

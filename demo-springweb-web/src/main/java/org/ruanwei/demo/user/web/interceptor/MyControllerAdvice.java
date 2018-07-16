@@ -165,7 +165,7 @@ public class MyControllerAdvice extends AbstractJsonpResponseBodyAdvice { // ext
             result.setError(ResponseCode.PARAM_ERROR.getCode(), errorBuilder.toString());
         }else {
             logger.error("handleSpringException " + url, e);
-            result.setError(ResponseCode.PARAM_ERROR);
+            result.setError(ResponseCode.ERROR);
         }
 
         model.addAttribute("success", result.isSuccess());

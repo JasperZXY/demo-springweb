@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.ruanwei.core.InvalidArgumentException;
 import org.ruanwei.demo.user.entity.User;
 import org.ruanwei.util.Counter;
 import org.springframework.format.Formatter;
@@ -37,6 +38,9 @@ final class MyUserFormatter implements Formatter<User> {
 			return null;
 		}
 		String[] kv = text.split("/");
+		if (kv.length < 2) {
+			throw new InvalidArgumentException("没找到分隔符/");
+		}
 		return new User(kv[0], Integer.parseInt(kv[1]));
 	}
 
