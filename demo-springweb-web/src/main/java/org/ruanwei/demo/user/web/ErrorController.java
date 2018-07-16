@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
-public class ExceptionController {
+public class ErrorController {
 	private static final Logger logger = LogManager.getLogger();
 
 	@GetMapping("testException/{type}")
