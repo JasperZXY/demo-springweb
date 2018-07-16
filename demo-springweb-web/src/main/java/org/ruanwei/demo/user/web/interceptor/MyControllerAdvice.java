@@ -7,7 +7,7 @@ import org.ruanwei.core.InvalidArgumentException;
 import org.ruanwei.core.InvalidLogicException;
 import org.ruanwei.core.ResponseCode;
 import org.ruanwei.core.ServiceException;
-import org.ruanwei.core.web.BaseResult;
+import org.ruanwei.core.web.Result;
 import org.ruanwei.util.Counter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.ui.Model;
@@ -131,7 +131,7 @@ public class MyControllerAdvice extends AbstractJsonpResponseBodyAdvice { // ext
             logger.info("URLDecoder error:" + ex.getMessage());
         }
 
-        BaseResult result = new BaseResult();
+        Result result = new Result();
         if (e instanceof InvalidArgumentException) {
             logger.warn("handleSpringException InvalidArgumentException url:{}, msg:{}", url, e.getMessage());
             result.setError(ResponseCode.PARAM_ERROR.getCode(), "参数异常：" + e.getMessage());
