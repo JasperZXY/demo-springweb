@@ -17,7 +17,8 @@ import org.ruanwei.demo.remoting.user.service.UserHttpInvokerService;
 import org.ruanwei.demo.remoting.user.service.UserJmsService;
 import org.ruanwei.demo.remoting.user.service.UserRmiService;
 import org.ruanwei.demo.user.dao.UserDao;
-import org.ruanwei.demo.user.entity.User;
+import org.ruanwei.demo.user.dao.entity.UserEntity;
+import org.ruanwei.demo.user.dao.entity.UserEntity;
 import org.ruanwei.demo.user.service.UserService;
 import org.ruanwei.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,9 +74,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> list4Page(@Valid @NotNull User user) {
+	public List<UserEntity> list4Page(@Valid @NotNull UserEntity user) {
 		logger.debug("list4Page user==================" + user);
-		List<User> userList;
+		List<UserEntity> userList;
 		try {
 			// add your code here.
 			userList = userDao.list4page(user);
@@ -88,7 +89,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public long count(User user) {
+	public long count(UserEntity user) {
 		logger.debug("count user==================" + user);
 		long count;
 		try {
@@ -103,9 +104,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> find(User user) {
+	public List<UserEntity> find(UserEntity user) {
 		logger.debug("find user==================" + user);
-		List<User> list;
+		List<UserEntity> list;
 		try {
 			// add your code here.
 			list = userDao.findByExample(user);
@@ -118,9 +119,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUser(long id) {
+	public UserEntity getUser(long id) {
 		logger.debug("getUser id==================" + id);
-		User user;
+		UserEntity user;
 		try {
 			// add your code here.
 			user = userDao.findById(id);
@@ -134,9 +135,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	@Async
-	public ListenableFuture<User> getUser0(long id) {
+	public ListenableFuture<UserEntity> getUser0(long id) {
 		logger.debug("getUser0 id==================" + id);
-		User user;
+		UserEntity user;
 		try {
 			// add your code here.
 			user = userDao.findById(id);
@@ -145,18 +146,18 @@ public class UserServiceImpl implements UserService {
 			// add your code here.
 			throw new ServiceException(e, -2);
 		}
-		return new AsyncResult<User>(user);
+		return new AsyncResult<UserEntity>(user);
 	}
 
 	@Override
-	public User getUser2(long id) {
+	public UserEntity getUser2(long id) {
 		logger.debug("getUser2 id==================" + id);
-		User user;
+		UserEntity user;
 		try {
 			// add your code here.
 			org.ruanwei.demo.remoting.user.entity.User u = userHessianService
 					.getUser(id);
-			user = BeanUtils.copy(u, User.class);
+			user = BeanUtils.copy(u, UserEntity.class);
 		} catch (RemoteAccessException e) {
 			logger.error(e.getMessage(), e);
 			// add your code here.
@@ -166,14 +167,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUser3(long id) {
+	public UserEntity getUser3(long id) {
 		logger.debug("getUser3 id==================" + id);
-		User user;
+		UserEntity user;
 		try {
 			// add your code here.
 			org.ruanwei.demo.remoting.user.entity.User u = userHttpInvokerService
 					.getUser(id);
-			user = BeanUtils.copy(u, User.class);
+			user = BeanUtils.copy(u, UserEntity.class);
 		} catch (RemoteAccessException e) {
 			logger.error(e.getMessage(), e);
 			// add your code here.
@@ -183,14 +184,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUser4(long id) {
+	public UserEntity getUser4(long id) {
 		logger.debug("getUser4 id==================" + id);
-		User user;
+		UserEntity user;
 		try {
 			// add your code here.
 			org.ruanwei.demo.remoting.user.entity.User u = userRmiService
 					.getUser(id);
-			user = BeanUtils.copy(u, User.class);
+			user = BeanUtils.copy(u, UserEntity.class);
 		} catch (RemoteAccessException e) {
 			logger.error(e.getMessage(), e);
 			// add your code here.
@@ -200,14 +201,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUser5(long id) {
+	public UserEntity getUser5(long id) {
 		logger.debug("getUser5 id==================" + id);
-		User user;
+		UserEntity user;
 		try {
 			// add your code here.
 			org.ruanwei.demo.remoting.user.entity.User u = userJmsService
 					.getUser(id);
-			user = BeanUtils.copy(u, User.class);
+			user = BeanUtils.copy(u, UserEntity.class);
 		} catch (RemoteAccessException e) {
 			logger.error(e.getMessage(), e);
 			// add your code here.
@@ -217,14 +218,14 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public User getUser6(long id) {
+	public UserEntity getUser6(long id) {
 		logger.debug("getUser6 id==================" + id);
-		User user;
+		UserEntity user;
 		try {
 			// add your code here.
 			org.ruanwei.demo.remoting.user.entity.User u = userDubboService
 					.getUser(id);
-			user = BeanUtils.copy(u, User.class);
+			user = BeanUtils.copy(u, UserEntity.class);
 		} catch (RemoteAccessException e) {
 			logger.error(e.getMessage(), e);
 			// add your code here.
@@ -234,7 +235,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void edit(User user) {
+	public void edit(UserEntity user) {
 		logger.debug("edit user==================" + user);
 		try {
 			// add your code here.
@@ -247,7 +248,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void add(User user) {
+	public void add(UserEntity user) {
 		logger.debug("add user==================" + user);
 		try {
 			// add your code here.

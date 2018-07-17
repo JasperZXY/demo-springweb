@@ -3,7 +3,7 @@ package org.ruanwei.demo.user.dao;
 import java.util.List;
 
 import org.ruanwei.core.DataAccessException;
-import org.ruanwei.demo.user.entity.User;
+import org.ruanwei.demo.user.dao.entity.User;
 
 public interface UserDao {
 	public List<User> list4page(User instance) throws DataAccessException;

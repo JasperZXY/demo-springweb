@@ -33,14 +33,14 @@
 				<!-- org.springframework.web.context.request.async.TimeoutDeferredResultProcessingInterceptor -->
 				<!-- org.springframework.web.context.request.async.ErrorDeferredResultProcessingInterceptor -->
 				<bean
-					class="org.ruanwei.demo.user.web.interceptor.MyDeferredResultProcessingInterceptor" />
+					class="org.ruanwei.demo.core.interceptor.MyDeferredResultProcessingInterceptor" />
 			</mvc:deferred-result-interceptors>
 			<!-- org.springframework.web.context.request.async.CallableProcessingInterceptor -->
 			<mvc:callable-interceptors>
 				<!-- org.springframework.web.context.request.async.TimeoutCallableProcessingInterceptor -->
 				<!-- org.springframework.web.context.request.async.ErrorCallableProcessingInterceptor -->
 				<bean
-					class="org.ruanwei.demo.user.web.interceptor.MyCallableProcessingInterceptor" />
+					class="org.ruanwei.demo.core.interceptor.MyCallableProcessingInterceptor" />
 			</mvc:callable-interceptors>
 		</mvc:async-support>
 
@@ -50,20 +50,20 @@
 			values from @RequestMapping or @ExceptionHandler methods. -->
 		<!-- org.springframework.http.converter.HttpMessageConverter -->
 		<mvc:message-converters register-defaults="true">
-			<bean class="org.ruanwei.demo.user.web.http.MyHttpMessageConverter" />
+			<bean class="org.ruanwei.core.http.MyHttpMessageConverter" />
 		</mvc:message-converters>
 
 		<!-- org.springframework.web.method.support.HandlerMethodArgumentResolver -->
 		<mvc:argument-resolvers>
 			<!-- <ref bean="jsonMethodArgumentResolver"/> -->
-			<bean class="org.ruanwei.demo.user.web.databind.JsonMethodArgumentResolver" />
+			<bean class="org.ruanwei.core.databind.JsonMethodArgumentResolver" />
 		</mvc:argument-resolvers>
 
 		<!-- org.springframework.web.method.support.HandlerMethodReturnValueHandler -->
 		<mvc:return-value-handlers>
 			<!-- <ref bean="authorMethodReturnValueHandler"/> -->
 			<bean
-				class="org.ruanwei.demo.user.web.databind.AuthorMethodReturnValueHandler" />
+				class="org.ruanwei.core.databind.AuthorMethodReturnValueHandler" />
 		</mvc:return-value-handlers>
 
 		<!-- org.springframework.util.PathMatcher -->
@@ -74,12 +74,12 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/user*/**" />
 			<mvc:exclude-mapping path="/admin/**" />
-			<bean class="org.ruanwei.demo.user.web.interceptor.MyHandlerInterceptor" />
+			<bean class="org.ruanwei.demo.core.interceptor.MyHandlerInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/user*/**" />
 			<mvc:exclude-mapping path="/admin/**" />
-			<bean class="org.ruanwei.demo.user.web.interceptor.MyWebRequestInterceptor" />
+			<bean class="org.ruanwei.demo.core.interceptor.MyWebRequestInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 	<!-- org.springframework.web.servlet.HandlerExceptionResolver -->
@@ -112,16 +112,16 @@
 				<bean class="org.springframework.web.servlet.view.xml.MappingJackson2XmlView" >
 					<property name="modelKey" value="data"></property>
 				</bean>
-				<bean class="org.ruanwei.demo.user.web.viewresolver.MyPdfView" />
-				<bean class="org.ruanwei.demo.user.web.viewresolver.MyXlsxView" />
-				<bean class="org.ruanwei.demo.user.web.viewresolver.MyXlsView" />
+				<bean class="org.ruanwei.core.viewresolver.MyPdfView" />
+				<bean class="org.ruanwei.core.viewresolver.MyXlsxView" />
+				<bean class="org.ruanwei.core.viewresolver.MyXlsView" />
 			</mvc:default-views>
 		</mvc:content-negotiation>
 
-		<!--<bean class="org.ruanwei.demo.user.web.viewresolver.MyJsonViewResolver" />
-		<bean class="org.ruanwei.demo.user.web.viewresolver.MyXmlViewResolver" />
-		<bean class="org.ruanwei.demo.user.web.viewresolver.MyXlsxViewResolver" />
-		<bean class="org.ruanwei.demo.user.web.viewresolver.MyPdfViewResolver" />-->
+		<!--<bean claorg.ruanwei.demo.core.viewresolverlver.MyJsonViewResolver" />
+		<bean claorg.ruanwei.demo.core.viewresolverlver.MyXmlViewResolver" />
+		<bean claorg.ruanwei.demo.core.viewresolverlver.MyXlsxViewResolver" />
+		<bean claorg.ruanwei.demo.core.viewresolverlver.MyPdfViewResolver" />-->
 
 		<!-- org.springframework.web.servlet.view.InternalResourceViewResolver -->
 		<mvc:jsp prefix="/WEB-INF/jsp/" suffix=".jsp"
