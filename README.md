@@ -21,8 +21,8 @@
 ```
 时间 线程名 日志级别(WARN=W, DEBUG=D, ERROR=E, TRACE=T, INFO=I) 类名[行号] - 日志信息
 
-2018-06-01 17:08:53.552 [main] D BeanValidationBeanPostProcessor[86] - postProcessBeforeInitialization==================307org.ruanwei.demo.user.web.interceptor.MyDeferredResultProcessingInterceptor#0#1=org.ruanwei.demo.user.web.interceptor.MyDeferredResultProcessingInterceptor@1031c1a0
-2018-06-01 17:08:53.552 [main] D BeanValidationBeanPostProcessor[136] - postProcessAfterInitialization==================308org.ruanwei.demo.user.web.interceptor.MyDeferredResultProcessingInterceptor#0#1=org.ruanwei.demo.user.web.interceptor.MyDeferredResultProcessingInterceptor@1031c1a0
+2018-06-01 17:08:53.552 [main] D BeanValidationBeanPostProcessor[86] - postProcessBeforeInitialization==================307org.ruanwei.demo.user.web.interceptor.MyDeferredResultProcessingInterceptor#0#1=org.ruanwei.demo.core.interceptor.MyDeferredResultProcessingInterceptor@1031c1a0
+2018-06-01 17:08:53.552 [main] D BeanValidationBeanPostProcessor[136] - postProcessAfterInitialization==================308org.ruanwei.demo.user.web.interceptor.MyDeferredResultProcessingInterceptor#0#1=org.ruanwei.demo.core.interceptor.MyDeferredResultProcessingInterceptor@1031c1a0
 2018-06-01 17:08:53.553 [main] D BeanValidationBeanPostProcessor[86] - postProcessBeforeInitialization==================309(inner bean)#6d5508a5=org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter@519b0f00
 2018-06-01 17:08:53.553 [main] D BeanValidationBeanPostProcessor[89] - handlerAdapter==================org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter@519b0f00
 2018-06-01 17:08:53.554 [main] I RequestMappingHandlerAdapter[568] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'springweb-web-servlet': startup date [Tue May 22 17:08:52 CST 2018]; parent: Root WebApplicationContext

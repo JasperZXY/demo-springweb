@@ -5,7 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.ruanwei.demo.user.entity.User;
+import org.ruanwei.demo.user.dao.entity.User;
 import org.springframework.util.concurrent.ListenableFuture;
 
 public interface UserService {

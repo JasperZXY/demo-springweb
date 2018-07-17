@@ -17,9 +17,10 @@ import javax.validation.groups.Default;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ruanwei.core.web.Page;
-import org.ruanwei.demo.user.entity.User;
+import org.ruanwei.demo.user.dao.entity.UserEntity;
 import org.ruanwei.demo.user.service.UserService;
-import org.ruanwei.demo.user.web.databind.UserForm;
+import org.ruanwei.demo.user.web.command.UserForm;
+import org.ruanwei.demo.user.web.utils.UserTransUtils;
 import org.ruanwei.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -60,18 +61,19 @@ public class UserController {
 
 		// add your code here.
 
-		User user = BeanUtils.copy(userForm, User.class);
+		UserEntity user = BeanUtils.copy(userForm, UserEntity.class);
 		long totalRecord = userService.count(user);
 		page.setTotalRecord(totalRecord);
 
 		user.setStart(page.getPageSize() * (page.getCurPage() - 1));
 		user.setOffset(page.getPageSize());
 
-		List<User> list = userService.list4Page(user);
+		List<UserEntity> list = userService.list4Page(user);
+		List<UserForm> retList = UserTransUtils.trans2UserFormList(list);
 
-		model.addAttribute("list", list);
+		model.addAttribute("list", retList);
 		// 为了支持xml、pdf、xlsx
-		model.addAttribute("data", list);
+		model.addAttribute("data", retList);
 
 		return "user/user_list";
 	}
@@ -82,11 +84,11 @@ public class UserController {
 
 		// add your code here.
 
-		User user = getUser0(id);
+		UserForm user = getUser0(id);
 		model.addAttribute("user", user);
 		model.addAttribute("data", user);
 		// @JsonView
-		// model.addAttribute(JsonView.class.getName(),User.WithoutPageingView.class);
+		// model.addAttribute(JsonView.class.getName(),UserEntity.WithoutPageingView.class);
 
 		return "user/user_edit";
 	}
@@ -102,12 +104,12 @@ public class UserController {
 
 	@PostMapping(path = "doAdd")
 	public String doAdd(
-			@Validated({ User.Create.class, Default.class }) @NotNull UserForm userForm) {
+			@Validated({ UserEntity.Create.class, Default.class }) @NotNull UserForm userForm) {
 		logger.debug("doAdd=" + userForm);
 
 		// add your code here.
 
-		User user = BeanUtils.copy(userForm, User.class);
+		UserEntity user = BeanUtils.copy(userForm, UserEntity.class);
 
 		userService.add(user);
 
@@ -120,7 +122,7 @@ public class UserController {
 
 		// add your code here.
 
-		User user = getUser0(id);
+		UserForm user = getUser0(id);
 		model.addAttribute("user", user);
 		model.addAttribute("data", user);
 
@@ -129,13 +131,13 @@ public class UserController {
 
 	@PostMapping(path = "doEdit")
 	public String doEdit(
-			@Validated({ User.Create.class, Default.class }) @NotNull UserForm userForm,
+			@Validated({ UserForm.Create.class, Default.class }) @NotNull UserForm userForm,
 			RedirectAttributes attr) {
 		logger.debug("doEdit=" + userForm);
 
 		// add your code here.
 
-		User user = BeanUtils.copy(userForm, User.class);
+		UserEntity user = BeanUtils.copy(userForm, UserEntity.class);
 		userService.edit(user);
 
 		// RedirectAttribute and FlashAttribute
@@ -218,10 +220,10 @@ public class UserController {
 		return "redirect:uploadSuccess";
 	}
 
-	private User getUser0(Integer id) {
+	private UserForm getUser0(Integer id) {
 		logger.debug("getUser0=" + id);
 
-		User user = userService.getUser(id);
+		UserEntity user = userService.getUser(id);
 		logger.debug("1 jdbc======" + user);
 		// user = userService.getUser2(id);
 		// logger.debug("2 hessian======" + user.toString());
@@ -233,7 +235,7 @@ public class UserController {
 		// logger.debug("5 jms======" + user.toString());
 		// user = userService.getUser6(id);
 		// logger.debug("6 dubbo======" + user.toString());
-		return user;
+		return UserTransUtils.trans2UserForm(user);
 	}
 
 	@GetMapping(path = "/test")
