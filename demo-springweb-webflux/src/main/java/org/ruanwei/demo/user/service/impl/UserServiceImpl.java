@@ -17,7 +17,7 @@ import org.ruanwei.demo.remoting.user.service.UserHttpInvokerService;
 import org.ruanwei.demo.remoting.user.service.UserJmsService;
 import org.ruanwei.demo.remoting.user.service.UserRmiService;
 import org.ruanwei.demo.user.dao.UserDao;
-import org.ruanwei.demo.user.entity.User;
+import org.ruanwei.demo.user.dao.entity.User;
 import org.ruanwei.demo.user.service.UserService;
 import org.ruanwei.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

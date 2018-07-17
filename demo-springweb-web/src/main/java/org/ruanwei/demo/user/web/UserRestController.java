@@ -2,13 +2,14 @@ package org.ruanwei.demo.user.web;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.ruanwei.core.databind.JsonParam;
 import org.ruanwei.core.web.Page;
 import org.ruanwei.core.web.PagingResult;
 import org.ruanwei.core.web.Result;
-import org.ruanwei.demo.user.entity.User;
+import org.ruanwei.demo.user.dao.entity.UserEntity;
 import org.ruanwei.demo.user.service.UserService;
-import org.ruanwei.demo.user.web.databind.JsonParam;
-import org.ruanwei.demo.user.web.databind.UserForm;
+import org.ruanwei.demo.user.web.command.UserForm;
+import org.ruanwei.demo.user.web.utils.UserTransUtils;
 import org.ruanwei.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -45,38 +45,40 @@ public class UserRestController {
 	@GetMapping(path = "list", produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public PagingResult<User> list(@Valid @NotNull @JsonParam(required = false) UserForm userForm, Page page) {
+	public PagingResult<UserForm> list(@Valid @NotNull @JsonParam(required = false) UserForm userForm, Page page) {
 		logger.debug("list=" + userForm + page);
 
 		// add your code here.
 
-		User user = BeanUtils.copy(userForm, User.class);
+		UserEntity user = BeanUtils.copy(userForm, UserEntity.class);
 		long totalRecord = userService.count(user);
 		page.setTotalRecord(totalRecord);
 
 		user.setStart(page.getPageSize() * (page.getCurPage() - 1));
 		user.setOffset(page.getPageSize());
 
-		List<User> list = userService.list4Page(user);
+		List<UserEntity> list = userService.list4Page(user);
+		List<UserForm> retList = UserTransUtils.trans2UserFormList(list);
 
-		return PagingResult.bulider().page(page).list(list).count(totalRecord).build();
+		return PagingResult.bulider().page(page).list(retList).count(totalRecord).build();
 	}
 	
 	@GetMapping(path = "{uid}")
-	public Result<User> get(@PathVariable("uid") @Min(0) int id) {
+	public Result<UserForm> get(@PathVariable("uid") @Min(0) int id) {
 		logger.debug("get=" + id);
 
 		// add your code here.
 
-		User user = getUser0(id);
+		UserForm user = getUser0(id);
 
 		return Result.bulider().data(user).build();
 	}
-	
-	private User getUser0(Integer id) {
+
+
+	private UserForm getUser0(Integer id) {
 		logger.debug("getUser0=" + id);
 
-		User user = userService.getUser(id);
+		UserEntity user = userService.getUser(id);
 		logger.debug("1 jdbc======" + user);
 		// user = userService.getUser2(id);
 		// logger.debug("2 hessian======" + user.toString());
@@ -88,7 +90,7 @@ public class UserRestController {
 		// logger.debug("5 jms======" + user.toString());
 		// user = userService.getUser6(id);
 		// logger.debug("6 dubbo======" + user.toString());
-		return user;
+		return UserTransUtils.trans2UserForm(user);
 	}
 
 }

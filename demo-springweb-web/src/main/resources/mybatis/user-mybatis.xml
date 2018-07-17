@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <!-- 拷贝以下内容至文件mybatis-config.xml -->
-<!-- <typeAlias alias="User" type="org.ruanwei.demo.user.entity.User" /> 
+<!-- <typeAlias aliUserEntityUser" tyorg.ruanwei.demo.user.dao.entitytUserEntityUser" /> 
 	 <mapper resource="mybatis/user-mybatis.xml" /> -->
 
 <mapper namespace="org.ruanwei.demo.user.dao.UserDao">
@@ -20,14 +20,14 @@
 		<result property="lastUpdTime" column="LASTUPDTIME" />
 	</resultMap>
 
-	<sql id="userColum">
+	<sql id="userColumn">
 		<![CDATA[
 		select ID, NAME, GENDER, AGE, BIRTHDAY, DEGREE, CELLPHONE, EMAIL, HOBBY, INTRO, LASTUPDTIME from user
 		]]>
 	</sql>
 
 	<select id="list4page" parameterType="User" resultMap="UserMap">
-		<include refid="userColum" />
+		<include refid="userColumn" />
 		<trim prefix="WHERE" prefixOverrides="AND |OR ">
 			1=1
 			<if test="id!=0">AND ID = #{id}</if>
@@ -45,7 +45,7 @@
 	</select>
 
 	<select id="findByExample" parameterType="User" resultMap="UserMap">
-		<include refid="userColum" />
+		<include refid="userColumn" />
 		<trim prefix="WHERE" prefixOverrides="AND |OR ">
 			1=1
 			<if test="id!=0">AND ID = #{id}</if>
@@ -79,7 +79,7 @@
 	</select>
 
 	<select id="findById" parameterType="long" resultMap="UserMap">
-		<include refid="userColum" />
+		<include refid="userColumn" />
 		where ID=#{value}
 	</select>
 

@@ -27,7 +27,7 @@
 		<property name="registerDefaultFormatters" value="true" />
 		<property name="formatterRegistrars">
 			<set>
-				<bean class="org.ruanwei.demo.user.web.databind.MyUserFormatterRegistrar" />
+				<bean class="org.ruanwei.demo.core.databind.MyUserFormatterRegistrar" />
 			</set>
 		</property>
 	</bean>
@@ -36,7 +36,7 @@
 		class="org.springframework.validation.beanvalidation.BeanValidationPostProcessor"
 		p:validator-ref="validator" /> -->
 	<bean
-		class="org.ruanwei.demo.user.web.interceptor.BeanValidationBeanPostProcessor"
+		class="org.ruanwei.demo.core.interceptor.BeanValidationBeanPostProcessor"
 		p:validator-ref="validator" />
 
 	<bean
