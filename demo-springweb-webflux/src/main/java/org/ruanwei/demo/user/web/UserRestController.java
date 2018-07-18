@@ -67,7 +67,7 @@ public class UserRestController {
 
 		List<User> list = userService.list4Page(user);
 
-		return PagingResult.bulider().page(page).list(list).count(totalRecord)
+		return PagingResult.<User>builder2().page(page).list(list).count(totalRecord)
 				.build();
 	}
 
@@ -79,7 +79,7 @@ public class UserRestController {
 
 		User user = getUser0(id);
 
-		return Result.bulider().data(user).build();
+		return Result.<User>builder().data(user).build();
 	}
 
 	private User getUser0(Integer id) {

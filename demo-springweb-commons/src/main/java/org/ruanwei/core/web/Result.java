@@ -101,16 +101,21 @@ public class Result<T> implements Serializable {
         return (R)this;
     }
 
+
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder(super.toString());
-        sb.append(",data=").append(data);
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("success=").append(success);
+        sb.append(", code=").append(code);
+        sb.append(", message='").append(message).append('\'');
+        sb.append(", data=").append(data);
+        sb.append('}');
         return sb.toString();
     }
 
 
-    public static ResultBuilder bulider() {
-        return new ResultBuilder();
+    public static <T> Result.ResultBuilder<T> builder() {
+        return new ResultBuilder<>();
     }
 
 
@@ -119,30 +124,30 @@ public class Result<T> implements Serializable {
         protected Result<T> result;
 
 
-        public ResultBuilder() {
+        ResultBuilder() {
             result = new Result<>();
         }
 
 
-        public ResultBuilder data(T data) {
+        public ResultBuilder<T> data(T data) {
             result.setData(data);
             return this;
         }
 
 
-        public ResultBuilder code(int code) {
+        public ResultBuilder<T> code(int code) {
             result.setCode(code);
             return this;
         }
 
 
-        public ResultBuilder message(String msg) {
+        public ResultBuilder<T> message(String msg) {
             result.setMessage(msg);
             return this;
         }
 
 
-        public ResultBuilder success(boolean success) {
+        public ResultBuilder<T> success(boolean success) {
             result.setSuccess(success);
             return this;
         }
@@ -155,8 +160,8 @@ public class Result<T> implements Serializable {
 
 
     public static void main(String[] args) {
-        Result<List<String>> reslt = new Result();
-        reslt.setData(Arrays.asList("ab"));
+        Result<String> reslt = new Result();
+        reslt.setData("ab");
         System.out.println(reslt);
     }
 }
