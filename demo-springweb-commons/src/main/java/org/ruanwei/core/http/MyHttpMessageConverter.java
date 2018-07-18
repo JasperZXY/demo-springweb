@@ -1,4 +1,4 @@
-package org.ruanwei.demo.user.web.http;
+package org.ruanwei.core.http;
 
 import java.io.IOException;
 
