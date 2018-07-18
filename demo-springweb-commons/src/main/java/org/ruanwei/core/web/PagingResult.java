@@ -1,5 +1,6 @@
 package org.ruanwei.core.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -84,12 +85,21 @@ public class PagingResult<T> extends Result<List<T>> {
     }
 
 
-    public static PagingResultBuilder bulider() {
-        return new PagingResultBuilder();
+    public static <T> PagingResult.PagingResultBuilder<T> builder2() {
+        return new PagingResult.PagingResultBuilder<>();
     }
 
 
-    public static class PagingResultBuilder<T> extends ResultBuilder<List<T>> {
+    public static void main(String[] args) {
+        List<String> list = new ArrayList<>();
+        list.add("a");
+        list.add("b");
+        PagingResult<String> result = PagingResult.<String>builder2().list(list).count(10).build();
+        System.out.println(result);
+    }
+
+
+    public static class PagingResultBuilder<T> {
 
         protected PagingResult<T> result;
 
@@ -99,32 +109,32 @@ public class PagingResult<T> extends Result<List<T>> {
         }
 
 
-        public PagingResultBuilder list(List<T> data) {
+        public PagingResultBuilder<T> list(List<T> data) {
             result.setData(data);
             return this;
         }
 
 
-        public PagingResultBuilder count(long count) {
+        public PagingResultBuilder<T> count(long count) {
             result.setCount(count);
             return this;
         }
 
 
-        public PagingResultBuilder page(Page page) {
+        public PagingResultBuilder<T> page(Page page) {
             result.setCurPage(page.getCurPage());
             result.setPageSize(page.getPageSize());
             return this;
         }
 
 
-        public PagingResultBuilder curPage(int curPage) {
+        public PagingResultBuilder<T> curPage(int curPage) {
             result.setCurPage(curPage);
             return this;
         }
 
 
-        public PagingResultBuilder pageSize(int pageSize) {
+        public PagingResultBuilder<T> pageSize(int pageSize) {
             result.setPageSize(pageSize);
             return this;
         }

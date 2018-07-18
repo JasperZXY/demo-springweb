@@ -18,8 +18,8 @@ import org.ruanwei.demo.remoting.user.service.UserJmsService;
 import org.ruanwei.demo.remoting.user.service.UserRmiService;
 import org.ruanwei.demo.user.dao.UserDao;
 import org.ruanwei.demo.user.dao.entity.UserEntity;
-import org.ruanwei.demo.user.dao.entity.UserEntity;
 import org.ruanwei.demo.user.service.UserService;
+import org.ruanwei.demo.user.service.dto.UserDTO;
 import org.ruanwei.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
@@ -147,6 +147,20 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException(e, -2);
 		}
 		return new AsyncResult<UserEntity>(user);
+	}
+
+	@Override
+	public UserDTO getUser1(long id) {
+		logger.debug("getUser1 id==================" + id);
+		UserEntity userEntity;
+		try {
+			userEntity = userDao.findById(id);
+		} catch (DataAccessException e) {
+			logger.error(e.getMessage(), e);
+			throw new ServiceException(e, -2);
+		}
+		UserDTO userDTO = BeanUtils.copy(userEntity, UserDTO.class);
+		return userDTO;
 	}
 
 	@Override

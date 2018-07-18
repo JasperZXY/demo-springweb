@@ -9,6 +9,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.ruanwei.util.BeanUtils;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -46,8 +47,8 @@ public class MyPdfView extends AbstractPdfView {
                     return;
                 }
                 Object first = list.get(0);
-                Field[] fields = first.getClass().getDeclaredFields();
-                PdfPTable tableHead = new PdfPTable(fields.length);
+                List<Field> fields = BeanUtils.getAllField(first.getClass());
+                PdfPTable tableHead = new PdfPTable(fields.size());
                 tableHead.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
                 tableHead.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
                 tableHead.getDefaultCell().setBackgroundColor(BaseColor.LIGHT_GRAY);
@@ -59,7 +60,7 @@ public class MyPdfView extends AbstractPdfView {
                 document.add(tableHead);
 
                 for (Object item : list) {
-                    PdfPTable tableItem = new PdfPTable(fields.length);
+                    PdfPTable tableItem = new PdfPTable(fields.size());
                     for (Field field : fields) {
                         Object itemFild = field.get(item);
                         if (itemFild == null) {
@@ -72,8 +73,8 @@ public class MyPdfView extends AbstractPdfView {
                 }
             }else {
                 Object first = obj;
-                Field[] fields = first.getClass().getDeclaredFields();
-                PdfPTable tableHead = new PdfPTable(fields.length);
+                List<Field> fields = BeanUtils.getAllField(first.getClass());
+                PdfPTable tableHead = new PdfPTable(fields.size());
                 tableHead.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
                 tableHead.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
                 tableHead.getDefaultCell().setBackgroundColor(BaseColor.LIGHT_GRAY);
@@ -84,7 +85,7 @@ public class MyPdfView extends AbstractPdfView {
                 }
                 document.add(tableHead);
 
-                PdfPTable tableItem = new PdfPTable(fields.length);
+                PdfPTable tableItem = new PdfPTable(fields.size());
                 for (Field field : fields) {
                     Object itemFild = field.get(obj);
                     if (itemFild == null) {

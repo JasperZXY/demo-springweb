@@ -2,13 +2,11 @@ package org.ruanwei.demo.user.web.command;
 
 import java.util.Arrays;
 
-import org.ruanwei.demo.user.dao.entity.UserEntity;
-import org.ruanwei.demo.user.dao.entity.UserEntity;
-import org.ruanwei.demo.user.service.dto.UserDto;
+import org.ruanwei.demo.user.service.dto.UserDTO;
 
 
 @SuppressWarnings("serial")
-public class UserForm extends UserDto {
+public class UserForm extends UserDTO {
 	public UserForm() {
 	}
 

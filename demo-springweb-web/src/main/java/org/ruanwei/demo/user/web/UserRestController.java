@@ -60,7 +60,7 @@ public class UserRestController {
 		List<UserEntity> list = userService.list4Page(user);
 		List<UserForm> retList = UserTransUtils.trans2UserFormList(list);
 
-		return PagingResult.bulider().page(page).list(retList).count(totalRecord).build();
+		return PagingResult.<UserForm>builder2().page(page).list(retList).count(totalRecord).build();
 	}
 	
 	@GetMapping(path = "{uid}")
@@ -71,7 +71,7 @@ public class UserRestController {
 
 		UserForm user = getUser0(id);
 
-		return Result.bulider().data(user).build();
+		return Result.<UserForm>builder().data(user).build();
 	}
 
 
