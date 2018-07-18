@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.ruanwei.demo.user.dao.entity.UserEntity;
+import org.ruanwei.demo.user.service.dto.UserDTO;
 import org.springframework.util.concurrent.ListenableFuture;
 
 public interface UserService {
@@ -19,6 +20,8 @@ public interface UserService {
 	public UserEntity getUser(long id);
 	
 	public ListenableFuture<UserEntity> getUser0(long id);
+
+	public UserDTO getUser1(long id);
 
 	public UserEntity getUser2(long id);
 
