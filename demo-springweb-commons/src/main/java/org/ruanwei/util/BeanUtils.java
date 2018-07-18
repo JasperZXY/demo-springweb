@@ -2,6 +2,9 @@ package org.ruanwei.util;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.apache.commons.beanutils.PropertyUtils;
 
@@ -57,6 +60,28 @@ public class BeanUtils {
     public static Object clone(Object orig) throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException, InstantiationException {
         return copy(orig, orig.getClass());
+    }
+
+
+    /**
+     * 获取类下所有的字段，包括父类
+     * @param clazz
+     * @return
+     */
+    public static List<Field> getAllField(Class clazz) {
+        List<Field> list = new ArrayList<>();
+        Class cla = clazz;
+        while (true) {
+            Field[] fields = cla.getDeclaredFields();
+            if (fields.length > 0) {
+                list.addAll(0, Arrays.asList(fields));
+            }
+            cla = cla.getSuperclass();
+            if (cla == Object.class) {
+                break;
+            }
+        }
+        return list;
     }
 
 }
