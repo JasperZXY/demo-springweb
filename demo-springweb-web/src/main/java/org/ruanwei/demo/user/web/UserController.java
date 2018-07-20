@@ -19,6 +19,7 @@ import org.apache.logging.log4j.Logger;
 import org.ruanwei.core.web.Page;
 import org.ruanwei.demo.user.dao.entity.UserEntity;
 import org.ruanwei.demo.user.service.UserService;
+import org.ruanwei.demo.user.service.dto.UserDTO;
 import org.ruanwei.demo.user.web.command.UserForm;
 import org.ruanwei.demo.user.web.utils.UserTransUtils;
 import org.ruanwei.util.BeanUtils;
@@ -61,14 +62,14 @@ public class UserController {
 
 		// add your code here.
 
-		UserEntity user = BeanUtils.copy(userForm, UserEntity.class);
+		UserDTO user = BeanUtils.copy(userForm, UserDTO.class);
 		long totalRecord = userService.count(user);
 		page.setTotalRecord(totalRecord);
 
 		user.setStart(page.getPageSize() * (page.getCurPage() - 1));
 		user.setOffset(page.getPageSize());
 
-		List<UserEntity> list = userService.list4Page(user);
+		List<UserDTO> list = userService.list4Page(user);
 		List<UserForm> retList = UserTransUtils.trans2UserFormList(list);
 
 		model.addAttribute("list", retList);
@@ -109,7 +110,7 @@ public class UserController {
 
 		// add your code here.
 
-		UserEntity user = BeanUtils.copy(userForm, UserEntity.class);
+		UserDTO user = BeanUtils.copy(userForm, UserDTO.class);
 
 		userService.add(user);
 
@@ -137,7 +138,7 @@ public class UserController {
 
 		// add your code here.
 
-		UserEntity user = BeanUtils.copy(userForm, UserEntity.class);
+		UserDTO user = BeanUtils.copy(userForm, UserDTO.class);
 		userService.edit(user);
 
 		// RedirectAttribute and FlashAttribute

@@ -8,6 +8,7 @@ import org.ruanwei.core.web.PagingResult;
 import org.ruanwei.core.web.Result;
 import org.ruanwei.demo.user.dao.entity.UserEntity;
 import org.ruanwei.demo.user.service.UserService;
+import org.ruanwei.demo.user.service.dto.UserDTO;
 import org.ruanwei.demo.user.web.command.UserForm;
 import org.ruanwei.demo.user.web.utils.UserTransUtils;
 import org.ruanwei.util.BeanUtils;
@@ -50,14 +51,14 @@ public class UserRestController {
 
 		// add your code here.
 
-		UserEntity user = BeanUtils.copy(userForm, UserEntity.class);
+		UserDTO user = BeanUtils.copy(userForm, UserDTO.class);
 		long totalRecord = userService.count(user);
 		page.setTotalRecord(totalRecord);
 
 		user.setStart(page.getPageSize() * (page.getCurPage() - 1));
 		user.setOffset(page.getPageSize());
 
-		List<UserEntity> list = userService.list4Page(user);
+		List<UserDTO> list = userService.list4Page(user);
 		List<UserForm> retList = UserTransUtils.trans2UserFormList(list);
 
 		return PagingResult.<UserForm>builder2().page(page).list(retList).count(totalRecord).build();

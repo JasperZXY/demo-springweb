@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.ruanwei.demo.user.dao.entity.UserEntity;
 import org.ruanwei.demo.user.dao.entity.UserEntity;
 import org.ruanwei.demo.user.service.UserService;
+import org.ruanwei.demo.user.service.dto.UserDTO;
 import org.ruanwei.demo.user.web.command.UserForm;
 import org.ruanwei.demo.user.web.utils.UserTransUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,11 +153,11 @@ public class UserAsyncController {
 	@GetMapping(path = "async4/{id}", produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public ListenableFuture<UserEntity> async4(@PathVariable Integer id)
+	public ListenableFuture<UserDTO> async4(@PathVariable Integer id)
 			throws Exception {
 		logger.debug("async4=" + id);
 
-		ListenableFuture<UserEntity> listenableFuture = userService.getUser0(id);
+		ListenableFuture<UserDTO> listenableFuture = userService.getUser0(id);
 		listenableFuture.addCallback((user -> logger
 				.debug("SuccessCallback.onSuccess=" + user)),
 				throwable -> logger.error("FailureCallback.onFailure=",

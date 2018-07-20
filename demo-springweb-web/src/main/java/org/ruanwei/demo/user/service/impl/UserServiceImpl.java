@@ -1,11 +1,14 @@
 package org.ruanwei.demo.user.service.impl;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.sql.DataSource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ruanwei.core.DataAccessException;
@@ -74,7 +77,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<UserEntity> list4Page(@Valid @NotNull UserEntity user) {
+	public List<UserDTO> list4Page(@Valid @NotNull UserDTO user) {
 		logger.debug("list4Page user==================" + user);
 		List<UserEntity> userList;
 		try {
@@ -85,11 +88,11 @@ public class UserServiceImpl implements UserService {
 			// add your code here.
 			throw new ServiceException(e, -2);
 		}
-		return userList;
+		return trans2UserDTOList(userList);
 	}
 
 	@Override
-	public long count(UserEntity user) {
+	public long count(UserDTO user) {
 		logger.debug("count user==================" + user);
 		long count;
 		try {
@@ -104,7 +107,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<UserEntity> find(UserEntity user) {
+	public List<UserDTO> find(UserDTO user) {
 		logger.debug("find user==================" + user);
 		List<UserEntity> list;
 		try {
@@ -115,11 +118,11 @@ public class UserServiceImpl implements UserService {
 			// add your code here.
 			throw new ServiceException(e, -2);
 		}
-		return list;
+		return trans2UserDTOList(list);
 	}
 
 	@Override
-	public UserEntity getUser(long id) {
+	public UserDTO getUser(long id) {
 		logger.debug("getUser id==================" + id);
 		UserEntity user;
 		try {
@@ -130,12 +133,12 @@ public class UserServiceImpl implements UserService {
 			// add your code here.
 			throw new ServiceException(e, -2);
 		}
-		return user;
+		return trans2UserDTO(user);
 	}
 	
 	@Override
 	@Async
-	public ListenableFuture<UserEntity> getUser0(long id) {
+	public ListenableFuture<UserDTO> getUser0(long id) {
 		logger.debug("getUser0 id==================" + id);
 		UserEntity user;
 		try {
@@ -146,7 +149,7 @@ public class UserServiceImpl implements UserService {
 			// add your code here.
 			throw new ServiceException(e, -2);
 		}
-		return new AsyncResult<UserEntity>(user);
+		return new AsyncResult<UserDTO>(trans2UserDTO(user));
 	}
 
 	@Override
@@ -159,19 +162,18 @@ public class UserServiceImpl implements UserService {
 			logger.error(e.getMessage(), e);
 			throw new ServiceException(e, -2);
 		}
-		UserDTO userDTO = BeanUtils.copy(userEntity, UserDTO.class);
-		return userDTO;
+		return trans2UserDTO(userEntity);
 	}
 
 	@Override
-	public UserEntity getUser2(long id) {
+	public UserDTO getUser2(long id) {
 		logger.debug("getUser2 id==================" + id);
-		UserEntity user;
+		UserDTO user;
 		try {
 			// add your code here.
 			org.ruanwei.demo.remoting.user.entity.User u = userHessianService
 					.getUser(id);
-			user = BeanUtils.copy(u, UserEntity.class);
+			user = BeanUtils.copy(u, UserDTO.class);
 		} catch (RemoteAccessException e) {
 			logger.error(e.getMessage(), e);
 			// add your code here.
@@ -181,14 +183,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserEntity getUser3(long id) {
+	public UserDTO getUser3(long id) {
 		logger.debug("getUser3 id==================" + id);
-		UserEntity user;
+		UserDTO user;
 		try {
 			// add your code here.
 			org.ruanwei.demo.remoting.user.entity.User u = userHttpInvokerService
 					.getUser(id);
-			user = BeanUtils.copy(u, UserEntity.class);
+			user = BeanUtils.copy(u, UserDTO.class);
 		} catch (RemoteAccessException e) {
 			logger.error(e.getMessage(), e);
 			// add your code here.
@@ -198,14 +200,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserEntity getUser4(long id) {
+	public UserDTO getUser4(long id) {
 		logger.debug("getUser4 id==================" + id);
-		UserEntity user;
+		UserDTO user;
 		try {
 			// add your code here.
 			org.ruanwei.demo.remoting.user.entity.User u = userRmiService
 					.getUser(id);
-			user = BeanUtils.copy(u, UserEntity.class);
+			user = BeanUtils.copy(u, UserDTO.class);
 		} catch (RemoteAccessException e) {
 			logger.error(e.getMessage(), e);
 			// add your code here.
@@ -215,14 +217,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserEntity getUser5(long id) {
+	public UserDTO getUser5(long id) {
 		logger.debug("getUser5 id==================" + id);
-		UserEntity user;
+		UserDTO user;
 		try {
 			// add your code here.
 			org.ruanwei.demo.remoting.user.entity.User u = userJmsService
 					.getUser(id);
-			user = BeanUtils.copy(u, UserEntity.class);
+			user = BeanUtils.copy(u, UserDTO.class);
 		} catch (RemoteAccessException e) {
 			logger.error(e.getMessage(), e);
 			// add your code here.
@@ -232,14 +234,14 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserEntity getUser6(long id) {
+	public UserDTO getUser6(long id) {
 		logger.debug("getUser6 id==================" + id);
-		UserEntity user;
+		UserDTO user;
 		try {
 			// add your code here.
 			org.ruanwei.demo.remoting.user.entity.User u = userDubboService
 					.getUser(id);
-			user = BeanUtils.copy(u, UserEntity.class);
+			user = BeanUtils.copy(u, UserDTO.class);
 		} catch (RemoteAccessException e) {
 			logger.error(e.getMessage(), e);
 			// add your code here.
@@ -249,7 +251,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void edit(UserEntity user) {
+	public void edit(UserDTO user) {
 		logger.debug("edit user==================" + user);
 		try {
 			// add your code here.
@@ -262,7 +264,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void add(UserEntity user) {
+	public void add(UserDTO user) {
 		logger.debug("add user==================" + user);
 		try {
 			// add your code here.
@@ -315,8 +317,21 @@ public class UserServiceImpl implements UserService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
-	
+	private UserDTO trans2UserDTO(UserEntity userEntity) {
+		if (userEntity == null) {
+			return null;
+		}
+		return BeanUtils.copy(userEntity, UserDTO.class);
+	}
+
+	private List<UserDTO> trans2UserDTOList(List<UserEntity> list) {
+		if (CollectionUtils.isEmpty(list)) {
+			return Collections.emptyList();
+		}
+		return list.stream().map(this::trans2UserDTO).collect(Collectors.toList());
+	}
+
 }
