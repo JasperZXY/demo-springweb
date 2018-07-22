@@ -230,6 +230,7 @@ ResourceUrlEncodingFilter
 - demo的bom，模仿spring-bom
 - 是否支持pluginManager
 
+<pre>
 spring-framework
 	pom.xml
 spring-boot
@@ -295,5 +296,4 @@ demo-projects
 			demo-spring-boot-remoting
 		demo-spring-boot-nonweb
 ------------------------------------------
-
-
+</pre>
