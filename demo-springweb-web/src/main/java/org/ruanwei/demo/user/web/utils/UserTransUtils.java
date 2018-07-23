@@ -2,6 +2,7 @@ package org.ruanwei.demo.user.web.utils;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.ruanwei.demo.user.dao.entity.UserEntity;
+import org.ruanwei.demo.user.service.dto.UserDTO;
 import org.ruanwei.demo.user.web.command.UserForm;
 import org.ruanwei.util.BeanUtils;
 
@@ -22,8 +23,14 @@ public class UserTransUtils {
         }
         return BeanUtils.copy(userEntity, UserForm.class);
     }
+    public static UserForm trans2UserForm(UserDTO userEntity) {
+        if (userEntity == null) {
+            return null;
+        }
+        return BeanUtils.copy(userEntity, UserForm.class);
+    }
 
-    public static List<UserForm> trans2UserFormList(List<UserEntity> list) {
+    public static List<UserForm> trans2UserFormList(List<? extends UserEntity> list) {
         if (CollectionUtils.isEmpty(list)) {
             return Collections.emptyList();
         }
