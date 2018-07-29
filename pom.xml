@@ -41,7 +41,7 @@
 		<module>demo-springweb-commons</module>
 		<module>demo-springweb-remoting</module>
 		<module>demo-springweb-service</module>
-		<module>demo-springweb-web</module>
+		<module>demo-springweb-webmvc</module>
 		<module>demo-springweb-webflux</module>
 	</modules>
 
