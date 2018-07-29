@@ -43,8 +43,6 @@
 		<module>demo-springweb-service</module>
 		<module>demo-springweb-web</module>
 		<module>demo-springweb-webflux</module>
-		<module>demo-springweb-boot</module>
-        <module>demo-springweb-boot2</module>
 	</modules>
 
 	<dependencyManagement>
