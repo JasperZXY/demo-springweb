@@ -1,6 +1,8 @@
 /.settings/
 /.project
 
+logs
+
 # idea
 .idea
 *.iml
