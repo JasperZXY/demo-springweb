@@ -72,6 +72,6 @@
 		<property name="keepAliveSeconds" value="30" /><!--线程池中空闲线程的存活时间单位秒  -->
 	</bean>
 
-	<import resource="integration-dataAccess.xml" />
+	<import resource="dataAccess.xml" />
 	<!-- <import resource="integration-remoting.xml" /> -->
 </beans>

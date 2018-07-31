@@ -13,7 +13,7 @@
       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd"
 	default-autowire="default">
 	<!-- 拷贝以下内容到applicationContext.xml -->
-	<!-- <import resource="integration-dataAccess.xml" /> -->
+	<!-- <import resource="dataAccess.xml" /> -->
 
 	<!-- MyBatis -->
 	<bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">

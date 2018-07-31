@@ -8,11 +8,11 @@
 		<version>1.0.20180202</version>
 	</parent>
 
-	<artifactId>demo-springweb-web</artifactId>
+	<artifactId>demo-springweb-webmvc</artifactId>
 	<version>0.0.2</version>
 	<packaging>war</packaging>
 
-	<name>Demo:Spring Web Web</name>
+	<name>Demo:Spring Web WebMVC</name>
 	<url>http://www.ruanwei.org</url>
 
 	<dependencies>
@@ -155,7 +155,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>demo-springweb-web</finalName>
+		<finalName>demo-springweb-webmvc</finalName>
 		<filters>
 			<filter>src/main/filters/${env}.properties</filter>
 		</filters>
