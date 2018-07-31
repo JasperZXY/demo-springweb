@@ -26,6 +26,8 @@
 
 	<properties>
 		<spring.version>5.0.7.RELEASE</spring.version>
+		<spring-data.version>Kay-SR2</spring-data.version>
+		<spring-data-jdbc.version>1.0.0.BUILD-SNAPSHOT</spring-data-jdbc.version>
 		<log4j.version>2.10.0</log4j.version>
 		<mybatis.version>3.3.0</mybatis.version>
 		<mybatis-spring.version>1.2.3</mybatis-spring.version>
@@ -47,12 +49,27 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- Spring -->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-framework-bom</artifactId>
 				<version>${spring.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+
+			<!-- Spring Data -->
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-releasetrain</artifactId>
+				<version>${spring-data.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-jdbc</artifactId>
+				<version>${spring-data-jdbc.version}</version>
 			</dependency>
 
 			<dependency>
@@ -418,25 +435,48 @@
 
 	<repositories>
 		<repository>
-			<id>repository.spring.release</id>
+			<id>io.spring.repo.maven.milestone</id>
+			<name>Spring Milestone Repository</name>
+			<url>http://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>io.spring.repo.maven.snapshot</id>
+			<name>Spring Snapshot Repository</name>
+			<url>http://repo.spring.io/snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>io.spring.repo.maven.release</id>
 			<name>Spring GA Repository</name>
 			<url>http://repo.spring.io/release/</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+
 		<repository>
-			<id>repository.spring.milestone</id>
-			<name>Spring Milestone Repository</name>
-			<url>http://repo.spring.io/milestone</url>
+			<id>spring-libs-milestone</id>
+			<name>Spring Milestones Repository</name>
+			<url>https://repo.spring.io/libs-milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
 		</repository>
 		<repository>
-			<id>repository.spring.snapshot</id>
+			<id>spring-libs-snapshot</id>
 			<name>Spring Snapshot Repository</name>
-			<url>http://repo.spring.io/snapshot</url>
+			<url>http://repo.spring.io/libs-snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 		<repository>
-			<id>spring-releases</id>
+			<id>spring-libs-releases</id>
 			<name>Spring project artifacts and all transitive dependencies</name>
 			<url>http://repo.spring.io/libs-release</url>
 		</repository>
