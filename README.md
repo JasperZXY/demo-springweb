@@ -6,7 +6,7 @@
 - 执行下面三个命令
 - `mvn clean compile`
 - `mvn -pl .,demo-springweb-commons install`
-- `cd demo-springweb-web`
+- `cd demo-springweb-webmvc`
 - `mvn jetty:run`
 - 用户管理页面 http://127.0.0.1:8080/springweb-web/user/list.html
 
@@ -102,6 +102,7 @@ success：是否调用成功；code：错误返回码；message：错误信息�
 - http://127.0.0.1:8080/springweb-web/user/1.json
 - http://127.0.0.1:8080/springweb-web/user/list.json?curPage=2&pageSize=1
 - http://127.0.0.1:8080/springweb-web/user/-1.json
+- http://127.0.0.1:8080/springweb-web/user/rest/list.json?callback=abc
 
 
 # 异常拦截
