@@ -46,19 +46,21 @@
 		<!-- org.springframework.http.converter.HttpMessageConverter -->
 		<mvc:message-converters register-defaults="true">
 			<bean
-				class="org.ruanwei.demo.springframework.web.conversion.http.MyHttpMessageConverter" />
+				class="org.ruanwei.demo.springframework.web.conversion.http.AbcHttpMessageConverter" />
 		</mvc:message-converters>
 
 		<!-- org.springframework.web.method.support.HandlerMethodArgumentResolver -->
 		<mvc:argument-resolvers>
 			<!-- <ref bean="jsonMethodArgumentResolver"/> -->
-			<bean class="org.ruanwei.core.databind.JsonMethodArgumentResolver" />
+			<bean
+				class="org.ruanwei.demo.springframework.web.interception.JsonMethodArgumentResolver" />
 		</mvc:argument-resolvers>
 
 		<!-- org.springframework.web.method.support.HandlerMethodReturnValueHandler -->
 		<mvc:return-value-handlers>
 			<!-- <ref bean="authorMethodReturnValueHandler"/> -->
-			<bean class="org.ruanwei.core.databind.AuthorMethodReturnValueHandler" />
+			<bean
+				class="org.ruanwei.demo.springframework.web.interception.AuthorMethodReturnValueHandler" />
 		</mvc:return-value-handlers>
 
 		<!-- org.springframework.util.PathMatcher -->
@@ -105,16 +107,17 @@
 					class="org.springframework.web.servlet.view.xml.MappingJackson2XmlView">
 					<property name="modelKey" value="data"></property>
 				</bean>
-				<bean class="org.ruanwei.core.viewresolver.MyPdfView" />
-				<bean class="org.ruanwei.core.viewresolver.MyXlsxView" />
-				<bean class="org.ruanwei.core.viewresolver.MyXlsView" />
+				<bean class="org.ruanwei.demo.springframework.web.view.MyPdfView" />
+				<bean class="org.ruanwei.demo.springframework.web.view.MyXlsxView" />
+				<bean class="org.ruanwei.demo.springframework.web.view.MyXlsView" />
 			</mvc:default-views>
 		</mvc:content-negotiation>
 
-		<!--<bean claorg.ruanwei.demo.core.viewresolverlver.MyJsonViewResolver" 
-			/> <bean claorg.ruanwei.demo.core.viewresolverlver.MyXmlViewResolver" /> 
-			<bean claorg.ruanwei.demo.core.viewresolverlver.MyXlsxViewResolver" /> <bean 
-			claorg.ruanwei.demo.core.viewresolverlver.MyPdfViewResolver" /> -->
+		<!--<bean claorg.ruanwei.demo.springframework.web.view.MyJsonViewResolver" 
+			/> <bean claorg.ruanwei.demo.demo.springframework.web.view.MyXmlViewResolver" 
+			/> <bean claorg.ruanwei.demo.demo.springframework.web.view.MyXlsxViewResolver" 
+			/> <bean claorg.ruanwei.demo.demo.springframework.web.view.MyPdfViewResolver" 
+			/> -->
 
 		<!-- org.springframework.web.servlet.view.InternalResourceViewResolver -->
 		<mvc:jsp prefix="/WEB-INF/jsp/" suffix=".jsp"

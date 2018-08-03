@@ -1,4 +1,4 @@
-package org.ruanwei.demo.springframework.web.core;
+package org.ruanwei.demo.core.exception;
 
 @SuppressWarnings("serial")
 //@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Web Exception")

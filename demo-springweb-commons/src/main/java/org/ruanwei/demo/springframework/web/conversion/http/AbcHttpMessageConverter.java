@@ -10,7 +10,7 @@ import org.springframework.http.converter.AbstractHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 
-public class MyHttpMessageConverter extends AbstractHttpMessageConverter<Abc> {
+public class AbcHttpMessageConverter extends AbstractHttpMessageConverter<Abc> {
 	private static final Logger logger = LogManager.getLogger();
 
 	@Override

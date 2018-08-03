@@ -1,4 +1,4 @@
-package org.ruanwei.demo.springframework.web.method;
+package org.ruanwei.demo.springframework.web.interception;
 
 import java.util.Map;
 
