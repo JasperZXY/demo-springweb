@@ -10,20 +10,6 @@
 	<name>Demo:Spring Web</name>
 	<url>http://www.ruanwei.org</url>
 
-	<developers>
-		<developer>
-			<id>ruanwei</id>
-			<name>ruanwei</name>
-			<email>ruanwei@ruanwei.org</email>
-			<url>http://www.ruanwei.org</url>
-			<organization>www.ruanwei.org</organization>
-			<organizationUrl>http://www.ruanwei.org</organizationUrl>
-			<roles>
-				<role>author</role>
-			</roles>
-		</developer>
-	</developers>
-
 	<properties>
 		<spring.version>5.0.7.RELEASE</spring.version>
 		<spring-data.version>Kay-SR9</spring-data.version>
@@ -40,7 +26,6 @@
 	</properties>
 
 	<modules>
-		<module>demo-springweb-commons</module>
 		<module>demo-springweb-remoting</module>
 		<module>demo-springweb-service</module>
 		<module>demo-springweb-webmvc</module>
