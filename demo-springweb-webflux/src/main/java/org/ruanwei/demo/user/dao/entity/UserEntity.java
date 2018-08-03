@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 
 
 @SuppressWarnings("serial")
-public class User implements Serializable {
+public class UserEntity implements Serializable {
 
     @JsonView(WithoutPageingView.class)
     @Min(value = 0, groups = {Update.class}, message = "ID必须大于0")
@@ -85,11 +85,11 @@ public class User implements Serializable {
     }
 
 
-    public User() {
+    public UserEntity() {
     }
 
 
-    public User(String name, int age) {
+    public UserEntity(String name, int age) {
         this.name = name;
         this.age = age;
     }

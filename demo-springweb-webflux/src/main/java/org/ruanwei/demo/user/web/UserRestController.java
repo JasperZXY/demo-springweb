@@ -8,14 +8,14 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.ruanwei.core.web.Page;
-import org.ruanwei.core.web.PagingResult;
-import org.ruanwei.core.web.Result;
-import org.ruanwei.demo.user.dao.entity.User;
+import org.ruanwei.demo.springframework.web.conversion.http.JsonParam;
+import org.ruanwei.demo.springframework.web.core.Page;
+import org.ruanwei.demo.springframework.web.core.PagingResult;
+import org.ruanwei.demo.springframework.web.core.Result;
+import org.ruanwei.demo.user.dao.entity.UserEntity;
 import org.ruanwei.demo.user.service.UserService;
-import org.ruanwei.demo.core.databind.JsonParam;
-import org.ruanwei.demo.core.databind.UserForm;
-import org.ruanwei.util.BeanUtils;
+import org.ruanwei.demo.user.web.form.UserForm;
+import org.ruanwei.demo.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,42 +51,42 @@ public class UserRestController {
 	@GetMapping(path = "list", produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public PagingResult<User> list(
+	public PagingResult<UserEntity> list(
 			@Valid @NotNull @JsonParam(required = false) UserForm userForm,
 			Page page) {
 		logger.debug("list=" + userForm + page);
 
 		// add your code here.
 
-		User user = BeanUtils.copy(userForm, User.class);
-		long totalRecord = userService.count(user);
+		UserEntity userEntity = BeanUtils.copy(userForm, UserEntity.class);
+		long totalRecord = userService.count(userEntity);
 		page.setTotalRecord(totalRecord);
 
-		user.setStart(page.getPageSize() * (page.getCurPage() - 1));
-		user.setOffset(page.getPageSize());
+		userEntity.setStart(page.getPageSize() * (page.getCurPage() - 1));
+		userEntity.setOffset(page.getPageSize());
 
-		List<User> list = userService.list4Page(user);
+		List<UserEntity> list = userService.list4Page(userEntity);
 
-		return PagingResult.<User>builder2().page(page).list(list).count(totalRecord)
+		return PagingResult.<UserEntity>builder2().page(page).list(list).count(totalRecord)
 				.build();
 	}
 
 	@GetMapping(path = "{uid}")
-	public Result<User> get(@PathVariable("uid") @Min(0) int id) {
+	public Result<UserEntity> get(@PathVariable("uid") @Min(0) int id) {
 		logger.debug("get=" + id);
 
 		// add your code here.
 
-		User user = getUser0(id);
+		UserEntity userEntity = getUser0(id);
 
-		return Result.<User>builder().data(user).build();
+		return Result.<UserEntity>builder().data(userEntity).build();
 	}
 
-	private User getUser0(Integer id) {
+	private UserEntity getUser0(Integer id) {
 		logger.debug("getUser0=" + id);
 
-		User user = userService.getUser(id);
-		logger.debug("1 jdbc======" + user);
+		UserEntity userEntity = userService.getUser(id);
+		logger.debug("1 jdbc======" + userEntity);
 		// user = userService.getUser2(id);
 		// logger.debug("2 hessian======" + user.toString());
 		// user = userService.getUser3(id);
@@ -97,7 +97,7 @@ public class UserRestController {
 		// logger.debug("5 jms======" + user.toString());
 		// user = userService.getUser6(id);
 		// logger.debug("6 dubbo======" + user.toString());
-		return user;
+		return userEntity;
 	}
 
 }
