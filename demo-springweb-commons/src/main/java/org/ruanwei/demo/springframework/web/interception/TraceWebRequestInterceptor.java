@@ -6,7 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.context.request.AsyncWebRequestInterceptor;
 import org.springframework.web.context.request.WebRequest;
 
-public class MyWebRequestInterceptor implements AsyncWebRequestInterceptor {
+public class TraceWebRequestInterceptor implements AsyncWebRequestInterceptor {
 	private static final Logger logger = LogManager.getLogger();
 
 	@Override

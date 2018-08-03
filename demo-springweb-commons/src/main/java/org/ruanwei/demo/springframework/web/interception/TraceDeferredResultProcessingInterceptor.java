@@ -6,7 +6,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.context.request.async.DeferredResultProcessingInterceptor;
 
-public class MyDeferredResultProcessingInterceptor implements DeferredResultProcessingInterceptor {
+public class TraceDeferredResultProcessingInterceptor implements DeferredResultProcessingInterceptor {
 	private static final Logger logger = LogManager.getLogger();
 
 	@Override

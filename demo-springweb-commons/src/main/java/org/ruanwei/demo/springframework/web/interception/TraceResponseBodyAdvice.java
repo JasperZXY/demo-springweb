@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 @ControllerAdvice
-public class MyResponseBodyAdvice implements ResponseBodyAdvice<Object> {
+public class TraceResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 	private static final Logger logger = LogManager.getLogger();
 
 	@Override

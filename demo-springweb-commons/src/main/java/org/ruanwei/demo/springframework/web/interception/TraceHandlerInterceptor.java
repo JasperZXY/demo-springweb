@@ -10,7 +10,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-public class MyHandlerInterceptor extends HandlerInterceptorAdapter {
+public class TraceHandlerInterceptor extends HandlerInterceptorAdapter {
 	private static final Logger logger = LogManager.getLogger();
 
 	/**

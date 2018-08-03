@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.async.CallableProcessingInterceptor;
 
-public class MyCallableProcessingInterceptor implements CallableProcessingInterceptor {
+public class TraceCallableProcessingInterceptor implements CallableProcessingInterceptor {
 	private static final Logger logger = LogManager.getLogger();
 
 	/**
