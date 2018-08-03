@@ -1,4 +1,4 @@
-package org.ruanwei.demo.springframework.web.interception;
+package org.ruanwei.demo.springframework.validation.beanvalidation;
 
 import java.util.Set;
 

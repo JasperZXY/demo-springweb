@@ -1,4 +1,4 @@
-package org.ruanwei.demo.springframework.web.user.extensions;
+package org.ruanwei.demo.springframework.web.user.web.command.conversion;
 
 import java.text.ParseException;
 import java.util.Locale;

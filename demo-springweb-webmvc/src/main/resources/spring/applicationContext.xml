@@ -22,21 +22,10 @@
 
 	<context:property-placeholder location="classpath*:jdbc.properties" />
 
-	<bean id="conversionService2"
-		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-		<property name="registerDefaultFormatters" value="true" />
-		<property name="formatterRegistrars">
-			<set>
-				<bean class="org.ruanwei.demo.core.databind.UserFormatterRegistrar" />
-			</set>
-		</property>
-	</bean>
-
-	<!-- <bean
-		class="org.springframework.validation.beanvalidation.BeanValidationPostProcessor"
+	<!-- <bean class="org.springframework.validation.beanvalidation.BeanValidationPostProcessor" 
 		p:validator-ref="validator" /> -->
 	<bean
-		class="org.ruanwei.demo.core.interceptor.BeanValidationBeanPostProcessor"
+		class="org.ruanwei.demo.springframework.validation.beanvalidation.BeanValidationBeanPostProcessor"
 		p:validator-ref="validator" />
 	<bean
 		class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"
@@ -60,6 +49,17 @@
 		</property>
 		<property name="cacheSeconds" value="10" />
 		<property name="defaultEncoding" value="utf-8" />
+	</bean>
+
+	<bean id="conversionService2"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="registerDefaultFormatters" value="true" />
+		<property name="formatterRegistrars">
+			<set>
+				<bean
+					class="org.ruanwei.demo.springframework.web.user.web.command.conversion.UserFormatterRegistrar" />
+			</set>
+		</property>
 	</bean>
 
 	<bean id="myThreadPool"
