@@ -24,7 +24,7 @@
 	<bean id="hessianService"
 		class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
 		<property name="serviceInterface"
-			value="org.ruanwei.demo.remoting.user.service.UserHessianService" />
+			value="org.ruanwei.demo.springframework.remoting.user.service.UserHessianService" />
 		<property name="serviceUrl"
 			value="http://localhost:8081/demo-service/userHessianService" />
 	</bean>
@@ -33,7 +33,7 @@
 	<bean id="httpInvokerService"
 		class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
 		<property name="serviceInterface"
-			value="org.ruanwei.demo.remoting.user.service.UserHttpInvokerService" />
+			value="org.ruanwei.demo.springframework.remoting.user.service.UserHttpInvokerService" />
 		<property name="serviceUrl"
 			value="http://localhost:8081/demo-service/userHttpInvokerService" />
 		<!-- By default, the HttpInvokerProxy uses the JDK’s HTTP functionality. -->
@@ -48,7 +48,7 @@
 	<!-- 4.RMI:Java serialization via Java Remote Method Protocol(TCP) -->
 	<bean id="rmiService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
 		<property name="serviceInterface"
-			value="org.ruanwei.demo.remoting.user.service.UserRmiService" />
+			value="org.ruanwei.demo.springframework.remoting.user.service.UserRmiService" />
 		<property name="serviceUrl" value="rmi://localhost:1199/userRmiService" />
 	</bean>
 
@@ -56,7 +56,7 @@
 	<bean id="jmsService"
 		class="org.springframework.jms.remoting.JmsInvokerProxyFactoryBean">
 		<property name="serviceInterface"
-			value="org.ruanwei.demo.remoting.user.service.UserJmsService" />
+			value="org.ruanwei.demo.springframework.remoting.user.service.UserJmsService" />
 		<property name="connectionFactory" ref="activeMQConnectionFactory" />
 		<property name="queue" ref="activeMQQueue" />
 	</bean>
@@ -73,6 +73,6 @@
 	<dubbo:application name="dubbo_consumer" />
 	<dubbo:registry address="zookeeper://127.0.0.1:2181" />
 	<dubbo:reference id="userDubboService"
-		interface="org.ruanwei.demo.remoting.user.service.UserDubboService" />
+		interface="org.ruanwei.demo.springframework.remoting.user.service.UserDubboService" />
 
 </beans>
