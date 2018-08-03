@@ -1,11 +1,11 @@
-package org.ruanwei.demo.core.databind;
+package org.ruanwei.demo.springframework.web.user.web.form;
 
 import java.util.Arrays;
 
-import org.ruanwei.demo.user.dao.entity.User;
+import org.ruanwei.demo.springframework.web.user.dao.entity.UserEntity;
 
 @SuppressWarnings("serial")
-public class UserForm extends User {
+public class UserForm extends UserEntity {
 	private String[] hobbyArray;
 
 	public String[] getHobbyArray() {

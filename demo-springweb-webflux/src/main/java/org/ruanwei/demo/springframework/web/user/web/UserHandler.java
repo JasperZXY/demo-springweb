@@ -1,4 +1,4 @@
-package org.ruanwei.demo.user.web;
+package org.ruanwei.demo.springframework.web.user.web;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
