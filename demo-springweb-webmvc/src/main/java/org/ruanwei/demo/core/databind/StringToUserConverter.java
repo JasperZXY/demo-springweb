@@ -14,10 +14,10 @@ import org.springframework.core.convert.converter.Converter;
  * @author Administrator
  *
  */
-final class MyStringToUserConverter implements Converter<String, UserForm> {
+final class StringToUserConverter implements Converter<String, UserForm> {
 	private static final Logger logger = LogManager.getLogger();
 
-	public MyStringToUserConverter() {
+	public StringToUserConverter() {
 		logger.info("MyStringToUserConverter()==================" + Counter.getCount());
 	}
 

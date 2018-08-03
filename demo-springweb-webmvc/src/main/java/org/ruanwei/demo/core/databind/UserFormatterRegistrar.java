@@ -6,15 +6,16 @@ import org.ruanwei.util.Counter;
 import org.springframework.format.FormatterRegistrar;
 import org.springframework.format.FormatterRegistry;
 
-public class MyUserFormatterRegistrar implements FormatterRegistrar {
+public class UserFormatterRegistrar implements FormatterRegistrar {
 	private static final Logger logger = LogManager.getLogger();
 
 	@Override
 	public void registerFormatters(FormatterRegistry registry) {
-		logger.info("registerFormatters==================" + Counter.getCount()+" registry="+registry);
-		registry.addConverter(new MyStringToUserConverter());
+		logger.info("registerFormatters==================" + Counter.getCount()
+				+ " registry=" + registry);
+		registry.addConverter(new StringToUserConverter());
 		registry.addFormatter(new MyUserFormatter());
-		// registry.addFormatterForFieldAnnotation(annotationFormatterFactory);
+		registry.addFormatterForFieldAnnotation(new UserFormatAnnotationFormatterFactory());
 	}
 
 }

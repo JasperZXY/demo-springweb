@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 @EnableWebMvc
-// @ComponentScan("org.example.web")
+@ComponentScan("org.ruanwei.demo")
 public class WebAppConfig implements WebMvcConfigurer {
 
 }
