@@ -44,7 +44,7 @@
 			value="org.ruanwei.demo.springframework.remoting.user.service.UserJmsService" />
 		<property name="service" ref="userJmsService" />
 	</bean>
-	<bean id="userJmsService" class="org.ruanwei.demo.user.service.impl.UserJmsServiceImpl" />
+	<bean id="userJmsService" class="org.ruanwei.demo.springframework.user.service.impl.UserJmsServiceImpl" />
 
 	<bean id="activeMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
 		<property name="brokerURL" value="tcp://localhost:61616" />

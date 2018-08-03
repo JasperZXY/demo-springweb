@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="org.ruanwei.demo.user.dao.entity.UserEntity" %>
+<%@ page import="org.ruanwei.demo.springframework.web.user.web.form.UserForm" %>
 <%@ include file="../head.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -69,10 +69,10 @@
 					<div class="row">
 						<label>爱好:</label>
 						<div class="el">
-							<input type="checkbox" name="hobbyArray" id="hobbyArray1" value="1" <%=((((UserEntity)request.getAttribute("user")).getHobby())&1)!=0?"checked=\"checked\"":"" %>/>政治
-							<input type="checkbox" name="hobbyArray" id="hobbyArray2" value="2" <%=((((UserEntity)request.getAttribute("user")).getHobby())&2)!=0?"checked=\"checked\"":"" %>/>经济
-							<input type="checkbox" name="hobbyArray" id="hobbyArray4" value="4" <%=((((UserEntity)request.getAttribute("user")).getHobby())&4)!=0?"checked=\"checked\"":"" %>/>文化
-							<input type="checkbox" name="hobbyArray" id="hobbyArray8" value="8" <%=((((UserEntity)request.getAttribute("user")).getHobby())&8)!=0?"checked=\"checked\"":"" %>/>军事
+							<input type="checkbox" name="hobbyArray" id="hobbyArray1" value="1" <%=((((UserForm)request.getAttribute("user")).getHobby())&1)!=0?"checked=\"checked\"":"" %>/>政治
+							<input type="checkbox" name="hobbyArray" id="hobbyArray2" value="2" <%=((((UserForm)request.getAttribute("user")).getHobby())&2)!=0?"checked=\"checked\"":"" %>/>经济
+							<input type="checkbox" name="hobbyArray" id="hobbyArray4" value="4" <%=((((UserForm)request.getAttribute("user")).getHobby())&4)!=0?"checked=\"checked\"":"" %>/>文化
+							<input type="checkbox" name="hobbyArray" id="hobbyArray8" value="8" <%=((((UserForm)request.getAttribute("user")).getHobby())&8)!=0?"checked=\"checked\"":"" %>/>军事
 						</div>
 					</div>
 					<div class="row">

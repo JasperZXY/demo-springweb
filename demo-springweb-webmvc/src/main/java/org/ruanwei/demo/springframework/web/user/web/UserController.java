@@ -226,8 +226,8 @@ public class UserController {
 
 		UserEntity user = userService.getUser(id);
 		logger.debug("1 jdbc======" + user);
-		// user = userService.getUser2(id);
-		// logger.debug("2 hessian======" + user.toString());
+		user = userService.getUser2(id);
+		logger.debug("2 hessian======" + user.toString());
 		// user = userService.getUser3(id);
 		// logger.debug("3 rmi======" + user.toString());
 		// user = userService.getUser4(id);
