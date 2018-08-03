@@ -69,12 +69,14 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/user*/**" />
 			<mvc:exclude-mapping path="/admin/**" />
-			<bean class="org.ruanwei.demo.core.interceptor.MyHandlerInterceptor" />
+			<bean
+				class="org.ruanwei.demo.springframework.web.interception.TraceHandlerInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/user*/**" />
 			<mvc:exclude-mapping path="/admin/**" />
-			<bean class="org.ruanwei.demo.core.interceptor.MyWebRequestInterceptor" />
+			<bean
+				class="org.ruanwei.demo.springframework.web.interception.TraceWebRequestInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 	<!-- org.springframework.web.servlet.HandlerExceptionResolver -->

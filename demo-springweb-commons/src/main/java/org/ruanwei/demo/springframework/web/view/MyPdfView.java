@@ -1,4 +1,4 @@
-package org.ruanwei.demo.springframework.web.viewresolver;
+package org.ruanwei.demo.springframework.web.view;
 
 import com.alibaba.fastjson.JSONObject;
 import com.itextpdf.text.BaseColor;

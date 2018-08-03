@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ruanwei.demo.springframework.web.viewresolver;
+package org.ruanwei.demo.springframework.web.view;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;

@@ -1,4 +1,4 @@
-package org.ruanwei.demo.springframework.web.viewresolver;
+package org.ruanwei.demo.springframework.web.view;
 
 import java.util.Locale;
 
@@ -9,15 +9,15 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 
 @Component
-public class MyXlsxViewResolver implements ViewResolver {
-	private static Log logger = LogFactory.getLog(MyXlsxViewResolver.class);
+public class MyPdfViewResolver implements ViewResolver {
+	private static Log logger = LogFactory.getLog(MyPdfViewResolver.class);
 
 	@Override
 	public View resolveViewName(String viewName, Locale locale)
 			throws Exception {
 		logger.debug("resolveViewName==================viewName="+viewName);
 		
-		MyXlsxView view = new MyXlsxView();
+		MyPdfView view = new MyPdfView();
 		return view;
 	}
 

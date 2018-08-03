@@ -1,4 +1,4 @@
-package org.ruanwei.demo.springframework.web.viewresolver;
+package org.ruanwei.demo.springframework.web.view;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.poi.ss.usermodel.Cell;
