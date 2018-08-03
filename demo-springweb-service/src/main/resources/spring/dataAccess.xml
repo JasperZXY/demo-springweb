@@ -11,14 +11,14 @@
       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd       
       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd"
-	default-autowire="default">
+	default-autowire="byName">
 	<!-- 拷贝以下内容到applicationContext.xml -->
-	<!-- <import resource="dataAccess.xml" /> -->
+	<!-- <import resource="integration-dataAccess.xml" /> -->
 
 	<!-- MyBatis -->
 	<bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-		<property name="mapperInterface" value="org.ruanwei.demo.springframework.web.user.dao.UserDao" />
+		<property name="mapperInterface" value="org.ruanwei.demo.springframework.user.dao.UserDao" />
 	</bean>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -34,11 +34,4 @@
 		<property name="password" value="${jdbc.password}" />
 	</bean>
 
-	<!-- Redis -->
-	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
-		p:connection-factory-ref="jedisConnectionFactory" />
-
-	<bean id="jedisConnectionFactory"
-		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-		p:port="6379" p:host-name="server" p:use-pool="true" />
 </beans>

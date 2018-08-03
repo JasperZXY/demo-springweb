@@ -1,7 +1,7 @@
 package org.ruanwei.demo.springframework.remoting.user.service;
 
 import org.ruanwei.demo.core.exception.RemoteAccessException;
-import org.ruanwei.demo.springframework.remoting.user.entity.UserResp;
+import org.ruanwei.demo.springframework.remoting.user.param.UserResp;
 
 public interface UserHessianService {
 

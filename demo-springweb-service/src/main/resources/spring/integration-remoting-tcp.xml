@@ -22,11 +22,12 @@
 	<bean class="org.springframework.remoting.rmi.RmiServiceExporter">
 		<property name="serviceName" value="userRmiService" />
 		<property name="serviceInterface"
-			value="org.ruanwei.demo.remoting.user.service.UserRmiService" />
+			value="org.ruanwei.demo.springframework.remoting.user.service.UserRmiService" />
 		<property name="service" ref="userRmiService" />
 		<property name="registryPort" value="1199" />
 	</bean>
-	<bean id="userRmiService" class="org.ruanwei.demo.user.service.impl.UserRmiServiceImpl" />
+	<bean id="userRmiService"
+		class="org.ruanwei.demo.springframework.user.service.impl.UserRmiServiceImpl" />
 
 	<!-- 5.JMS -->
 	<bean id="jmsContainer"
@@ -40,7 +41,7 @@
 	<bean id="jmsExporter"
 		class="org.springframework.jms.remoting.JmsInvokerServiceExporter">
 		<property name="serviceInterface"
-			value="org.ruanwei.demo.remoting.user.service.UserJmsService" />
+			value="org.ruanwei.demo.springframework.remoting.user.service.UserJmsService" />
 		<property name="service" ref="userJmsService" />
 	</bean>
 	<bean id="userJmsService" class="org.ruanwei.demo.user.service.impl.UserJmsServiceImpl" />
@@ -58,7 +59,7 @@
 	<dubbo:registry address="zookeeper://127.0.0.1:2181" />
 	<dubbo:protocol name="dubbo" port="20880" />
 	<dubbo:service
-		interface="org.ruanwei.demo.remoting.user.service.UserDubboService"
-		ref="userDubboService" protocol="dubbo"/>
-		
+		interface="org.ruanwei.demo.springframework.remoting.user.service.UserDubboService"
+		ref="userDubboService" protocol="dubbo" />
+
 </beans>

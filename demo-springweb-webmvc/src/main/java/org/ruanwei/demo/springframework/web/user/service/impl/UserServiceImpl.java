@@ -13,12 +13,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ruanwei.demo.core.exception.DataAccessException;
 import org.ruanwei.demo.core.exception.RemoteAccessException;
+import org.ruanwei.demo.core.exception.ServiceException;
+import org.ruanwei.demo.springframework.remoting.user.param.UserResp;
 import org.ruanwei.demo.springframework.remoting.user.service.UserDubboService;
 import org.ruanwei.demo.springframework.remoting.user.service.UserHessianService;
 import org.ruanwei.demo.springframework.remoting.user.service.UserHttpInvokerService;
 import org.ruanwei.demo.springframework.remoting.user.service.UserJmsService;
 import org.ruanwei.demo.springframework.remoting.user.service.UserRmiService;
-import org.ruanwei.demo.springframework.web.core.ServiceException;
 import org.ruanwei.demo.springframework.web.user.dao.UserDao;
 import org.ruanwei.demo.springframework.web.user.dao.entity.UserEntity;
 import org.ruanwei.demo.springframework.web.user.service.UserService;
@@ -26,7 +27,6 @@ import org.ruanwei.demo.springframework.web.user.service.dto.UserDTO;
 import org.ruanwei.demo.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -43,20 +43,20 @@ import org.springframework.validation.annotation.Validated;
 public class UserServiceImpl implements UserService {
 	private static final Logger logger = LogManager.getLogger();
 
-	//@Autowired
+	// @Autowired
 	private UserHessianService userHessianService;
 
-	//@Autowired
+	// @Autowired
 	private UserHttpInvokerService userHttpInvokerService;
 
-	//@Autowired
+	// @Autowired
 	private UserRmiService userRmiService;
 
-	//@Autowired
+	// @Autowired
 	private UserJmsService userJmsService;
-	
-	//@Autowired
-	//@Resource
+
+	// @Autowired
+	// @Resource
 	private UserDubboService userDubboService;
 
 	@Autowired
@@ -135,7 +135,7 @@ public class UserServiceImpl implements UserService {
 		}
 		return trans2UserDTO(user);
 	}
-	
+
 	@Override
 	@Async
 	public ListenableFuture<UserDTO> getUser0(long id) {
@@ -171,8 +171,7 @@ public class UserServiceImpl implements UserService {
 		UserDTO user;
 		try {
 			// add your code here.
-			org.ruanwei.demo.springframework.remoting.user.entity.UserResp u = userHessianService
-					.getUser(id);
+			UserResp u = userHessianService.getUser(id);
 			user = BeanUtils.copy(u, UserDTO.class);
 		} catch (RemoteAccessException e) {
 			logger.error(e.getMessage(), e);
@@ -188,8 +187,7 @@ public class UserServiceImpl implements UserService {
 		UserDTO user;
 		try {
 			// add your code here.
-			org.ruanwei.demo.springframework.remoting.user.entity.UserResp u = userHttpInvokerService
-					.getUser(id);
+			UserResp u = userHttpInvokerService.getUser(id);
 			user = BeanUtils.copy(u, UserDTO.class);
 		} catch (RemoteAccessException e) {
 			logger.error(e.getMessage(), e);
@@ -205,8 +203,7 @@ public class UserServiceImpl implements UserService {
 		UserDTO user;
 		try {
 			// add your code here.
-			org.ruanwei.demo.springframework.remoting.user.entity.UserResp u = userRmiService
-					.getUser(id);
+			UserResp u = userRmiService.getUser(id);
 			user = BeanUtils.copy(u, UserDTO.class);
 		} catch (RemoteAccessException e) {
 			logger.error(e.getMessage(), e);
@@ -222,8 +219,7 @@ public class UserServiceImpl implements UserService {
 		UserDTO user;
 		try {
 			// add your code here.
-			org.ruanwei.demo.springframework.remoting.user.entity.UserResp u = userJmsService
-					.getUser(id);
+			UserResp u = userJmsService.getUser(id);
 			user = BeanUtils.copy(u, UserDTO.class);
 		} catch (RemoteAccessException e) {
 			logger.error(e.getMessage(), e);
@@ -232,15 +228,14 @@ public class UserServiceImpl implements UserService {
 		}
 		return user;
 	}
-	
+
 	@Override
 	public UserDTO getUser6(long id) {
 		logger.debug("getUser6 id==================" + id);
 		UserDTO user;
 		try {
 			// add your code here.
-			org.ruanwei.demo.springframework.remoting.user.entity.UserResp u = userDubboService
-					.getUser(id);
+			UserResp u = userDubboService.getUser(id);
 			user = BeanUtils.copy(u, UserDTO.class);
 		} catch (RemoteAccessException e) {
 			logger.error(e.getMessage(), e);
@@ -301,24 +296,6 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException(e, -2);
 		}
 	}
-	
-	public static void main(String[] args) {
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-				new String[] { "spring/test.xml" });
-		context.registerShutdownHook();
-
-		logger.info("======================================================================================");
-		UserDubboService userDubboService = context.getBean("userDubboService",
-				UserDubboService.class);
-		try {
-			logger.info("================================="+userDubboService.getUser(1));
-			Thread.currentThread().join();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
 
 	private UserDTO trans2UserDTO(UserEntity userEntity) {
 		if (userEntity == null) {
@@ -331,7 +308,8 @@ public class UserServiceImpl implements UserService {
 		if (CollectionUtils.isEmpty(list)) {
 			return Collections.emptyList();
 		}
-		return list.stream().map(this::trans2UserDTO).collect(Collectors.toList());
+		return list.stream().map(this::trans2UserDTO)
+				.collect(Collectors.toList());
 	}
 
 }
