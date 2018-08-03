@@ -1,4 +1,4 @@
-package org.ruanwei.demo;
+package org.ruanwei.demo.springframework.web;
 
 import java.time.Duration;
 

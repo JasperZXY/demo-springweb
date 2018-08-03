@@ -1,6 +1,6 @@
-package org.ruanwei.demo;
+package org.ruanwei.demo.springframework.web;
 
-import org.ruanwei.demo.user.web.UserHandler;
+import org.ruanwei.demo.springframework.web.user.web.UserHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

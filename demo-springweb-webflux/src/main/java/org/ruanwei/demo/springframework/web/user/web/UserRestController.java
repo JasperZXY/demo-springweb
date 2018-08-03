@@ -1,4 +1,4 @@
-package org.ruanwei.demo.user.web;
+package org.ruanwei.demo.springframework.web.user.web;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ import org.ruanwei.demo.springframework.web.conversion.http.JsonParam;
 import org.ruanwei.demo.springframework.web.core.Page;
 import org.ruanwei.demo.springframework.web.core.PagingResult;
 import org.ruanwei.demo.springframework.web.core.Result;
-import org.ruanwei.demo.user.dao.entity.UserEntity;
-import org.ruanwei.demo.user.service.UserService;
-import org.ruanwei.demo.user.web.form.UserForm;
+import org.ruanwei.demo.springframework.web.user.dao.entity.UserEntity;
+import org.ruanwei.demo.springframework.web.user.service.UserService;
+import org.ruanwei.demo.springframework.web.user.web.form.UserForm;
 import org.ruanwei.demo.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

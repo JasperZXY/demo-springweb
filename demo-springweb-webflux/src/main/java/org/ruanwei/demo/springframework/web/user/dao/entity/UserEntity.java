@@ -1,4 +1,4 @@
-package org.ruanwei.demo.user.dao.entity;
+package org.ruanwei.demo.springframework.web.user.dao.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
 

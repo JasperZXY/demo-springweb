@@ -1,4 +1,4 @@
-package org.ruanwei.demo.user.service.impl;
+package org.ruanwei.demo.springframework.web.user.service.impl;
 
 import java.util.List;
 
@@ -17,9 +17,9 @@ import org.ruanwei.demo.springframework.remoting.user.service.UserHessianService
 import org.ruanwei.demo.springframework.remoting.user.service.UserHttpInvokerService;
 import org.ruanwei.demo.springframework.remoting.user.service.UserJmsService;
 import org.ruanwei.demo.springframework.remoting.user.service.UserRmiService;
-import org.ruanwei.demo.user.dao.UserDao;
-import org.ruanwei.demo.user.dao.entity.UserEntity;
-import org.ruanwei.demo.user.service.UserService;
+import org.ruanwei.demo.springframework.web.user.dao.UserDao;
+import org.ruanwei.demo.springframework.web.user.dao.entity.UserEntity;
+import org.ruanwei.demo.springframework.web.user.service.UserService;
 import org.ruanwei.demo.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;

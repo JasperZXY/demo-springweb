@@ -1,8 +1,8 @@
-package org.ruanwei.demo.user.web.form;
+package org.ruanwei.demo.springframework.web.user.web.form;
 
 import java.util.Arrays;
 
-import org.ruanwei.demo.user.dao.entity.UserEntity;
+import org.ruanwei.demo.springframework.web.user.dao.entity.UserEntity;
 
 @SuppressWarnings("serial")
 public class UserForm extends UserEntity {
