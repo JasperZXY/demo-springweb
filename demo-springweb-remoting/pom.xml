@@ -19,11 +19,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.ruanwei.demo</groupId>
-			<artifactId>demo-commons</artifactId>
-			<version>0.0.2</version>
-		</dependency>
 	</dependencies>
 
 	<build>

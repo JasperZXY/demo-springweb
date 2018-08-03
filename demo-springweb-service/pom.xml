@@ -21,11 +21,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.ruanwei.demo</groupId>
-			<artifactId>demo-commons</artifactId>
-			<version>0.0.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ruanwei.demo</groupId>
 			<artifactId>demo-springweb-remoting</artifactId>
 			<version>0.0.2</version>
 		</dependency>
