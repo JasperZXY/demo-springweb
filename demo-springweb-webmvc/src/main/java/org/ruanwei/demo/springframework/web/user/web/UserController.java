@@ -16,13 +16,13 @@ import javax.validation.groups.Default;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.ruanwei.core.web.Page;
+import org.ruanwei.demo.springframework.web.Page;
 import org.ruanwei.demo.springframework.web.user.dao.entity.UserEntity;
 import org.ruanwei.demo.springframework.web.user.service.UserService;
 import org.ruanwei.demo.springframework.web.user.service.dto.UserDTO;
 import org.ruanwei.demo.springframework.web.user.web.command.UserForm;
 import org.ruanwei.demo.springframework.web.user.web.utils.UserTransUtils;
-import org.ruanwei.util.BeanUtils;
+import org.ruanwei.demo.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

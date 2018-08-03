@@ -13,7 +13,7 @@
       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd"
 	default-autowire="default">
 
-	<context:component-scan base-package="org.ruanwei.demo">
+	<context:component-scan base-package="org.ruanwei.demo.springframework.web">
 		<context:include-filter type="annotation"
 			expression="org.springframework.validation.annotation.Validated" />
 		<!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" 

@@ -2,8 +2,8 @@ package org.ruanwei.demo.user.dao;
 
 import java.util.List;
 
-import org.ruanwei.core.DataAccessException;
 import org.ruanwei.demo.remoting.user.entity.User;
+import org.ruanwei.demo.springframework.web.core.DataAccessException;
 
 public interface UserDao {
 	public List<User> list4page(User instance) throws DataAccessException;

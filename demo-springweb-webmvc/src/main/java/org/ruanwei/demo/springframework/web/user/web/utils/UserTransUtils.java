@@ -4,7 +4,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.ruanwei.demo.springframework.web.user.dao.entity.UserEntity;
 import org.ruanwei.demo.springframework.web.user.service.dto.UserDTO;
 import org.ruanwei.demo.springframework.web.user.web.command.UserForm;
-import org.ruanwei.util.BeanUtils;
+import org.ruanwei.demo.util.BeanUtils;
 
 import java.util.Collections;
 import java.util.List;

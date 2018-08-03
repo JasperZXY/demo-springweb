@@ -8,7 +8,7 @@
 	default-autowire="default">
 
 	<!-- 扫描并识别具有@Controller和@RequestMapping注解的类 -->
-	<context:component-scan base-package="org.ruanwei.demo.user.web">
+	<context:component-scan base-package="org.ruanwei.demo.springframework.web">
 		<context:include-filter type="annotation"
 			expression="org.springframework.validation.annotation.Validated" />
 		<!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" 
