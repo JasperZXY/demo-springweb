@@ -28,14 +28,14 @@
 				<!-- org.springframework.web.context.request.async.TimeoutDeferredResultProcessingInterceptor -->
 				<!-- org.springframework.web.context.request.async.ErrorDeferredResultProcessingInterceptor -->
 				<bean
-					class="org.ruanwei.demo.springframework.web.interception.TraceDeferredResultProcessingInterceptor" />
+					class="org.ruanwei.demo.springframework.web.interceptor.TraceDeferredResultProcessingInterceptor" />
 			</mvc:deferred-result-interceptors>
 			<!-- org.springframework.web.context.request.async.CallableProcessingInterceptor -->
 			<mvc:callable-interceptors>
 				<!-- org.springframework.web.context.request.async.TimeoutCallableProcessingInterceptor -->
 				<!-- org.springframework.web.context.request.async.ErrorCallableProcessingInterceptor -->
 				<bean
-					class="org.ruanwei.demo.springframework.web.interception.TraceCallableProcessingInterceptor" />
+					class="org.ruanwei.demo.springframework.web.interceptor.TraceCallableProcessingInterceptor" />
 			</mvc:callable-interceptors>
 		</mvc:async-support>
 
@@ -53,14 +53,14 @@
 		<mvc:argument-resolvers>
 			<!-- <ref bean="jsonMethodArgumentResolver"/> -->
 			<bean
-				class="org.ruanwei.demo.springframework.web.interception.JsonMethodArgumentResolver" />
+				class="org.ruanwei.demo.springframework.web.conversion.http.JsonMethodArgumentResolver" />
 		</mvc:argument-resolvers>
 
 		<!-- org.springframework.web.method.support.HandlerMethodReturnValueHandler -->
 		<mvc:return-value-handlers>
 			<!-- <ref bean="authorMethodReturnValueHandler"/> -->
 			<bean
-				class="org.ruanwei.demo.springframework.web.interception.AuthorMethodReturnValueHandler" />
+				class="org.ruanwei.demo.springframework.web.conversion.http.AuthorMethodReturnValueHandler" />
 		</mvc:return-value-handlers>
 
 		<!-- org.springframework.util.PathMatcher -->
@@ -72,13 +72,13 @@
 			<mvc:mapping path="/user*/**" />
 			<mvc:exclude-mapping path="/admin/**" />
 			<bean
-				class="org.ruanwei.demo.springframework.web.interception.TraceHandlerInterceptor" />
+				class="org.ruanwei.demo.springframework.web.interceptor.TraceHandlerInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/user*/**" />
 			<mvc:exclude-mapping path="/admin/**" />
 			<bean
-				class="org.ruanwei.demo.springframework.web.interception.TraceWebRequestInterceptor" />
+				class="org.ruanwei.demo.springframework.web.interceptor.TraceWebRequestInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 	<!-- org.springframework.web.servlet.HandlerExceptionResolver -->

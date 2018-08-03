@@ -2,10 +2,10 @@ package org.ruanwei.demo.springframework.web.user.web;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.ruanwei.demo.springframework.web.conversion.http.JsonParam;
 import org.ruanwei.demo.springframework.web.core.Page;
 import org.ruanwei.demo.springframework.web.core.PagingResult;
 import org.ruanwei.demo.springframework.web.core.Result;
-import org.ruanwei.demo.springframework.web.interception.JsonParam;
 import org.ruanwei.demo.springframework.web.user.dao.entity.UserEntity;
 import org.ruanwei.demo.springframework.web.user.service.UserService;
 import org.ruanwei.demo.springframework.web.user.service.dto.UserDTO;

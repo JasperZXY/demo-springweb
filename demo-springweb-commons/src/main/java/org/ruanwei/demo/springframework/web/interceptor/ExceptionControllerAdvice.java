@@ -1,4 +1,13 @@
-package org.ruanwei.demo.springframework.web.interception;
+package org.ruanwei.demo.springframework.web.interceptor;
+
+import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolationException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,15 +32,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.AbstractJsonpResponseBodyAdvice;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.ConstraintViolationException;
-
 /**
  * Classes annotated with @ControllerAdvice or @Controller can contain
  *
@@ -49,27 +49,11 @@ import javax.validation.ConstraintViolationException;
  *                                through jsonpParameterNames property.
  */
 @ControllerAdvice
-//@RestControllerAdvice
-public class JsonpResponseBodyAdvice extends AbstractJsonpResponseBodyAdvice { // extends
-	// ResponseEntityExceptionHandler  
-
+// @RestControllerAdvice
+public class ExceptionControllerAdvice {
 	private static final Logger logger = LogManager.getLogger();
 
 	protected String errorPath = "generic_error";
-	
-	// TODO:在XML文件中声明的没有生效，不知道为什么
-    @Bean
-    public MethodValidationPostProcessor methodValidationPostProcessor() {
-        return new MethodValidationPostProcessor();
-    }
-
-	public JsonpResponseBodyAdvice() {
-		super("callback");
-	}
-
-	public JsonpResponseBodyAdvice(String callback) {
-		super(callback);
-	}
 
 	public String getErrorPath() {
 		return errorPath;

@@ -1,4 +1,4 @@
-package org.ruanwei.demo.springframework.web.interception;
+package org.ruanwei.demo.springframework.web.conversion.http;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

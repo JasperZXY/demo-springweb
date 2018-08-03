@@ -1,4 +1,4 @@
-package org.ruanwei.demo.springframework.web.interception;
+package org.ruanwei.demo.springframework.web.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
