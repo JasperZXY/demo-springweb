@@ -1,4 +1,4 @@
-package org.ruanwei.demo.remoting.user.entity;
+package org.ruanwei.demo.springframework.remoting.user.entity;
 
 import java.io.Serializable;
 import java.sql.Date;

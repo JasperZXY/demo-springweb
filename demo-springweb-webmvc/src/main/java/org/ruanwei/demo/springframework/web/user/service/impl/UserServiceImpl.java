@@ -11,11 +11,11 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.ruanwei.demo.remoting.user.service.UserDubboService;
-import org.ruanwei.demo.remoting.user.service.UserHessianService;
-import org.ruanwei.demo.remoting.user.service.UserHttpInvokerService;
-import org.ruanwei.demo.remoting.user.service.UserJmsService;
-import org.ruanwei.demo.remoting.user.service.UserRmiService;
+import org.ruanwei.demo.springframework.remoting.user.service.UserDubboService;
+import org.ruanwei.demo.springframework.remoting.user.service.UserHessianService;
+import org.ruanwei.demo.springframework.remoting.user.service.UserHttpInvokerService;
+import org.ruanwei.demo.springframework.remoting.user.service.UserJmsService;
+import org.ruanwei.demo.springframework.remoting.user.service.UserRmiService;
 import org.ruanwei.demo.springframework.web.core.DataAccessException;
 import org.ruanwei.demo.springframework.web.core.RemoteAccessException;
 import org.ruanwei.demo.springframework.web.core.ServiceException;
@@ -171,7 +171,7 @@ public class UserServiceImpl implements UserService {
 		UserDTO user;
 		try {
 			// add your code here.
-			org.ruanwei.demo.remoting.user.entity.User u = userHessianService
+			org.ruanwei.demo.springframework.remoting.user.entity.User u = userHessianService
 					.getUser(id);
 			user = BeanUtils.copy(u, UserDTO.class);
 		} catch (RemoteAccessException e) {
@@ -188,7 +188,7 @@ public class UserServiceImpl implements UserService {
 		UserDTO user;
 		try {
 			// add your code here.
-			org.ruanwei.demo.remoting.user.entity.User u = userHttpInvokerService
+			org.ruanwei.demo.springframework.remoting.user.entity.User u = userHttpInvokerService
 					.getUser(id);
 			user = BeanUtils.copy(u, UserDTO.class);
 		} catch (RemoteAccessException e) {
@@ -205,7 +205,7 @@ public class UserServiceImpl implements UserService {
 		UserDTO user;
 		try {
 			// add your code here.
-			org.ruanwei.demo.remoting.user.entity.User u = userRmiService
+			org.ruanwei.demo.springframework.remoting.user.entity.User u = userRmiService
 					.getUser(id);
 			user = BeanUtils.copy(u, UserDTO.class);
 		} catch (RemoteAccessException e) {
@@ -222,7 +222,7 @@ public class UserServiceImpl implements UserService {
 		UserDTO user;
 		try {
 			// add your code here.
-			org.ruanwei.demo.remoting.user.entity.User u = userJmsService
+			org.ruanwei.demo.springframework.remoting.user.entity.User u = userJmsService
 					.getUser(id);
 			user = BeanUtils.copy(u, UserDTO.class);
 		} catch (RemoteAccessException e) {
@@ -239,7 +239,7 @@ public class UserServiceImpl implements UserService {
 		UserDTO user;
 		try {
 			// add your code here.
-			org.ruanwei.demo.remoting.user.entity.User u = userDubboService
+			org.ruanwei.demo.springframework.remoting.user.entity.User u = userDubboService
 					.getUser(id);
 			user = BeanUtils.copy(u, UserDTO.class);
 		} catch (RemoteAccessException e) {

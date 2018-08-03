@@ -2,7 +2,7 @@ package org.ruanwei.demo.user.dao;
 
 import java.util.List;
 
-import org.ruanwei.demo.remoting.user.entity.User;
+import org.ruanwei.demo.springframework.remoting.user.entity.User;
 import org.ruanwei.demo.springframework.web.core.DataAccessException;
 
 public interface UserDao {

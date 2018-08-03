@@ -2,8 +2,8 @@ package org.ruanwei.demo.user.service.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.ruanwei.demo.remoting.user.entity.User;
-import org.ruanwei.demo.remoting.user.service.UserDubboService;
+import org.ruanwei.demo.springframework.remoting.user.entity.User;
+import org.ruanwei.demo.springframework.remoting.user.service.UserDubboService;
 import org.ruanwei.demo.springframework.web.core.RemoteAccessException;
 import org.ruanwei.demo.user.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
