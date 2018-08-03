@@ -1,4 +1,4 @@
-package org.ruanwei.demo.springframework.web.databind;
+package org.ruanwei.demo.springframework.web.method;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -8,18 +8,16 @@ import java.lang.annotation.Target;
 
 import org.springframework.core.annotation.AliasFor;
 
-@Target(ElementType.PARAMETER)
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface JsonParam {
+public @interface Author {
 
 	@AliasFor("name")
-	String value() default "json";
+	String value() default "";
 
 	@AliasFor("value")
-	String name() default "json";
+	String name() default "";
 
-	boolean required() default false;
-	
-	String defaultValue() default "{}";
+	String defaultValue() default "youzan_meiye";
 }

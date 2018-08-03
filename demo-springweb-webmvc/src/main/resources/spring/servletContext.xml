@@ -28,14 +28,14 @@
 				<!-- org.springframework.web.context.request.async.TimeoutDeferredResultProcessingInterceptor -->
 				<!-- org.springframework.web.context.request.async.ErrorDeferredResultProcessingInterceptor -->
 				<bean
-					class="org.ruanwei.demo.core.interceptor.MyDeferredResultProcessingInterceptor" />
+					class="org.ruanwei.demo.springframework.web.interception.TraceDeferredResultProcessingInterceptor" />
 			</mvc:deferred-result-interceptors>
 			<!-- org.springframework.web.context.request.async.CallableProcessingInterceptor -->
 			<mvc:callable-interceptors>
 				<!-- org.springframework.web.context.request.async.TimeoutCallableProcessingInterceptor -->
 				<!-- org.springframework.web.context.request.async.ErrorCallableProcessingInterceptor -->
 				<bean
-					class="org.ruanwei.demo.core.interceptor.MyCallableProcessingInterceptor" />
+					class="org.ruanwei.demo.springframework.web.interception.TraceCallableProcessingInterceptor" />
 			</mvc:callable-interceptors>
 		</mvc:async-support>
 
@@ -45,7 +45,8 @@
 			values from @RequestMapping or @ExceptionHandler methods. -->
 		<!-- org.springframework.http.converter.HttpMessageConverter -->
 		<mvc:message-converters register-defaults="true">
-			<bean class="org.ruanwei.core.http.MyHttpMessageConverter" />
+			<bean
+				class="org.ruanwei.demo.springframework.web.conversion.http.MyHttpMessageConverter" />
 		</mvc:message-converters>
 
 		<!-- org.springframework.web.method.support.HandlerMethodArgumentResolver -->

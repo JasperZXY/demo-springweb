@@ -1,4 +1,4 @@
-package org.ruanwei.demo.springframework.web.databind;
+package org.ruanwei.demo.springframework.web.method;
 
 import javax.servlet.http.HttpServletResponse;
 

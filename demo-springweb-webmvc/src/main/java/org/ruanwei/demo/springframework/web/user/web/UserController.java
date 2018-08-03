@@ -21,7 +21,7 @@ import org.ruanwei.demo.springframework.web.user.dao.entity.UserEntity;
 import org.ruanwei.demo.springframework.web.user.service.UserService;
 import org.ruanwei.demo.springframework.web.user.service.dto.UserDTO;
 import org.ruanwei.demo.springframework.web.user.web.command.UserForm;
-import org.ruanwei.demo.springframework.web.user.web.utils.UserTransUtils;
+import org.ruanwei.demo.springframework.web.user.web.command.conversion.UserTransUtils;
 import org.ruanwei.demo.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

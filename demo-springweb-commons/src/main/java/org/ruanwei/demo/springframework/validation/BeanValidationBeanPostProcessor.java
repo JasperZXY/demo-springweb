@@ -1,4 +1,4 @@
-package org.ruanwei.demo.springframework.validation.beanvalidation;
+package org.ruanwei.demo.springframework.validation;
 
 import java.util.Set;
 

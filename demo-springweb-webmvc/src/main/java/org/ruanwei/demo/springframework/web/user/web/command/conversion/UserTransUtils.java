@@ -1,4 +1,4 @@
-package org.ruanwei.demo.springframework.web.user.web.utils;
+package org.ruanwei.demo.springframework.web.user.web.command.conversion;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.ruanwei.demo.springframework.web.user.dao.entity.UserEntity;

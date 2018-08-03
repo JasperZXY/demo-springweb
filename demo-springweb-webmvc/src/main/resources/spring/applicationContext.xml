@@ -25,7 +25,7 @@
 	<!-- <bean class="org.springframework.validation.beanvalidation.BeanValidationPostProcessor" 
 		p:validator-ref="validator" /> -->
 	<bean
-		class="org.ruanwei.demo.springframework.validation.beanvalidation.BeanValidationBeanPostProcessor"
+		class="org.ruanwei.demo.springframework.validation.BeanValidationBeanPostProcessor"
 		p:validator-ref="validator" />
 	<bean
 		class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"
