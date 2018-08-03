@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 @SuppressWarnings("serial")
-public class User implements Serializable {
+public class UserResp implements Serializable {
 	private int id;
 	private String name = "";
 	private int gender;

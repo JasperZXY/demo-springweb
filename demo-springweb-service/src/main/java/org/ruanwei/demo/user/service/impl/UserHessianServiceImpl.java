@@ -2,7 +2,7 @@ package org.ruanwei.demo.user.service.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.ruanwei.demo.springframework.remoting.user.entity.User;
+import org.ruanwei.demo.springframework.remoting.user.entity.UserResp;
 import org.ruanwei.demo.springframework.remoting.user.service.UserHessianService;
 import org.ruanwei.demo.springframework.web.core.RemoteAccessException;
 import org.ruanwei.demo.user.dao.UserDao;
@@ -18,14 +18,14 @@ public class UserHessianServiceImpl implements UserHessianService {
 
 
 	@Override
-	public User getUser(long id) throws RemoteAccessException {
+	public UserResp getUser(long id) throws RemoteAccessException {
 		try {
 			logger.debug("getUser(long id)" + id);
 
 			// add your code here.
 
-			User user = userDao.findById(id);
-			return user;
+			UserResp userResp = userDao.findById(id);
+			return userResp;
 		} catch (Exception e) {
 			// add your code here.
 			logger.error(e.getMessage(), e);

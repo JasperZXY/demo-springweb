@@ -1,10 +1,10 @@
 package org.ruanwei.demo.springframework.remoting.user.service;
 
-import org.ruanwei.demo.springframework.remoting.user.entity.User;
+import org.ruanwei.demo.springframework.remoting.user.entity.UserResp;
 import org.ruanwei.demo.springframework.web.core.RemoteAccessException;
 
 public interface UserHessianService {
 
-	public User getUser(long id) throws RemoteAccessException;
+	public UserResp getUser(long id) throws RemoteAccessException;
 
 }
