@@ -13,7 +13,6 @@
 	<packaging>war</packaging>
 
 	<name>Demo:Spring Web WebFlux</name>
-	<url>http://www.ruanwei.org</url>
 
 	<dependencies>
 		<dependency>
