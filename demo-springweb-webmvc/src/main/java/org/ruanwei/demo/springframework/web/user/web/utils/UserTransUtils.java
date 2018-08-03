@@ -1,9 +1,9 @@
-package org.ruanwei.demo.user.web.utils;
+package org.ruanwei.demo.springframework.web.user.web.utils;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.ruanwei.demo.user.dao.entity.UserEntity;
-import org.ruanwei.demo.user.service.dto.UserDTO;
-import org.ruanwei.demo.user.web.command.UserForm;
+import org.ruanwei.demo.springframework.web.user.dao.entity.UserEntity;
+import org.ruanwei.demo.springframework.web.user.service.dto.UserDTO;
+import org.ruanwei.demo.springframework.web.user.web.command.UserForm;
 import org.ruanwei.util.BeanUtils;
 
 import java.util.Collections;

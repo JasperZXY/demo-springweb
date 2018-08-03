@@ -1,10 +1,9 @@
-package org.ruanwei.demo.user.dao;
+package org.ruanwei.demo.springframework.web.user.dao;
 
 import java.util.List;
 
 import org.ruanwei.core.DataAccessException;
-import org.ruanwei.demo.user.dao.entity.UserEntity;
-import org.ruanwei.demo.user.dao.entity.UserEntity;
+import org.ruanwei.demo.springframework.web.user.dao.entity.UserEntity;
 
 
 public interface UserDao {

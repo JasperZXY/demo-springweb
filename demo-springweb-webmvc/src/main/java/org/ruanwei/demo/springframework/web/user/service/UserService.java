@@ -1,11 +1,11 @@
-package org.ruanwei.demo.user.service;
+package org.ruanwei.demo.springframework.web.user.service;
 
 import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.ruanwei.demo.user.service.dto.UserDTO;
+import org.ruanwei.demo.springframework.web.user.service.dto.UserDTO;
 import org.springframework.util.concurrent.ListenableFuture;
 
 public interface UserService {

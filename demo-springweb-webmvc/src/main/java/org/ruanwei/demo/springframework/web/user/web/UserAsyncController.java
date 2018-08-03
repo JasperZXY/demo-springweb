@@ -1,4 +1,4 @@
-package org.ruanwei.demo.user.web;
+package org.ruanwei.demo.springframework.web.user.web;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -8,12 +8,11 @@ import javax.validation.constraints.Min;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.ruanwei.demo.user.dao.entity.UserEntity;
-import org.ruanwei.demo.user.dao.entity.UserEntity;
-import org.ruanwei.demo.user.service.UserService;
-import org.ruanwei.demo.user.service.dto.UserDTO;
-import org.ruanwei.demo.user.web.command.UserForm;
-import org.ruanwei.demo.user.web.utils.UserTransUtils;
+import org.ruanwei.demo.springframework.web.user.dao.entity.UserEntity;
+import org.ruanwei.demo.springframework.web.user.service.UserService;
+import org.ruanwei.demo.springframework.web.user.service.dto.UserDTO;
+import org.ruanwei.demo.springframework.web.user.web.command.UserForm;
+import org.ruanwei.demo.springframework.web.user.web.utils.UserTransUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.concurrent.ListenableFuture;

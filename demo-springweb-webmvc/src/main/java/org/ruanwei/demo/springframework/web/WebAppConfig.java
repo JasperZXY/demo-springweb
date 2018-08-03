@@ -1,4 +1,4 @@
-package org.ruanwei.demo;
+package org.ruanwei.demo.springframework.web;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

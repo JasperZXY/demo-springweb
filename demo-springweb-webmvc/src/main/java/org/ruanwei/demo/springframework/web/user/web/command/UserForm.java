@@ -1,8 +1,8 @@
-package org.ruanwei.demo.user.web.command;
+package org.ruanwei.demo.springframework.web.user.web.command;
 
 import java.util.Arrays;
 
-import org.ruanwei.demo.user.service.dto.UserDTO;
+import org.ruanwei.demo.springframework.web.user.service.dto.UserDTO;
 
 
 @SuppressWarnings("serial")

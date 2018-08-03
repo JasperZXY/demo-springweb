@@ -7,7 +7,7 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ruanwei.demo.core.databind.UserFormFormat.Separator;
-import org.ruanwei.demo.user.web.command.UserForm;
+import org.ruanwei.demo.springframework.web.user.web.command.UserForm;
 import org.springframework.format.AnnotationFormatterFactory;
 import org.springframework.format.Formatter;
 import org.springframework.format.Parser;

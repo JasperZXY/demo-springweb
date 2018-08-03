@@ -5,7 +5,7 @@ import java.util.Locale;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.ruanwei.demo.user.web.command.UserForm;
+import org.ruanwei.demo.springframework.web.user.web.command.UserForm;
 import org.springframework.format.Formatter;
 
 /**
