@@ -369,6 +369,12 @@
 				<artifactId>reactor-netty</artifactId>
 				<version>0.7.8.RELEASE</version>
 			</dependency>
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>1.18.2</version>
+				<scope>provided</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

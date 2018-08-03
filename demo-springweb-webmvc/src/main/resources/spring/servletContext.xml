@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd       
-
-
-
       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd"
-       default-autowire="default">
+	default-autowire="default">
 
 	<!-- 扫描并识别具有@Controller和@RequestMapping注解的类 -->
-	<context:component-scan base-package="org.ruanwei.demo.user.web">
+	<context:component-scan base-package="org.ruanwei.demo.springframework.web">
 		<context:include-filter type="annotation"
 			expression="org.springframework.validation.annotation.Validated" />
 		<!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" 
@@ -25,7 +21,6 @@
 		ignore-default-model-on-redirect="true" content-negotiation-manager="contentNegotiationManager"
 		conversion-service="conversionService2" validator="validator"
 		message-codes-resolver="messageCodesResolver">
-
 		<mvc:async-support default-timeout="5000"
 			task-executor="myThreadPool">
 			<!-- org.springframework.web.context.request.async.DeferredResultProcessingInterceptor -->
@@ -33,14 +28,14 @@
 				<!-- org.springframework.web.context.request.async.TimeoutDeferredResultProcessingInterceptor -->
 				<!-- org.springframework.web.context.request.async.ErrorDeferredResultProcessingInterceptor -->
 				<bean
-					class="org.ruanwei.demo.core.interceptor.MyDeferredResultProcessingInterceptor" />
+					class="org.ruanwei.demo.springframework.web.interception.TraceDeferredResultProcessingInterceptor" />
 			</mvc:deferred-result-interceptors>
 			<!-- org.springframework.web.context.request.async.CallableProcessingInterceptor -->
 			<mvc:callable-interceptors>
 				<!-- org.springframework.web.context.request.async.TimeoutCallableProcessingInterceptor -->
 				<!-- org.springframework.web.context.request.async.ErrorCallableProcessingInterceptor -->
 				<bean
-					class="org.ruanwei.demo.core.interceptor.MyCallableProcessingInterceptor" />
+					class="org.ruanwei.demo.springframework.web.interception.TraceCallableProcessingInterceptor" />
 			</mvc:callable-interceptors>
 		</mvc:async-support>
 
@@ -50,7 +45,8 @@
 			values from @RequestMapping or @ExceptionHandler methods. -->
 		<!-- org.springframework.http.converter.HttpMessageConverter -->
 		<mvc:message-converters register-defaults="true">
-			<bean class="org.ruanwei.core.http.MyHttpMessageConverter" />
+			<bean
+				class="org.ruanwei.demo.springframework.web.conversion.http.MyHttpMessageConverter" />
 		</mvc:message-converters>
 
 		<!-- org.springframework.web.method.support.HandlerMethodArgumentResolver -->
@@ -62,8 +58,7 @@
 		<!-- org.springframework.web.method.support.HandlerMethodReturnValueHandler -->
 		<mvc:return-value-handlers>
 			<!-- <ref bean="authorMethodReturnValueHandler"/> -->
-			<bean
-				class="org.ruanwei.core.databind.AuthorMethodReturnValueHandler" />
+			<bean class="org.ruanwei.core.databind.AuthorMethodReturnValueHandler" />
 		</mvc:return-value-handlers>
 
 		<!-- org.springframework.util.PathMatcher -->
@@ -104,12 +99,8 @@
 			<mvc:default-views>
 				<bean
 					class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
-				<!--<bean class="org.springframework.web.servlet.ViewResolver">
-					<replaced-method name="resolveViewName" replacer="xmlViewResolver">
-						<arg-type>org.springframework.web.servlet.view.xml.MappingJackson2XmlView</arg-type>
-					</replaced-method>
-				</bean>-->
-				<bean class="org.springframework.web.servlet.view.xml.MappingJackson2XmlView" >
+				<bean
+					class="org.springframework.web.servlet.view.xml.MappingJackson2XmlView">
 					<property name="modelKey" value="data"></property>
 				</bean>
 				<bean class="org.ruanwei.core.viewresolver.MyPdfView" />
@@ -118,10 +109,10 @@
 			</mvc:default-views>
 		</mvc:content-negotiation>
 
-		<!--<bean claorg.ruanwei.demo.core.viewresolverlver.MyJsonViewResolver" />
-		<bean claorg.ruanwei.demo.core.viewresolverlver.MyXmlViewResolver" />
-		<bean claorg.ruanwei.demo.core.viewresolverlver.MyXlsxViewResolver" />
-		<bean claorg.ruanwei.demo.core.viewresolverlver.MyPdfViewResolver" />-->
+		<!--<bean claorg.ruanwei.demo.core.viewresolverlver.MyJsonViewResolver" 
+			/> <bean claorg.ruanwei.demo.core.viewresolverlver.MyXmlViewResolver" /> 
+			<bean claorg.ruanwei.demo.core.viewresolverlver.MyXlsxViewResolver" /> <bean 
+			claorg.ruanwei.demo.core.viewresolverlver.MyPdfViewResolver" /> -->
 
 		<!-- org.springframework.web.servlet.view.InternalResourceViewResolver -->
 		<mvc:jsp prefix="/WEB-INF/jsp/" suffix=".jsp"
