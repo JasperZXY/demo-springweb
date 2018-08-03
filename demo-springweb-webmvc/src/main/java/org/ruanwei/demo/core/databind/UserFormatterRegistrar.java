@@ -13,9 +13,9 @@ public class UserFormatterRegistrar implements FormatterRegistrar {
 	public void registerFormatters(FormatterRegistry registry) {
 		logger.info("registerFormatters==================" + Counter.getCount()
 				+ " registry=" + registry);
-		registry.addConverter(new StringToUserConverter());
-		registry.addFormatter(new MyUserFormatter());
-		registry.addFormatterForFieldAnnotation(new UserFormatAnnotationFormatterFactory());
+		registry.addConverter(new StringToUserFormConverter());
+		registry.addFormatter(new UserFormFormatter());
+		registry.addFormatterForFieldAnnotation(new UserFormFormatAnnotationFormatterFactory());
 	}
 
 }

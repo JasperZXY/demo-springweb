@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER })
-public @interface UserFormat {
+public @interface UserFormFormat {
 
 	Separator separator() default Separator.SLASH;
 

@@ -2,8 +2,6 @@ package org.ruanwei.demo.core.databind;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.ruanwei.demo.user.dao.entity.UserEntity;
-import org.ruanwei.demo.user.dao.entity.UserEntity;
 import org.ruanwei.demo.user.web.command.UserForm;
 import org.ruanwei.util.Counter;
 import org.springframework.core.convert.converter.Converter;
@@ -14,11 +12,11 @@ import org.springframework.core.convert.converter.Converter;
  * @author Administrator
  *
  */
-final class StringToUserConverter implements Converter<String, UserForm> {
+final class StringToUserFormConverter implements Converter<String, UserForm> {
 	private static final Logger logger = LogManager.getLogger();
 
-	public StringToUserConverter() {
-		logger.info("MyStringToUserConverter()==================" + Counter.getCount());
+	public StringToUserFormConverter() {
+		logger.info("StringToUserFormConverter()==================" + Counter.getCount());
 	}
 
 	@Override
