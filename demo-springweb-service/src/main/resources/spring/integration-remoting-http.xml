@@ -22,21 +22,21 @@
 	<bean name="/userHessianService"
 		class="org.springframework.remoting.caucho.HessianServiceExporter">
 		<property name="serviceInterface"
-			value="org.ruanwei.demo.remoting.user.service.UserHessianService" />
+			value="org.ruanwei.demo.springframework.remoting.user.service.UserHessianService" />
 		<property name="service" ref="userHessianService" />
 	</bean>
 	<bean id="userHessianService"
-		class="org.ruanwei.demo.user.service.impl.UserHessianServiceImpl" />
+		class="org.ruanwei.demo.springframework.user.service.impl.UserHessianServiceImpl" />
 
 	<!-- 2.HTTP Invoker:Java serialization via HTTP -->
 	<bean name="/userHttpInvokerService"
 		class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
 		<property name="serviceInterface"
-			value="org.ruanwei.demo.remoting.user.service.UserHttpInvokerService" />
+			value="org.ruanwei.demo.springframework.remoting.user.service.UserHttpInvokerService" />
 		<property name="service" ref="userHttpInvokerService" />
 	</bean>
 	<bean id="userHttpInvokerService"
-		class="org.ruanwei.demo.user.service.impl.UserHttpInvokerServiceImpl" />
+		class="org.ruanwei.demo.springframework.user.service.impl.UserHttpInvokerServiceImpl" />
 		
 	<!-- 2.HTTP Invoker(outside of a servlet container ):Java serialization 
 		via HTTP -->
