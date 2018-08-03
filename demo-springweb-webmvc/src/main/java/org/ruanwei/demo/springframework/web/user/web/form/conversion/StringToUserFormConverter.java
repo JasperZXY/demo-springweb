@@ -1,8 +1,8 @@
-package org.ruanwei.demo.springframework.web.user.web.command.conversion;
+package org.ruanwei.demo.springframework.web.user.web.form.conversion;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.ruanwei.demo.springframework.web.user.web.command.UserForm;
+import org.ruanwei.demo.springframework.web.user.web.form.UserForm;
 import org.ruanwei.demo.util.Counter;
 import org.springframework.core.convert.converter.Converter;
 

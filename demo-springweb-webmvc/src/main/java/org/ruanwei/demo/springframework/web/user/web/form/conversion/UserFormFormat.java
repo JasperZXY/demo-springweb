@@ -1,4 +1,4 @@
-package org.ruanwei.demo.springframework.web.user.web.command.conversion;
+package org.ruanwei.demo.springframework.web.user.web.form.conversion;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

@@ -1,5 +1,11 @@
 package org.ruanwei.demo.springframework.web.user.web;
 
+import java.util.List;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ruanwei.demo.springframework.web.conversion.http.JsonParam;
@@ -9,8 +15,8 @@ import org.ruanwei.demo.springframework.web.core.Result;
 import org.ruanwei.demo.springframework.web.user.dao.entity.UserEntity;
 import org.ruanwei.demo.springframework.web.user.service.UserService;
 import org.ruanwei.demo.springframework.web.user.service.dto.UserDTO;
-import org.ruanwei.demo.springframework.web.user.web.command.UserForm;
-import org.ruanwei.demo.springframework.web.user.web.command.conversion.UserTransUtils;
+import org.ruanwei.demo.springframework.web.user.web.form.UserForm;
+import org.ruanwei.demo.springframework.web.user.web.form.conversion.UserTransUtils;
 import org.ruanwei.demo.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,12 +25,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 /**
  * 本文件演示：

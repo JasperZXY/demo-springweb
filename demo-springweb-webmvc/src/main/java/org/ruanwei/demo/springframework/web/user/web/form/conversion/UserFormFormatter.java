@@ -1,11 +1,11 @@
-package org.ruanwei.demo.springframework.web.user.web.command.conversion;
+package org.ruanwei.demo.springframework.web.user.web.form.conversion;
 
 import java.text.ParseException;
 import java.util.Locale;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.ruanwei.demo.springframework.web.user.web.command.UserForm;
+import org.ruanwei.demo.springframework.web.user.web.form.UserForm;
 import org.springframework.format.Formatter;
 
 /**

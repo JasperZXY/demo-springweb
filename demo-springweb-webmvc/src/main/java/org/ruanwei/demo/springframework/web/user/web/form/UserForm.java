@@ -1,4 +1,4 @@
-package org.ruanwei.demo.springframework.web.user.web.command;
+package org.ruanwei.demo.springframework.web.user.web.form;
 
 import java.util.Arrays;
 

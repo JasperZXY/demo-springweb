@@ -1,14 +1,14 @@
-package org.ruanwei.demo.springframework.web.user.web.command.conversion;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.ruanwei.demo.springframework.web.user.dao.entity.UserEntity;
-import org.ruanwei.demo.springframework.web.user.service.dto.UserDTO;
-import org.ruanwei.demo.springframework.web.user.web.command.UserForm;
-import org.ruanwei.demo.util.BeanUtils;
+package org.ruanwei.demo.springframework.web.user.web.form.conversion;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.ruanwei.demo.springframework.web.user.dao.entity.UserEntity;
+import org.ruanwei.demo.springframework.web.user.service.dto.UserDTO;
+import org.ruanwei.demo.springframework.web.user.web.form.UserForm;
+import org.ruanwei.demo.util.BeanUtils;
 
 
 /**
