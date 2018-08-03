@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ruanwei.demo.core.exception.DataAccessException;
 import org.ruanwei.demo.core.exception.RemoteAccessException;
-import org.ruanwei.demo.springframework.remoting.user.entity.UserResp;
+import org.ruanwei.demo.springframework.remoting.user.param.UserResp;
 import org.ruanwei.demo.springframework.remoting.user.service.UserHttpInvokerService;
 import org.ruanwei.demo.user.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;

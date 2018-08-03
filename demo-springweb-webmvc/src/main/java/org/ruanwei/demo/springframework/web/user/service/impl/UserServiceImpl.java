@@ -171,7 +171,7 @@ public class UserServiceImpl implements UserService {
 		UserDTO user;
 		try {
 			// add your code here.
-			org.ruanwei.demo.springframework.remoting.user.entity.UserResp u = userHessianService
+			org.ruanwei.demo.springframework.remoting.user.param.UserResp u = userHessianService
 					.getUser(id);
 			user = BeanUtils.copy(u, UserDTO.class);
 		} catch (RemoteAccessException e) {
@@ -188,7 +188,7 @@ public class UserServiceImpl implements UserService {
 		UserDTO user;
 		try {
 			// add your code here.
-			org.ruanwei.demo.springframework.remoting.user.entity.UserResp u = userHttpInvokerService
+			org.ruanwei.demo.springframework.remoting.user.param.UserResp u = userHttpInvokerService
 					.getUser(id);
 			user = BeanUtils.copy(u, UserDTO.class);
 		} catch (RemoteAccessException e) {
@@ -205,7 +205,7 @@ public class UserServiceImpl implements UserService {
 		UserDTO user;
 		try {
 			// add your code here.
-			org.ruanwei.demo.springframework.remoting.user.entity.UserResp u = userRmiService
+			org.ruanwei.demo.springframework.remoting.user.param.UserResp u = userRmiService
 					.getUser(id);
 			user = BeanUtils.copy(u, UserDTO.class);
 		} catch (RemoteAccessException e) {
@@ -222,7 +222,7 @@ public class UserServiceImpl implements UserService {
 		UserDTO user;
 		try {
 			// add your code here.
-			org.ruanwei.demo.springframework.remoting.user.entity.UserResp u = userJmsService
+			org.ruanwei.demo.springframework.remoting.user.param.UserResp u = userJmsService
 					.getUser(id);
 			user = BeanUtils.copy(u, UserDTO.class);
 		} catch (RemoteAccessException e) {
@@ -239,7 +239,7 @@ public class UserServiceImpl implements UserService {
 		UserDTO user;
 		try {
 			// add your code here.
-			org.ruanwei.demo.springframework.remoting.user.entity.UserResp u = userDubboService
+			org.ruanwei.demo.springframework.remoting.user.param.UserResp u = userDubboService
 					.getUser(id);
 			user = BeanUtils.copy(u, UserDTO.class);
 		} catch (RemoteAccessException e) {
