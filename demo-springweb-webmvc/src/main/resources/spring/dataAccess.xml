@@ -18,7 +18,7 @@
 	<!-- MyBatis -->
 	<bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-		<property name="mapperInterface" value="org.ruanwei.demo.user.dao.UserDao" />
+		<property name="mapperInterface" value="org.ruanwei.demo.springframework.web.user.dao.UserDao" />
 	</bean>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

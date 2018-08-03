@@ -16,7 +16,7 @@
 	default-autowire="byName">
 	
 	<!-- 扫描并识别具有@Controller和@RequestMapping注解的类 -->
-	<context:component-scan base-package="org.ruanwei.demo">
+	<context:component-scan base-package="org.ruanwei.demo.springframework">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Service" />
 	</context:component-scan>

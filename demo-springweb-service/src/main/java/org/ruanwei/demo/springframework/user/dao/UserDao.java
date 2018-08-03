@@ -1,4 +1,4 @@
-package org.ruanwei.demo.user.dao;
+package org.ruanwei.demo.springframework.user.dao;
 
 import java.util.List;
 
