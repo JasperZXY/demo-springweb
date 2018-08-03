@@ -1,4 +1,4 @@
-package org.ruanwei.demo.springframework.web;
+package org.ruanwei.demo.springframework.web.core;
 
 public class Page {
 	private int curPage = 1;

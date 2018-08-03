@@ -2,7 +2,7 @@ package org.ruanwei.demo.springframework.web.user.dao;
 
 import java.util.List;
 
-import org.ruanwei.demo.springframework.web.core.DataAccessException;
+import org.ruanwei.demo.core.exception.DataAccessException;
 import org.ruanwei.demo.springframework.web.user.dao.entity.UserEntity;
 
 

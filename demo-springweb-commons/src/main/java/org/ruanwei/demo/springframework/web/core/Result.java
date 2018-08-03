@@ -1,6 +1,4 @@
-package org.ruanwei.demo.springframework.web;
-
-import org.ruanwei.demo.springframework.web.core.ResponseCode;
+package org.ruanwei.demo.springframework.web.core;
 
 import java.io.Serializable;
 import java.util.Arrays;

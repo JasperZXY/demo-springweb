@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.ruanwei.demo.springframework.web.core.InvalidArgumentException;
+import org.ruanwei.demo.core.exception.InvalidArgumentException;
 import org.springframework.core.MethodParameter;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ValueConstants;

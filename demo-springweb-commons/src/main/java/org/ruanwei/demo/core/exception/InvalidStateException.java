@@ -1,4 +1,4 @@
-package org.ruanwei.demo.springframework.web.core;
+package org.ruanwei.demo.core.exception;
 
 public class InvalidStateException extends IllegalStateException {
 	private static final long serialVersionUID = -911673472912800374L;

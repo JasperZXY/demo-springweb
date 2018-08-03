@@ -1,4 +1,4 @@
-package org.ruanwei.demo.springframework.web.core;
+package org.ruanwei.demo.core.exception;
 
 public class InvalidLogicException extends IllegalStateException {
 

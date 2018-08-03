@@ -1,4 +1,4 @@
-package org.ruanwei.demo.springframework.web;
+package org.ruanwei.demo.springframework.web.core;
 
 import java.util.ArrayList;
 import java.util.List;

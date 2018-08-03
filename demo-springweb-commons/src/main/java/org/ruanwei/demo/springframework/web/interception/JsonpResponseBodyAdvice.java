@@ -2,10 +2,10 @@ package org.ruanwei.demo.springframework.web.interception;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.ruanwei.demo.springframework.web.Result;
-import org.ruanwei.demo.springframework.web.core.InvalidArgumentException;
-import org.ruanwei.demo.springframework.web.core.InvalidLogicException;
+import org.ruanwei.demo.core.exception.InvalidArgumentException;
+import org.ruanwei.demo.core.exception.InvalidLogicException;
 import org.ruanwei.demo.springframework.web.core.ResponseCode;
+import org.ruanwei.demo.springframework.web.core.Result;
 import org.ruanwei.demo.springframework.web.core.ServiceException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.ui.Model;
