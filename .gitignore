@@ -20,3 +20,9 @@ logs
 logs
 target
 pom.xml.versionsBackup
+
+/demo-springweb-commons/logs
+/demo-springweb-remoting/logs
+/demo-springweb-service/logs
+/demo-springweb-webflux/logs
+/demo-springweb-webmvc/logs
