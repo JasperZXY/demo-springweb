@@ -37,6 +37,7 @@
 # 参数
 ## 参数校验
 - 文档参考 https://docs.spring.io/spring/docs/4.3.x/spring-framework-reference/htmlsingle/#validation
+          https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#validation
 - 引用的jar包`hibernate-validator`
 - 可使用`javax.validation.Valid`注解或`org.springframework.validation.annotation.Validated`注解
 - Validated支持分组校验，Valid不支持分组校验，不指定分组的话，默认是`javax.validation.groups.Default`
@@ -153,58 +154,51 @@ success：是否调用成功；code：错误返回码；message：错误信息�
 # demo-springweb
 Spring Web Demo
 
-- [ ] 容器配置，Java的配置方式
+- [x] 容器配置，Java的配置方式
 - [ ] MVC配置，Java方式的配置为主，xml配置为辅
 - [ ] maven配置
     - [ ] 打包成tomcat的运行用的包，一次性打包两个项目
-    - [ ] demo的bom，模仿spring-bom
-    - [ ] 是否支持pluginManager
-    - [ ] 依赖的jar包分类注释
+    - [x] demo的bom，模仿spring-bom
+    - [x] 是否支持pluginManager
+    - [x] 依赖的jar包分类注释
 - [ ] URL路径匹配，支持自定义的
 - [ ] 处理拦截
     - [ ] servlet filter
-    - [ ] HandlerInterceptor
-    - [ ] WebRequestInterceptor
+    - [x] HandlerInterceptor
+    - [x] WebRequestInterceptor
 - [ ] 异常，ExceptionHandler，error-page
 - [ ] 视图，内容协商，根据不同的扩展名返回不同的数据
     - [ ] 生成json的两种方式，JsonView、Message Converter
-- [ ] 国际化支持，LocalResolver
+- [x] 国际化支持，LocalResolver
 - [ ] ThemeResolver
-- [ ] 文件上传，两种方式
+- [x] 文件上传，两种方式
 - [ ] 视图控制器
-    - [ ] json
-    - [ ] html
-    - [ ] pdf
-    - [ ] view-controller、UrlFilenameViewController
+    - [x] json
+    - [x] html
+    - [x] pdf
+    - [x] view-controller、UrlFilenameViewController
     - [ ] 自定义视图
-- [ ] RequestMapping，这个不用，要强制get跟post，两个页面之间跳转传参
+- [x] RequestMapping，建议使用`@GetMapping`跟`@PostMapping`
 - [ ] RequestBody,ResponseBody
 - [ ] 自定义参数解析和返回值
     - [ ] HttpMessageConverter
-    - [ ] ResponseBodyAdvice，可以修改返回的数据，jsonp
+    - [x] ResponseBodyAdvice，可以修改返回的数据，jsonp
 - [ ] PushBuilder，支持Http2
-- [ ] InitBinder
-- [ ] 参数校验，带消息，自定义校验器消息，错误消息国际化
-- [ ] 异常的处理支持内容协商
-- [ ] ControllerAdvice
-- [ ] 异步请求处理，支持两种异步方法
-- [ ] HTTP Streaming
+- [x] InitBinder
+- [x] 参数校验，带消息，自定义校验器消息，错误消息国际化
+- [x] 异常的处理支持内容协商
+- [x] ControllerAdvice
+- [x] 异步请求处理，支持两种异步方法
+- [x] HTTP Streaming
 - [ ] WebSocket
-- [ ] HTTP 缓存
-    - [ ] ResourceHttpRequestHandler 静态资源
-    - [ ] Controller 缓存
+- [x] HTTP 缓存
+    - [x] ResourceHttpRequestHandler 静态资源
+    - [x] Controller 缓存
 - [ ] RestTemplate
-- [ ] 类型转换
+- [x] 类型转换
 
 # TODO
-- 数据绑定：转换（）、校验（分组）
-- 异常统一处理，异常信息国际化
-- 内容协商（异常）
-- 统一输入输出格式
-- 正确有效的拦截器
-- 清理maven配置和依赖
 - 增加spring基于Java的配置
-- 清理日志
 - 增加servlet基于Java的配置
 - 增加WebFlux项目
 - 报名统一到org.ruanwei.demo.springweb.user
@@ -226,11 +220,9 @@ ResourceUrlEncodingFilter
 - PDF输出中文支持
 - 自动扫描的inclued和exclude
 - @ConvertGroup、@GroupSequence、@ScriptAssert、@SupportedValidationTarget、EL表达式${validatedValue}
-- 验证错误消息和国际化消息
 - 打包成tomcat的运行用的包，一次性打包两个项目
-- demo的bom，模仿spring-bom
-- 是否支持pluginManager
 
+# 项目结构
 <pre>
 spring-framework
 	pom.xml
