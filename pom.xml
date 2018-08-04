@@ -4,7 +4,7 @@
 
 	<parent>
 		<groupId>org.ruanwei.demo</groupId>
-		<artifactId>demo-share-parent</artifactId>
+		<artifactId>demo-share-starter</artifactId>
 		<version>0.0.2</version>
 	</parent>
 
@@ -30,11 +30,6 @@
 	</dependencyManagement>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.ruanwei.demo</groupId>
-			<artifactId>demo-share-commons</artifactId>
-			<version>0.0.2</version>
-		</dependency>
 	</dependencies>
 
 	<build>
