@@ -57,7 +57,7 @@
 		<property name="formatterRegistrars">
 			<set>
 				<bean
-					class="org.ruanwei.demo.springframework.web.user.web.command.conversion.UserFormatterRegistrar" />
+					class="org.ruanwei.demo.springframework.web.user.web.form.conversion.UserFormatterRegistrar" />
 			</set>
 		</property>
 	</bean>
@@ -72,5 +72,5 @@
 	</bean>
 
 	<import resource="dataAccess.xml" />
-	<import resource="integration-remoting.xml" />
+	<!--<import resource="integration-remoting.xml" />-->
 </beans>

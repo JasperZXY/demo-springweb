@@ -53,7 +53,7 @@
 		<mvc:argument-resolvers>
 			<!-- <ref bean="jsonMethodArgumentResolver"/> -->
 			<bean
-				class="org.ruanwei.demo.springframework.web.conversion.http.JsonMethodArgumentResolver" />
+				class="org.ruanwei.demo.springframework.web.conversion.http.JsonMethodArgumentResolverV2" />
 		</mvc:argument-resolvers>
 
 		<!-- org.springframework.web.method.support.HandlerMethodReturnValueHandler -->

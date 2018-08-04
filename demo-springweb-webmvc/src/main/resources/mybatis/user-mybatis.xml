@@ -5,7 +5,7 @@
 <!-- <typeAlias aliUserEntityUser" tyorg.ruanwei.demo.user.dao.entitytUserEntityUser" /> 
 	 <mapper resource="mybatis/user-mybatis.xml" /> -->
 
-<mapper namespace="org.ruanwei.demo.user.dao.UserDao">
+<mapper namespace="org.ruanwei.demo.springframework.web.user.dao.UserDao">
 	<resultMap id="UserMap" type="User">
 		<result property="id" column="ID" />
 		<result property="name" column="NAME" />

@@ -46,7 +46,7 @@ public class UserRestController {
 	@GetMapping(path = "list", produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public PagingResult<UserForm> list(@Valid @NotNull @JsonParam UserForm userForm, Page page) {
+	public PagingResult<UserForm> list(@JsonParam @Valid @NotNull UserForm userForm, @Valid Page page) {
 		logger.debug("list=" + userForm + page);
 
 		// add your code here.
@@ -63,7 +63,13 @@ public class UserRestController {
 
 		return PagingResult.<UserForm>builder2().page(page).list(retList).count(totalRecord).build();
 	}
-	
+	@GetMapping(path = "list2", produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public PagingResult<UserForm> list2(@Valid @NotNull UserForm userForm, @Valid Page page) {
+		return list(userForm, page);
+	}
+
 	@GetMapping(path = "{uid}")
 	public Result<UserForm> get(@PathVariable("uid") @Min(0) int id) {
 		logger.debug("get=" + id);

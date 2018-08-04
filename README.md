@@ -11,6 +11,7 @@
 - 默认的配置环境是dev，需要确认dev.properties中的配置信息是否正确，特别是数据库的配置
 - 执行下面三个命令
 - `mvn clean compile`
+- `mvn -pl .,demo-springweb-remoting install`
 - `cd demo-springweb-webmvc`
 - `mvn jetty:run`
 - 用户管理页面 http://127.0.0.1:8080/springweb-web/user/list.html
