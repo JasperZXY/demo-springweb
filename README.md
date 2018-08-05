@@ -159,7 +159,8 @@ success：是否调用成功；code：错误返回码；message：错误信息�
 
 # demo-springweb
 Spring Web Demo
-
+- [ ] 完成项目测试用例
+- [ ] 默认启用内存数据库
 - [x] 容器配置，Java的配置方式
 - [ ] MVC配置，Java方式的配置为主，xml配置为辅
 - [ ] maven配置

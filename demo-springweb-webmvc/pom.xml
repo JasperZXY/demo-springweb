@@ -21,7 +21,6 @@
 			<version>0.0.2</version>
 		</dependency>
 
-		<!-- Logging -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
