@@ -22,11 +22,6 @@
 
 	<context:property-placeholder location="classpath*:jdbc.properties" />
 
-	<!-- <bean class="org.springframework.validation.beanvalidation.BeanValidationPostProcessor" 
-		p:validator-ref="validator" /> -->
-	<!--<bean
-		class="org.ruanwei.demo.springframework.validation.BeanValidationBeanPostProcessor"
-		p:validator-ref="validator" />-->
 	<bean
 		class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"
 		p:order="0" p:validator-ref="validator" />
