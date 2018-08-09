@@ -32,8 +32,7 @@
 		</property>
 	</bean>
 
-	<!-- <bean
-		class="org.springframework.validation.beanvalidation.BeanValidationPostProcessor"
+	<!-- <bean class="org.springframework.validation.beanvalidation.BeanValidationPostProcessor" 
 		p:validator-ref="validator" /> -->
 	<bean
 		class="org.ruanwei.demo.core.interceptor.BeanValidationBeanPostProcessor"
@@ -49,6 +48,7 @@
 		<property name="validationMessageSource" ref="messageSource" />
 	</bean>
 
+	<!-- building message codes from validation error codes,used by DataBinder -->
 	<bean id="messageCodesResolver"
 		class="org.springframework.validation.DefaultMessageCodesResolver" />
 
