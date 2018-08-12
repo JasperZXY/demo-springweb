@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 	// @Resource
 	private UserDubboService userDubboService;
 
-	//@Autowired
+	@Autowired
 	private UserDao userDao;
 
 	// private JdbcTemplate jdbcTemplate;
