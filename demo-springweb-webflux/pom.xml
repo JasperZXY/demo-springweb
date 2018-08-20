@@ -10,7 +10,7 @@
 
 	<artifactId>demo-springweb-webflux</artifactId>
 	<version>0.0.2</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>Demo:Spring Web WebFlux</name>
 
